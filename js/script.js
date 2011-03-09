@@ -1,5 +1,8 @@
 $(function(){
 	
+	// hide loading
+	$('.loading').hide();
+	
 	// start params object with needed csrf
 	var params = $('input[name^="csrf_token_"]').closest('form').serializeArray();
 
@@ -19,9 +22,22 @@ $(function(){
 				type: 'post',
 				dataType: 'json',
 				success: function(resp){
+					
+					// don't do anything with false
+					if(!resp) return false;
+					
+					// easeout old tree
+					parent.children('.list:visible').eq(0).hide("slide", { direction: "left" }, 500);
+					
+					//easein new
+					$('<ul/>').addClass('list').appendTo(parent);
+					
+					
 					// build new tree
 					$.each(resp, function(){
-						$('<li>').append($('<a/>').html(this.name)).appendTo(parent.find('.list'));
+							$('<li>').append(
+								$('<a/>').attr({'href':'#'+this.relative_path+'/'+this.name}).addClass('directory').html(this.name)
+							).appendTo(parent.children('.list:last-child'));
 					});
 				}
 		});

@@ -10,16 +10,15 @@ class Storage extends CI_Model
 		parent::__construct();
 	}
 	
-	function getDirectory($path = null){
-		
-		// root of storage directory, from config
-		$path = implode('/', array(
-			$this->config->item('storage_directory'),
-			$path
-			)
-		);
-		
-		return get_dir_file_info($path, true);
+	function getDirectory($file = null){
+
+		$root = $this->config->item('storage_directory');
+
+		// if root directory isn't present then add it
+		if(!preg_match('/^'.$root.'/', $file))
+			$file = !$file ? $root : $root . '/' . $file;
+
+		return get_dir_file_info($file, true);
 	}
 
 }
