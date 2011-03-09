@@ -1,0 +1,271 @@
+/* css3 buttons */
+a.button { display: inline-block; padding: 7px 9px; font-size: 12px; line-height:1; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC url('img/css3buttons_backgrounds.png') 0 0 no-repeat; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; -webkit-background-clip: padding-box; border-radius: 2px; outline: none; position: relative; zoom: 1; *display: inline; }
+a.button.primary { font-weight: bold }
+a.button:hover { color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5; }
+a.button:active,
+a.button.active { background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none; }
+a.button:active { top: 1px }
+a.button.negative:hover { color: #FFFFFF; background-position: 0 -121px; background-color: #D84743; border-color: #911D1B; }
+a.button.negative:active,
+a.button.negative.active { background-position: 0 -161px; background-color: #A5211E; border-color: #911D1B; }
+a.button.pill { -webkit-border-radius: 19px; -moz-border-radius: 19px; border-radius: 19px; padding: 6px 12px; }
+a.button.left { -webkit-border-bottom-right-radius: 0px; -webkit-border-top-right-radius: 0px; -moz-border-radius-bottomright: 0px; -moz-border-radius-topright: 0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px; margin-right: 0px; }
+a.button.middle { margin-right: 0px; margin-left: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px; border-left: none; }
+a.button.right { -webkit-border-bottom-left-radius: 0px; -webkit-border-top-left-radius: 0px; -moz-border-radius-bottomleft: 0px; -moz-border-radius-topleft: 0px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; margin-left: 0px; border-left: none;}
+a.button.left:active,
+a.button.middle:active,
+a.button.right:active { top: 0px }
+a.button.big { font-size: 16px; padding: 7px 16px; }
+a.button span.icon { display: inline-block; width: 14px; height: 12px; margin: auto 7px auto auto; position: relative; top: 1px; background-image: url('img/css3buttons_icons.png'); background-repeat: no-repeat; }
+a.big.button span.icon { top: 0px }
+a.button span.icon.book { background-position: 0 0 }
+a.button:hover span.icon.book { background-position: 0 -15px }
+a.button span.icon.calendar { background-position: 0 -30px }
+a.button:hover span.icon.calendar { background-position: 0 -45px }
+a.button span.icon.chat { background-position: 0 -60px }
+a.button:hover span.icon.chat { background-position: 0 -75px }
+a.button span.icon.check { background-position: 0 -90px }
+a.button:hover span.icon.check { background-position: 0 -103px }
+a.button span.icon.clock { background-position: 0 -116px }
+a.button:hover span.icon.clock { background-position: 0 -131px }
+a.button span.icon.cog { background-position: 0 -146px }
+a.button:hover span.icon.cog { background-position: 0 -161px }
+a.button span.icon.comment { background-position: 0 -176px }
+a.button:hover span.icon.comment { background-position: 0 -190px }
+a.button span.icon.cross { background-position: 0 -204px }
+a.button:hover span.icon.cross { background-position: 0 -219px }
+a.button span.icon.downarrow { background-position: 0 -234px }
+a.button:hover span.icon.downarrow { background-position: 0 -249px }
+a.button span.icon.fork { background-position: 0 -264px }
+a.button:hover span.icon.fork { background-position: 0 -279px }
+a.button span.icon.heart { background-position: 0 -294px }
+a.button:hover span.icon.heart { background-position: 0 -308px }
+a.button span.icon.home { background-position: 0 -322px }
+a.button:hover span.icon.home { background-position: 0 -337px }
+a.button span.icon.key { background-position: 0 -352px }
+a.button:hover span.icon.key { background-position: 0 -367px }
+a.button span.icon.leftarrow { background-position: 0 -382px }
+a.button:hover span.icon.leftarrow { background-position: 0 -397px }
+a.button span.icon.lock { background-position: 0 -412px }
+a.button:hover span.icon.lock { background-position: 0 -427px }
+a.button span.icon.loop { background-position: 0 -442px }
+a.button:hover span.icon.loop { background-position: 0 -457px }
+a.button span.icon.magnifier { background-position: 0 -472px }
+a.button:hover span.icon.magnifier { background-position: 0 -487px }
+a.button span.icon.mail { background-position: 0 -502px }
+a.button:hover span.icon.mail { background-position: 0 -514px }
+a.button span.icon.move { background-position: 0 -526px }
+a.button:hover span.icon.move { background-position: 0 -541px }
+a.button span.icon.pen { background-position: 0 -556px }
+a.button:hover span.icon.pen { background-position: 0 -571px }
+a.button span.icon.pin { background-position: 0 -586px }
+a.button:hover span.icon.pin { background-position: 0 -601px }
+a.button span.icon.plus { background-position: 0 -616px }
+a.button:hover span.icon.plus { background-position: 0 -631px }
+a.button span.icon.reload { background-position: 0 -646px }
+a.button:hover span.icon.reload { background-position: 0 -660px }
+a.button span.icon.rightarrow { background-position: 0 -674px }
+a.button:hover span.icon.rightarrow { background-position: 0 -689px }
+a.button span.icon.rss { background-position: 0 -704px }
+a.button:hover span.icon.rss { background-position: 0 -719px }
+a.button span.icon.tag { background-position: 0 -734px }
+a.button:hover span.icon.tag { background-position: 0 -749px }
+a.button span.icon.trash { background-position: 0 -764px }
+a.button:hover span.icon.trash { background-position: 0 -779px }
+a.button span.icon.unlock { background-position: 0 -794px }
+a.button:hover span.icon.unlock { background-position: 0 -809px }
+a.button span.icon.uparrow { background-position: 0 -824px }
+a.button:hover span.icon.uparrow { background-position: 0 -839px }
+a.button span.icon.user { background-position: 0 -854px }
+a.button:hover span.icon.user { background-position: 0 -869px }
+
+
+/* reset */
+*{padding:0; margin:0; outline:0; color:inherit;}
+ul, ol, nav{list-style: none; margin: 0;}
+
+body{
+	background: #d5d5d5;
+	height: 100%;
+	width: 100%;
+	min-width:600px;
+}
+
+
+
+.users form{
+	background: #eee;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e5e5e5', endColorstr='#eeeeee'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#e5e5e5), to(#eee)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #e5e5e5,  #eee); /* for firefox 3.6+ */
+	
+	width: 300px;
+	-webkit-border-radius: 3px;
+	margin: 0 auto;
+	-webkit-box-shadow: 0 1px 2px #999;
+	-webkit-border-radius: 3px;
+	
+	-moz-box-shadow: 0 1px 2px #999;
+	-moz-border-radius: 3px;
+	
+	box-shadow: 0 1px 2px #999;
+	border-radius: 3px;
+	padding-top: 5px;
+}
+
+.users form legend{
+	display: none;
+}
+
+.users form label{
+	display: block;
+}
+
+.users form ul{
+
+}
+
+.users form li{
+	color: #fff;
+	text-shadow: 0 1px 2px #666;
+	background: #fff; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#ffffff'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#fff)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #f5f5f5,  #fff); /* for firefox 3.6+ */
+	border: 1px solid #e5e5e5;
+	-webkit-box-shadow: inset 0 1px 2px #666;
+	-webkit-border-radius: 3px;
+	-moz-box-shadow: inset 0 1px 2px #666;
+	-moz-border-radius: 3px;
+	box-shadow: inset 0 1px 2px #666;
+	border-radius: 3px;
+	
+	padding: 8px 10px;
+	margin: 10px 15px;
+}
+
+.users form input[type='text'],
+.users form input[type='password']{
+	background: none;
+	border: 0;
+	width: 100%;
+}
+
+.users form .action{
+	padding-bottom: 5px;
+}
+
+.users form .action li{
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	background: none;
+	border: 0;
+	padding: 0;
+}
+
+.users form .error{
+	border: 1px solid orange;
+}
+
+/* app frame */
+
+/* Header styles */
+#header {
+	clear:both;
+	float:left;
+	width:100%;
+	line-height: 30px;
+	background: #eee;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e5e5e5', endColorstr='#eeeeee'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#e5e5e5), to(#eee)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #e5e5e5,  #eee); /* for firefox 3.6+ */
+}
+
+/* column container */
+.colmask {
+	position:relative;		/* This fixes the IE7 overflow hidden bug and stops the layout jumping out of place */
+	clear:both;
+	float:left;
+	width:100%;				/* width of whole page */
+	overflow:hidden;		/* This chops off any overhanging divs */
+}
+.colmid {
+	float:left;
+	width:200%;
+	margin-left:-200px; 	/* Width of right column */
+	position:relative;
+	right:100%;
+	background:#fff;
+}
+.colleft {
+	float:left;
+	width:100%;
+	margin-left:-50%;
+	position:relative;
+	left:400px;
+	background:#FFD8B7;
+}
+.col1wrap {
+	float:left;
+	width:50%;
+	position:relative;
+	right:200px;
+	padding-bottom:1em;
+}
+.col1 {
+	margin:0 200px;
+	position:relative;
+	left:200%;
+	overflow:hidden;
+}
+.col2 {
+	float:left;
+	float:right;
+	width:200px;
+	position:relative;
+	right:0;
+}
+.col3 {
+	float:left;
+	float:right;
+	width:200px;
+	margin-right:0px;
+	position:relative;
+	left:50%;
+}
+
+/* block list */
+#frame .stack{
+	margin: 5px;
+}
+#frame .stack > *{
+	border: 1px solid #000;
+	width: 150px;
+	height: 150px;
+	float: left;
+	margin: 5px;
+}
+
+/* vertical list */
+#frame h3{
+	padding: 0 10px;
+	line-height: 20px;
+	background: #fff; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#ffffff'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#fff)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #f5f5f5,  #fff); /* for firefox 3.6+ */
+}
+#frame .list{
+	
+}
+#frame .list > li > *{
+	text-decoration: none;
+	display: block;
+	line-height: 20px;
+	background: #eee;
+	padding: 0 10px;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#e5e5e5'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#e5e5e5)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #eeeeee,  #e5e5e5); /* for firefox 3.6+ */
+}

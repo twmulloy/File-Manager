@@ -1,0 +1,15 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script> 
+<script>!window.jQuery && document.write(unescape('%3Cscript src="/js/libs/jquery-1.5.min.js"%3E%3C/script%3E'))</script> 
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script> 
+<script>!window.jQuery && document.write(unescape('%3Cscript src="/js/libs/jquery-ui-1.8.9.min.js"%3E%3C/script%3E'))</script>
+
+<script src="/js/libs/gritter/jquery.gritter.min.js"></script>
+<script src="/js/libs/bbq/jquery.ba-bbq.min.js"></script>
+
+<script src="/js/plugins.js"></script>
+<script src="/js/script.js"></script>
+
+<!--[if lt IE 7 ]>
+<script src="/js/libs/dd_belatedpng.js"></script>
+<script> DD_belatedPNG.fix('img, .png_bg'); </script>
+<![endif]-->
