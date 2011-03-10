@@ -5,6 +5,7 @@
 
 <script src="/js/libs/gritter/jquery.gritter.min.js"></script>
 <script src="/js/libs/bbq/jquery.ba-bbq.min.js"></script>
+<script src="/js/libs/vinniefranco/jquery.inline.dialog.js"></script>
 
 <script src="/js/plugins.js"></script>
 <script src="/js/script.js"></script>

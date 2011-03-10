@@ -37,7 +37,8 @@ $(function(){
 		if(treePosition){ 
 			--treePosition;
 			tree.animate({'left':'+=200'}, 250, function(){
-
+				// remove forward tree
+				tree.eq(treePosition + 1).remove();
 			});
 		}	
 		return false;
@@ -91,9 +92,19 @@ $(function(){
 
 		return false;
 	});
-
-
-
+	
+	$('.dialog-inline').inlineDialog({
+		content: $('<input/>'),
+		buttons: {
+			'Add': function(){
+				//$(this).inlineDialog('close');
+			},
+			'Cancel':function(){
+				$(this).inlineDialog('close');
+			}
+		}
+	});
+	
 	// css3 submit buttons
 	$('.submit').click(function(){
 		var form = $(this).closest('form'),
