@@ -1,11 +1,10 @@
 <?=form_open()?>
 <?=form_close()?>
 
-<div id="header">
-	search
-</div>
-
 <div id="frame" class="colmask"> 
+	<div id="header">
+		search
+	</div>
 	<div class="colmid"> 
 		<div class="colleft"> 
 			
