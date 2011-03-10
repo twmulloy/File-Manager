@@ -18,7 +18,21 @@ class Storage extends CI_Model
 		if(!preg_match('/^'.$root.'/', $file))
 			$file = !$file ? $root : $root . '/' . $file;
 
-		return get_dir_file_info($file, true);
+		// get only top level files
+		$contents = get_dir_file_info($file, true);
+		
+		if(count($contents)){
+			foreach($contents as $name => $content){
+				// determine whether folder or file
+				if(is_dir($content['server_path'])) 
+					$contents[$name]['type'] = 'folder';
+				else
+					$contents[$name]['type'] = 'file';
+			}
+		}
+		
+		return $contents;
+		
 	}
 
 }

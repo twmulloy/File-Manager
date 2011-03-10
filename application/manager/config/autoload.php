@@ -72,7 +72,8 @@ $autoload['libraries'] = array(
 $autoload['helper'] = array(
 	'url', 
 	'file', 
-	'form'
+	'form',
+	'text'
 );
 
 

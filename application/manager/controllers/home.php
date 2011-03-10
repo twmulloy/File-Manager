@@ -11,6 +11,10 @@ class Home extends CI_Controller {
 	{
 		// get root file tree
 		$tree['dir_content'] = $this->storage->getDirectory();
+		
+		#echo '<pre>';
+		#print_r($tree['dir_content']);
+		#die;
 		$data['tree'] = $this->load->view('tree', $tree, true);
 		
 		// get root stack

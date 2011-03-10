@@ -32,6 +32,9 @@ $(function(){
 	$('.button.back').click(function(){
 		var parent = $(this).closest('.partial'),
 				tree = parent.children('.list');
+				
+		//reset all active
+		$('.active.folder', parent).removeClass('active').find('.icon.folder-open').removeClass('folder-open').addClass('folder');
 
 		// slide tree over if tree is not at root
 		if(treePosition){ 
@@ -45,7 +48,11 @@ $(function(){
 	});
 	
 	// move forward through tree
-	$('.directory').live('click', function(){
+	$('a.folder', '.list').live('click', function(){
+		
+		// change button state
+		$(this).addClass('active').find('.icon.folder').removeClass('folder').addClass('folder-open');
+		
 		var path = $(this).attr('href').replace(/^#/, ''),
 			parent = $(this).closest('.partial');
 
@@ -76,12 +83,12 @@ $(function(){
 					
 					// slide tree over
 					parent.children('.list').animate({'left':'-=200'}, 250);
-
-
 					// build new tree
 					$.each(resp, function(){
 							$('<li>').append(
-								$('<a/>').attr({'href':'#'+this.relative_path+'/'+this.name}).addClass('directory').html(this.name)
+								$('<a/>').attr({'href':'#'+this.relative_path+'/'+this.name}).addClass(this.type).html(this.name).prepend(
+									$('<span/>').addClass('icon '+this.type)
+								)
 							).appendTo(parent.children('.list:last-child'));
 					});
 				},
@@ -92,6 +99,13 @@ $(function(){
 
 		return false;
 	});
+	
+	// files in tree
+	$('a.file', '.list').live('click', function(){
+		alert('i am a file');
+		return false;
+	});
+	
 	
 	$('.dialog-inline').inlineDialog({
 		content: $('<input/>'),
