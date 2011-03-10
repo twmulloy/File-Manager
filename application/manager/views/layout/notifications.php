@@ -4,4 +4,4 @@
 	</ol>
 <?php endif; ?>
 
-<?=$this->session->flashdata('notice')?>
+<?#=$this->session->flashdata('notice')?>
