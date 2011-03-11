@@ -19,6 +19,7 @@
 
 	<?=$this->load->view('layout/stylesheets')?>
 	<script src="/js/libs/modernizr-1.6.min.js"></script>
+	<?=$this->load->view('layout/scripts')?>
 </head>
 
 <body class="admin <?=$this->router->class?>">
@@ -35,9 +36,6 @@
 		</div>
 		
 		<?=$this->load->view('layout/footer')?>
-	</div> <!-- end of #container -->
-
-	<?=$this->load->view('layout/scripts')?>
-	
+	</div> <!-- end of #container -->	
 </body>
 </html>

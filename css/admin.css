@@ -86,7 +86,7 @@ ul, ol, nav{list-style: none; margin: 0;}
 
 html{
 	/* override the boilerplate scroll */
-	overflow-y: hidden;
+	overflow: hidden;
 }
 
 body{
@@ -96,90 +96,39 @@ body{
 	min-width:600px;
 }
 
-/* app frame */
-/* column container, do not change */
-.colmask {
-	position:relative;
-	clear:both;
-	float:left;
-	width:100%;
-	overflow:hidden;
-}
-.colmid {
-	float:left;
-	width:200%;
-	margin-left:-200px;
-	position:relative;
-	right:100%;
-}
-.colleft {
-	float:left;
-	width:100%;
-	margin-left:-50%;
-	position:relative;
-	left:400px;
-}
-.col1wrap {
-	float:left;
-	width:50%;
-	position:relative;
-	right:200px;
-	padding-bottom:1em;
-}
-.col1 {
-	margin:0;
-	margin-left: 200px; /* width of .col2 */
-	margin-right: 275px; /* width of .col3 */
-	position:relative;
-	left:200%;
-	overflow:hidden;
-}
-.col2 {
-	float:left;
-	float:right;
-	width:200px;
-	position:relative;
-	right:0;
-}
-.col3 {
-	float:left;
-	float:right;
-	width:275px;
-	margin-right:0px;
-	position:relative;
-	left:50%;
-}
-#frame{
-
-}
-/* Header styles */
-#frame #header {
+/* layout */
+#header {
 	line-height: 30px;
+	width: 100%;
+	height: 30px;
 }
 
-#frame #header ul li{
+#header ul li{
 	float: left;
 }
 
-/* left region */
-#frame #w{
+#w{
+	position: absolute;
+	top: 30px;
+	width: 200px;
 	background: url('img/bg.light.png');
-	position: relative;
-	z-index: 1;
+	overflow: hidden;
 }
-/* center */
-#frame #c{
-	background: url('img/bg.png');
+#c{
+	margin: 0 275px 0 200px;
 	overflow-y: auto;
-	z-index: 10;
-	position: relative;
+	background: url('img/bg.png');
 	box-shadow: inset 0 0 3px #000;
 	-moz-box-shadow: inset 0 0 3px #000;
+	min-width: 600px;
 }
-#frame #e{
-
+#e{
+	position: absolute;
+	right: 0;
+	top: 30px;
+	width: 275px;
+	overflow: hidden;
 }
-
 
 /* block list */
 #frame .loading{
@@ -200,6 +149,11 @@ body{
 	box-shadow: 0 0 3px #000;
 	-moz-box-shadow: 0 0 3px #000;
 }
+	/* ui fix */
+	.ui-draggable-dragging{
+		border: 1px solid #fff !important;
+		z-index: 10 !important;
+	}
 
 /* vertical list */
 #frame h3{

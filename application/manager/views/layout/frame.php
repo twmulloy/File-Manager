@@ -1,7 +1,7 @@
 <?=form_open()?>
 <?=form_close()?>
 
-<div id="frame" class="colmask"> 
+<div id="frame" > 
 	<div id="header">
 		<ul>
 			<li><?=form_input()?></li>
@@ -9,27 +9,25 @@
 			<li>zoom slider?</li>
 		</ul>
 	</div>
-	<div class="colmid"> 
-		<div class="colleft"> 
-			
-			<div class="col1wrap"> 
-				<div id="c" class="col1 partial"> 
-					<span class="loading">Loading...</span>
-					<?=$stack?>
-				</div><!-- end middle -->
-			</div> 
-			
-			<div id="w" class="col2 partial"> 
+	
+	<div class="content"> 
+
+			<div id="c" class="partial"> 
+				<span class="loading">Loading...</span>
+				<?=$stack?>
+			</div><!-- end middle -->
+
+			<div id="w" class="partial"> 
 				<span class="loading">Loading...</span>				
 				<?=$tree?>
 			</div><!-- end left -->
-			
-			<div id="e" class="col3 partial"> 
+
+			<div id="e" class="partial"> 
 				<span class="loading">Loading...</span>
 				<?=$pane?>
 				
 			</div><!-- end right-->
-			
+
 		</div> 
 	</div> 
 </div>

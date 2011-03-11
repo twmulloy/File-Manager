@@ -181,25 +181,27 @@ $(function(){
 			revert: true, 
 			scroll: false,
 			stack: '',
-			zIndex: 10,
-			//helper: 'clone', // causing issues with redragging
+			zIndex: 1,
+			helper: 'clone', // causing issues with redragging jquery 1.5 removes draggable class
 			start: function(event, ui) {
 				// record original pane position to global
 				globals.originalIndex = $('.control .button.active', '#e').index();
 				globals.paneWidth = $('.pane > div', '#e').width();
 
 				// index of download pane
-				var downloadIndex = $('.control .button.download', '#e').index();
+				var downloadIndex = $('.control .button.download', '#e').index(),
+					margin = -downloadIndex * globals.paneWidth;
 				// change to pane-download
 				$('.pane', '#e').animate({
-					'marginLeft': -downloadIndex*globals.paneWidth
+					'marginLeft': margin
 				}, 500);
 
 			},
 			stop: function(event, ui) {
+				var margin = -globals.originalIndex * globals.paneWidth;
 				// scroll back to original pane
 				$('.pane', '#e').animate({
-					'marginLeft': -globals.originalIndex*globals.paneWidth
+					'marginLeft': margin
 				}, 500);
 			}
 		}).disableSelection();		
