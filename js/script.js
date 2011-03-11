@@ -4,11 +4,17 @@ function setFrameHeight(height){
 	return false;
 }
 
+var globals = {
+	originalIndex: 0,
+	paneWidth: 0
+};
+
 $(function(){
 	
 	// hide loading
 	$('.loading').hide();
 	
+	// set globals, most dimensions from css
 	// start params object with needed csrf
 	var params = $('input[name^="csrf_token_"]').closest('form').serializeArray();
 
@@ -42,6 +48,9 @@ $(function(){
 			tree.animate({'left':'+=200'}, 250, function(){
 				// remove forward tree
 				tree.eq(treePosition + 1).remove();
+				// clear stack
+				$('.stack', '#c').empty();
+				
 			});
 		}	
 		return false;
@@ -61,16 +70,19 @@ $(function(){
 			{name:'path', value: path}
 		);
 
+		// get and load next tree layer
 		$.ajax({
 				url : '/partial/tree',
 				data: params,
 				type: 'post',
 				dataType: 'json',
 				beforeSend: function(){
+					// trigger tree loading
 					parent.find('.loading').show();
+					// trigger stack loading
+					$('.loading', '#c').show();
 				},
 				success: function(resp){
-
 					// don't do anything with false
 					if(!resp) return false;
 					
@@ -81,19 +93,34 @@ $(function(){
 						'left': 200
 					});
 					
+					// empty stack list in main window, otherwise create it
+					var stack = $('.stack', '#c');
+					if(stack.length){ stack.empty(); }
+					else{ stack = $('<ul/>').addClass('stack').appendTo('#c'); }
+					
 					// slide tree over
 					parent.children('.list').animate({'left':'-=200'}, 250);
-					// build new tree
 					$.each(resp, function(){
+							// build new tree
 							$('<li>').append(
 								$('<a/>').attr({'href':'#'+this.relative_path+'/'+this.name}).addClass(this.type).html(this.name).prepend(
 									$('<span/>').addClass('icon '+this.type)
 								)
 							).appendTo(parent.children('.list:last-child'));
+							
+							// since tree data is similar to stack data build stack using this same loop
+							$('<li>').append(
+								$('<span/>').addClass('icon '+this.type)
+							).appendTo(stack);
+							
 					});
+					
+					
 				},
 				complete: function(){
+					// end loading
 					parent.find('.loading').hide();
+					$('.loading', '#c').hide();
 				}
 		});
 
@@ -139,7 +166,36 @@ $(function(){
 	});
 	
 	// download queue pane is droppable
-	$('#pane-download', '#e').droppable();
+	$('#pane-download', '#e').droppable({
+		accept: '#c .stack > li'
+	});
+	// stack items are draggable
+	$('.stack > li', '#c').draggable({
+		revert: true, 
+		scroll: false,
+		stack: '',
+		zIndex: 10,
+		//helper: 'clone', // causing issues with redragging
+		start: function(event, ui) {
+			// record original pane position to global
+			globals.originalIndex = $('.control .button.active', '#e').index();
+			globals.paneWidth = $('.pane > div', '#e').width();
+			
+			// index of download pane
+			var downloadIndex = $('.control .button.download', '#e').index();
+			// change to pane-download
+			$('.pane', '#e').animate({
+				'marginLeft': -downloadIndex*globals.paneWidth
+			}, 500);
+			
+		},
+		stop: function(event, ui) {
+			// scroll back to original pane
+			$('.pane', '#e').animate({
+				'marginLeft': -globals.originalIndex*globals.paneWidth
+			}, 500);
+		}
+	}).disableSelection();
 	
 
 	

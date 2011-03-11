@@ -1,11 +1,14 @@
-<?php if(isset($stack)): ?>
+<?php if(isset($dir_content)): ?>
 <ul class="stack">
-	<?php foreach($stack as $item): ?>
-	<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+	<?php foreach($dir_content as $item): ?>
+	<li>
+		<span class="icon <?=$item['type']?>"></span>
+		<?=$item['name']?>
+	</li>
 	<?php endforeach; ?>
 </ul>
 <?php else: ?>
 <div class="silhouette">
-	<p>No contents</p>
+	<p>Empty</p>
 </div>
 <?php endif; ?>

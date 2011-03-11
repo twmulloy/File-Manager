@@ -10,7 +10,7 @@ class Home extends CI_Controller {
 	function index()
 	{
 		// get root file tree
-		$tree['dir_content'] = $this->storage->getDirectory();
+		$tree['dir_content'] = $stack['dir_content'] = $this->storage->getDirectory();
 		
 		#echo '<pre>';
 		#print_r($tree['dir_content']);
@@ -18,7 +18,7 @@ class Home extends CI_Controller {
 		$data['tree'] = $this->load->view('tree', $tree, true);
 		
 		// get file stack
-		$data['stack'] = $this->load->view('stack', null, true);
+		$data['stack'] = $this->load->view('stack', $stack, true);
 		
 		// information, upload queue, export panes
 		$data['pane'] = $this->load->view('pane', null, true);

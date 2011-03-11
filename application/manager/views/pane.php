@@ -20,7 +20,16 @@
 	<div id="pane-download" class="droppable">
 		<h3>Download Queue</h3>
 		<ul class="queue">
-			
+			<li>Some file</li>
+			<li>Some file</li>
+			<li>Some file</li>
+			<li>Some file</li>
+			<li>Some file</li>
+			<li>Some file</li>
+			<li>Some file</li>
+			<li>Some file</li>
+			<li>Some file</li>
+			<li>Some file</li>
 		</ul>
 
 	</div>
