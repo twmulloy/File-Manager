@@ -3,7 +3,11 @@
 
 <div id="frame" class="colmask"> 
 	<div id="header">
-		search
+		<ul>
+			<li><?=form_input()?></li>
+			<li>some/current/path</li>
+			<li>zoom slider?</li>
+		</ul>
 	</div>
 	<div class="colmid"> 
 		<div class="colleft"> 

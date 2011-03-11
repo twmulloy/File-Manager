@@ -156,6 +156,11 @@ body{
 #frame #header {
 	line-height: 30px;
 }
+
+#frame #header ul li{
+	float: left;
+}
+
 /* left region */
 #frame #w{
 	background: url('img/bg.light.png');
