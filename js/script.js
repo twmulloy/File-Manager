@@ -26,10 +26,10 @@ $(function(){
 
 	
 
-	/* directory tree */
+	/* directory tree, left pane */
 	var treePosition = 0;
 	// move backward through tree
-	$('.button.back').click(function(){
+	$('.control .button.back', '#w').click(function(){
 		var parent = $(this).closest('.partial'),
 				tree = parent.children('.list');
 				
@@ -48,7 +48,7 @@ $(function(){
 	});
 	
 	// move forward through tree
-	$('a.folder', '.list').live('click', function(){
+	$('.list a.folder', '#w').live('click', function(){
 		
 		// change button state
 		$(this).addClass('active').find('.icon.folder').removeClass('folder').addClass('folder-open');
@@ -101,12 +101,12 @@ $(function(){
 	});
 	
 	// files in tree
-	$('a.file', '.list').live('click', function(){
+	$('.list a.file', '#w').live('click', function(){
 		alert('i am a file');
 		return false;
 	});
 	
-	
+	// new folder
 	$('.dialog-inline').inlineDialog({
 		content: $('<input/>'),
 		buttons: {
@@ -118,6 +118,30 @@ $(function(){
 			}
 		}
 	});
+	
+	// right panel
+	$('.control .button', '#e').click(function(){
+		var parent = $(this).closest('.partial'),
+			index = $(this).index(),
+			width = $('.pane > div', parent).width();
+		
+		// reset active pane
+		$('.active', parent).removeClass('active');
+		// set active
+		$(this).addClass('active');
+		
+		// position proper pane
+		$('.pane', parent).animate({
+			'marginLeft': -index*width
+		}, 500);
+
+		return false;
+	});
+	
+	// download queue pane is droppable
+	$('#pane-download', '#e').droppable();
+	
+
 	
 	// css3 submit buttons
 	$('.submit').click(function(){

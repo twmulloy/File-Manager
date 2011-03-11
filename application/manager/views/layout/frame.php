@@ -11,27 +11,7 @@
 			<div class="col1wrap"> 
 				<div id="c" class="col1 partial"> 
 					<span class="loading">Loading...</span>
-					<ul class="stack">
-						<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-						<li>Aliquam tincidunt mauris eu risus.</li>
-						<li>Vestibulum auctor dapibus neque.</li>
-						<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-						<li>Aliquam tincidunt mauris eu risus.</li>
-						<li>Vestibulum auctor dapibus neque.</li>
-						<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-						<li>Aliquam tincidunt mauris eu risus.</li>
-						<li>Vestibulum auctor dapibus neque.</li>
-						<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-						<li>Aliquam tincidunt mauris eu risus.</li>
-						<li>Vestibulum auctor dapibus neque.</li>
-						<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-						<li>Aliquam tincidunt mauris eu risus.</li>
-						<li>Vestibulum auctor dapibus neque.</li>
-						<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-						<li>Aliquam tincidunt mauris eu risus.</li>
-						<li>Vestibulum auctor dapibus neque.</li>
-					</ul>
-
+					<?=$stack?>
 				</div><!-- end middle -->
 			</div> 
 			
@@ -42,6 +22,7 @@
 			
 			<div id="e" class="col3 partial"> 
 				<span class="loading">Loading...</span>
+				<?=$pane?>
 				
 			</div><!-- end right-->
 			

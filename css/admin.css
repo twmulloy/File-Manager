@@ -127,7 +127,9 @@ body{
 	padding-bottom:1em;
 }
 .col1 {
-	margin:0 200px;
+	margin:0;
+	margin-left: 200px; /* width of .col2 */
+	margin-right: 275px; /* width of .col3 */
 	position:relative;
 	left:200%;
 	overflow:hidden;
@@ -142,7 +144,7 @@ body{
 .col3 {
 	float:left;
 	float:right;
-	width:200px;
+	width:275px;
 	margin-right:0px;
 	position:relative;
 	left:50%;
@@ -216,8 +218,8 @@ body{
 */
 /* vertical list */
 #frame .list{
-	width: 200px;
 	position: absolute;
+	width: 200px;
 }
 #frame .list > li{
 	background: #777 url('img/bg.list.item.png') repeat-x;
@@ -235,6 +237,25 @@ body{
 	display: block;
 	line-height: 44px;
 	padding: 0 10px;
+}
+
+/* panes and pane lists */
+#frame .pane > div{
+	position: absolute;
+	width: 275px; /* width of right column */
+	z-index: 1;
+}
+
+#pane-info{
+	margin-left: 0px; /* increment each pane n * width (275px) */
+}
+
+#pane-upload{
+	margin-left: 275px;
+}
+
+#pane-download{
+	margin-left: 550px;
 }
 
 /* icons */
@@ -255,4 +276,16 @@ body{
 }
 #frame .list .icon.file{
 	background-image: url('img/document.png');
+}
+
+/* background information */
+#frame .silhouette{
+	text-align: center;
+}
+#frame .silhouette p{
+	color: #333;
+	font-size: 32px;
+	text-shadow: #000 0px 1px 1px;
+	text-transform: uppercase;
+	
 }

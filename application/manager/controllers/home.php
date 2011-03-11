@@ -17,8 +17,11 @@ class Home extends CI_Controller {
 		#die;
 		$data['tree'] = $this->load->view('tree', $tree, true);
 		
-		// get root stack
-		#$content['stack'] = 
+		// get file stack
+		$data['stack'] = $this->load->view('stack', null, true);
+		
+		// information, upload queue, export panes
+		$data['pane'] = $this->load->view('pane', null, true);
 		
 		$data['partial'] = $this->load->view('layout/frame', $data, true);
 		$this->load->view($this->config->item('default_layout'), $data);
