@@ -50,6 +50,7 @@ $(function(){
 				tree.eq(treePosition + 1).remove();
 				// clear stack
 				$('.stack', '#c').empty();
+				// load previous ...
 				
 			});
 		}	
@@ -115,7 +116,8 @@ $(function(){
 							
 					});
 					
-					
+					// bind new stack
+					bindStack();			
 				},
 				complete: function(){
 					// end loading
@@ -169,33 +171,41 @@ $(function(){
 	$('#pane-download', '#e').droppable({
 		accept: '#c .stack > li'
 	});
-	// stack items are draggable
-	$('.stack > li', '#c').draggable({
-		revert: true, 
-		scroll: false,
-		stack: '',
-		zIndex: 10,
-		//helper: 'clone', // causing issues with redragging
-		start: function(event, ui) {
-			// record original pane position to global
-			globals.originalIndex = $('.control .button.active', '#e').index();
-			globals.paneWidth = $('.pane > div', '#e').width();
-			
-			// index of download pane
-			var downloadIndex = $('.control .button.download', '#e').index();
-			// change to pane-download
-			$('.pane', '#e').animate({
-				'marginLeft': -downloadIndex*globals.paneWidth
-			}, 500);
-			
-		},
-		stop: function(event, ui) {
-			// scroll back to original pane
-			$('.pane', '#e').animate({
-				'marginLeft': -globals.originalIndex*globals.paneWidth
-			}, 500);
-		}
-	}).disableSelection();
+	
+	// enable dragging on stack items
+	bindStack();
+	
+	function bindStack(){
+		// stack items are draggable
+		$('.stack > li', '#c').draggable({
+			revert: true, 
+			scroll: false,
+			stack: '',
+			zIndex: 10,
+			//helper: 'clone', // causing issues with redragging
+			start: function(event, ui) {
+				// record original pane position to global
+				globals.originalIndex = $('.control .button.active', '#e').index();
+				globals.paneWidth = $('.pane > div', '#e').width();
+
+				// index of download pane
+				var downloadIndex = $('.control .button.download', '#e').index();
+				// change to pane-download
+				$('.pane', '#e').animate({
+					'marginLeft': -downloadIndex*globals.paneWidth
+				}, 500);
+
+			},
+			stop: function(event, ui) {
+				// scroll back to original pane
+				$('.pane', '#e').animate({
+					'marginLeft': -globals.originalIndex*globals.paneWidth
+				}, 500);
+			}
+		}).disableSelection();		
+		return false;
+	}
+
 	
 
 	
