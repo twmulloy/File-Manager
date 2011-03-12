@@ -6,6 +6,9 @@ function setFrameHeight(height){
 
 // maintain dom consistency
 function buildStack(data, appendTo){
+	// only files
+	if(data.type !== 'file'){ return false; }
+	
 	return $('<li>').append(
 			$('<span/>').addClass('icon '+data.type)
 		)
@@ -18,6 +21,8 @@ function buildStack(data, appendTo){
 }
 
 function buildTree(data, appendTo){
+	// only folders
+	if(data.type !== 'folder'){ return false; }
 	// build new tree
 	return $('<li>').append(
 		$('<a/>')
@@ -33,6 +38,43 @@ function buildTree(data, appendTo){
 	).appendTo(appendTo);
 }
 
+function bindStack(){
+	// stack items are draggable
+	$('.stack > li', '#c').draggable({
+		revert: true, 
+		scroll: false,
+		stack: '.stack',
+		zIndex: 2,
+		helper: 'clone',
+		start: function(event, ui) {
+			// record original pane position to global
+			globals.originalIndex = $('.control .button.active', '#e').index();
+			globals.paneWidth = $('.pane > div', '#e').width();
+
+			// index of download pane
+			var downloadIndex = $('.control .button.download', '#e').index(),
+				margin = -downloadIndex * globals.paneWidth;
+
+			// change to pane-download
+			$('.pane', '#e').animate({
+				'marginLeft': margin
+			}, 500, function(){
+				// do something when done
+			});
+
+		},
+		stop: function(event, ui) {
+			var margin = -globals.originalIndex * globals.paneWidth;
+			// scroll back to original pane
+			$('.pane', '#e').animate({
+				'marginLeft': margin
+			}, 500);
+		}
+	}).disableSelection();	
+				
+	return false;
+}
+
 var globals = {
 	originalIndex: 0,
 	paneWidth: 0,
@@ -41,16 +83,19 @@ var globals = {
 };
 
 $(function(){
-	
+
 	// hide loading
 	$('.loading').hide();
 	
 	// set globals, most dimensions from css
 	// start params object with needed csrf
 	var params = {
-		csrf_token_manager : $('input[name^="csrf_token_"]').val(),
-		path : globals.curDir
-	};
+			csrf_token_manager : $('input[name^="csrf_token_"]').val(),
+			path : globals.curDir,
+			crud : null,
+			data : {} 
+		},
+		appPath = window.location.pathname;
 
 	// handle static notifications
 	$('.notifications').notify();
@@ -94,7 +139,7 @@ $(function(){
 		params.path = globals.prevDir;
 		
 		$.ajax({
-			url: '/partial/tree',
+			url: appPath + 'partial/tree',
 			data: params,
 			type: 'post',
 			dataType: 'json',
@@ -148,7 +193,7 @@ $(function(){
 
 		// get and load next tree layer
 		$.ajax({
-				url : '/partial/tree',
+				url : appPath + 'partial/tree',
 				data: params,
 				type: 'post',
 				dataType: 'json',
@@ -177,7 +222,6 @@ $(function(){
 					// slide tree over
 					parent.children('.list').animate({'left':'-=200'}, 250);
 					$.each(resp, function(){
-
 							buildTree(this, parent.children('.list:last-child'));
 							buildStack(this, stack);
 							
@@ -192,7 +236,6 @@ $(function(){
 					$('.loading', '#c').hide();
 				}
 		});
-
 		return false;
 	});
 	
@@ -205,10 +248,38 @@ $(function(){
 	
 	// new folder
 	$('.dialog-inline').inlineDialog({
-		content: $('<input/>'),
+		content: $('<input/>').attr({'placeholder':'Name'}),
 		buttons: {
 			'Add': function(){
-				//$(this).inlineDialog('close');
+				var folder = $('.ui-inline-dialog-content').find('input').val();
+				
+				// alert notification
+				if(!folder){
+					return $.gritter.add({
+						title: 'Alert',
+						text: 'Folder name is required',
+						image: appPath + 'css/img/icons/folder-exclamation.png'
+					});
+				}
+				
+				var thisParams = params;
+				thisParams.crud = 'create';
+				thisParams.data = {
+					item : 'folder',
+					name : folder
+				};
+				
+				// create new folder
+				$.ajax({
+					url: appPath + 'xhr/create',
+					data: thisParams,
+					type: 'post',
+					dataType: 'json',
+					success: function(resp){
+						console.log(resp)
+					}
+				});
+				
 			},
 			'Cancel':function(){
 				$(this).inlineDialog('close');
@@ -239,51 +310,13 @@ $(function(){
 	// enable dragging on stack items
 	bindStack();
 	
-	function bindStack(){
-		// stack items are draggable
-		$('.stack > li', '#c').draggable({
-			revert: true, 
-			scroll: false,
-			stack: '.stack',
-			zIndex: 2,
-			helper: 'clone', // causing issues with redragging jquery 1.5 removes draggable class
-			start: function(event, ui) {
-				// record original pane position to global
-				globals.originalIndex = $('.control .button.active', '#e').index();
-				globals.paneWidth = $('.pane > div', '#e').width();
-
-				// index of download pane
-				var downloadIndex = $('.control .button.download', '#e').index(),
-					margin = -downloadIndex * globals.paneWidth;
-					
-					console.log(margin);
-				// change to pane-download
-				$('.pane', '#e').animate({
-					'marginLeft': margin
-				}, 500, function(){
-					// do something when done
-				});
-
-			},
-			stop: function(event, ui) {
-				var margin = -globals.originalIndex * globals.paneWidth;
-				// scroll back to original pane
-				$('.pane', '#e').animate({
-					'marginLeft': margin
-				}, 500);
-			}
-		}).disableSelection();	
-					
-		return false;
-	}
-	
 	// download queue pane is droppable
 	$('#pane-download', '#e').droppable({
 		accept: '#c .stack > li',
 		hoverClass: 'drophover',
 		activeClass: 'dropactive',
 		over: function(event, ui){
-			console.log(event, ui);
+			//console.log(event, ui);
 		},
 		drop: function(){
 			alert('got it');

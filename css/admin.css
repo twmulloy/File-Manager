@@ -254,13 +254,13 @@ body{
 	float: left;
 }
 #frame li .icon.folder{
-	background-image: url('img/folder-horizontal.png');
+	background-image: url('img/icons/folder-horizontal.png');
 }
 #frame li .icon.folder-open{
-	background-image: url('img/folder-horizontal-open.png');
+	background-image: url('img/icons/folder-horizontal-open.png');
 }
 #frame li .icon.file{
-	background-image: url('img/document.png');
+	background-image: url('img/icons/document.png');
 }
 
 #frame .queue > li{

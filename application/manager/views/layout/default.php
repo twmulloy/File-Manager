@@ -18,7 +18,7 @@
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 	<?=$this->load->view('layout/stylesheets')?>
-	<script src="/js/libs/modernizr-1.6.min.js"></script>
+	<script src="js/libs/modernizr-1.6.min.js"></script>
 	<?=$this->load->view('layout/scripts')?>
 </head>
 
@@ -27,7 +27,6 @@
 	<?=$this->load->view('layout/notifications')?>
 	
 	<div id="container">
-		<?#=$this->load->view('layout/header')?>
 		
 		<div id="main">
 			<?php if(isset($partial)): ?>

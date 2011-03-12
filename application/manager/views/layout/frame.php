@@ -4,9 +4,8 @@
 <div id="frame" > 
 	<div id="header">
 		<ul>
-			<li><?=form_input()?></li>
-			<li>some/current/path</li>
-			<li>zoom slider?</li>
+			<li id="search"><?=form_input()?></li>
+			<li id="path">some/current/path</li>
 		</ul>
 	</div>
 	
