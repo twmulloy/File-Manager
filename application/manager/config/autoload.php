@@ -119,7 +119,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('auth', 'storage');
+$autoload['model'] = array('storage');
 
 
 /* End of file autoload.php */

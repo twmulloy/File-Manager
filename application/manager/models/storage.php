@@ -3,21 +3,28 @@
 class Storage extends CI_Model
 {
 	
-	protected $path;
+	protected $root;
 	
 	function __construct()
 	{
 		parent::__construct();
+		$this->root = $this->config->item('storage_directory');
+	}
+	
+	// builds the real path
+	function getPath($filename){
+		// if root directory isn't present then add it
+		if(!preg_match('/^'.$this->root.'/', $filename))
+			$filename = !$filename ? $this->root : $this->root . '/' . $filename;
+			
+		return $filename;
+		
 	}
 	
 	function getDirectory($file = null){
-
-		$root = $this->config->item('storage_directory');
-
-		// if root directory isn't present then add it
-		if(!preg_match('/^'.$root.'/', $file))
-			$file = !$file ? $root : $root . '/' . $file;
-
+		
+		$file = $this->getPath($file);
+		
 		// get only top level files
 		$contents = get_dir_file_info($file, true);
 		
@@ -33,6 +40,16 @@ class Storage extends CI_Model
 		
 		return $contents;
 		
+	}
+	
+	function createDirectory($data, $path){
+		
+		$path = $this->getPath($path);
+		
+		mkdir($path.'/'.$data['name'], 0755, true);
+		
+		print_r($data);
+		print_r($path);
 	}
 
 }

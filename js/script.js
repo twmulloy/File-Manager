@@ -78,8 +78,8 @@ function bindStack(){
 var globals = {
 	originalIndex: 0,
 	paneWidth: 0,
-	curDir: '/', // current directory
-	prevDir: '/' // root of storage directory
+	curDir: '', // current directory
+	prevDir: '' // root of storage directory
 };
 
 $(function(){
@@ -132,8 +132,8 @@ $(function(){
 		
 		// reset dir
 		if(!treePosition){
-			globals.curDir = '/';
-			globals.prevDir = '/';
+			globals.curDir = '';
+			globals.prevDir = '';
 		}
 		
 		params.path = globals.prevDir;
