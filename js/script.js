@@ -152,24 +152,20 @@ $(function(){
 	$('.control .button', '#e').click(function(){
 		var parent = $(this).closest('.partial'),
 			index = $(this).index(),
-			width = $('.pane > div', parent).width();
-		
-		// reset active pane
-		$('.active', parent).removeClass('active');
-		// set active
-		$(this).addClass('active');
-		
+			width = $('.pane > div', parent).width()
+			that = this;
+				
 		// position proper pane
 		$('.pane', parent).animate({
 			'marginLeft': -index*width
-		}, 500);
+		}, 500, function(){
+			// reset active pane
+			$('.active', parent).removeClass('active');
+			// set active
+			$(that).addClass('active');
+		});
 
 		return false;
-	});
-	
-	// download queue pane is droppable
-	$('#pane-download', '#e').droppable({
-		accept: '#c .stack > li'
 	});
 	
 	// enable dragging on stack items
@@ -180,8 +176,8 @@ $(function(){
 		$('.stack > li', '#c').draggable({
 			revert: true, 
 			scroll: false,
-			stack: '',
-			zIndex: 1,
+			stack: '.stack',
+			zIndex: 2,
 			helper: 'clone', // causing issues with redragging jquery 1.5 removes draggable class
 			start: function(event, ui) {
 				// record original pane position to global
@@ -204,13 +200,24 @@ $(function(){
 					'marginLeft': margin
 				}, 500);
 			}
-		}).disableSelection();		
+		}).disableSelection();	
+					
 		return false;
 	}
-
 	
+	// download queue pane is droppable
+	$('#pane-download', '#e').droppable({
+		accept: '#c .stack > li',
+		hoverClass: 'drophover',
+		activeClass: 'dropactive',
+		over: function(event, ui){
+			console.log(event, ui);
+		},
+		drop: function(){
+			alert('got it');
+		}
+	});
 
-	
 	// css3 submit buttons
 	$('.submit').click(function(){
 		var form = $(this).closest('form'),

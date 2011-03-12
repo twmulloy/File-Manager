@@ -93,7 +93,6 @@ body{
 	background: #1B1B1B;;
 	height: 100%;
 	width: 100%;
-	min-width:600px;
 }
 
 /* layout */
@@ -123,7 +122,7 @@ body{
 	min-width: 600px;
 }
 #e{
-	position: absolute;
+	position: fixed;
 	right: 0;
 	top: 30px;
 	width: 275px;
@@ -150,10 +149,13 @@ body{
 	-moz-box-shadow: 0 0 3px #000;
 }
 	/* ui fix */
-	.ui-draggable-dragging{
+	#frame .stack .ui-draggable-dragging{
 		border: 1px solid #fff !important;
-		z-index: 10 !important;
 	}
+	
+#frame .stack > li:hover{
+	border-color: #fff;
+}
 
 /* vertical list */
 #frame h3{
@@ -210,6 +212,7 @@ body{
 	position: absolute;
 	width: 275px; /* width of right column */
 	z-index: 1;
+	height:100%;
 }
 
 #pane-info{
@@ -222,6 +225,13 @@ body{
 
 #pane-download{
 	margin-left: 550px;
+}
+
+#pane-download.dropactive{
+	background: #fff;
+}
+#pane-download.drophover{
+	background: #000;
 }
 
 /* icons */
