@@ -3,7 +3,12 @@
 	<?php foreach($dir_content as $item): ?>
 	<li>
 		<span class="icon <?=$item['type']?>"></span>
-		<?=$item['name']?>
+		<ul class="details">
+			<li><?=$item['name']?></li>
+			<li><?=$item['size']?></li>
+			<li><?=$item['date']?></li>
+		</ul>
+
 	</li>
 	<?php endforeach; ?>
 </ul>

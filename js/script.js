@@ -4,9 +4,40 @@ function setFrameHeight(height){
 	return false;
 }
 
+// maintain dom consistency
+function buildStack(data, appendTo){
+	return $('<li>').append(
+			$('<span/>').addClass('icon '+data.type)
+		)
+		.append(
+			$('<ul/>')
+				.append($('<li/>').html(data.name))
+				.append($('<li/>').html(data.size))
+				.append($('<li/>').html(data.date))
+		).appendTo(appendTo);
+}
+
+function buildTree(data, appendTo){
+	// build new tree
+	return $('<li>').append(
+		$('<a/>')
+			.attr({
+				'href':'#'+data.relative_path+'/'+data.name,
+				'data-type':data.type
+			})
+			.addClass(data.type)
+			.html(data.name)
+			.prepend(
+				$('<span/>').addClass('icon '+data.type)
+		)
+	).appendTo(appendTo);
+}
+
 var globals = {
 	originalIndex: 0,
-	paneWidth: 0
+	paneWidth: 0,
+	curDir: '/', // current directory
+	prevDir: '/' // root of storage directory
 };
 
 $(function(){
@@ -16,7 +47,10 @@ $(function(){
 	
 	// set globals, most dimensions from css
 	// start params object with needed csrf
-	var params = $('input[name^="csrf_token_"]').closest('form').serializeArray();
+	var params = {
+		csrf_token_manager : $('input[name^="csrf_token_"]').val(),
+		path : globals.curDir
+	};
 
 	// handle static notifications
 	$('.notifications').notify();
@@ -48,12 +82,48 @@ $(function(){
 			tree.animate({'left':'+=200'}, 250, function(){
 				// remove forward tree
 				tree.eq(treePosition + 1).remove();
-				// clear stack
-				$('.stack', '#c').empty();
-				// load previous ...
-				
 			});
 		}	
+		
+		// reset dir
+		if(!treePosition){
+			globals.curDir = '/';
+			globals.prevDir = '/';
+		}
+		
+		params.path = globals.prevDir;
+		
+		$.ajax({
+			url: '/partial/tree',
+			data: params,
+			type: 'post',
+			dataType: 'json',
+			beforeSend: function(){
+				// trigger stack loading
+				$('.loading', '#c').show();
+			},
+			success: function(resp){
+				// don't do anything with false
+				if(!resp) return false;
+
+				// empty stack list in main window, otherwise create it
+				var stack = $('.stack', '#c');
+				if(stack.length){ stack.empty(); }
+				else{ stack = $('<ul/>').addClass('stack').appendTo('#c'); }
+
+				$.each(resp, function(){
+					buildStack(this, stack);
+				});
+				
+				// bind new stack
+				bindStack();			
+			},
+			complete: function(){
+				// end loading
+				$('.loading', '#c').hide();
+			}
+		});
+		
 		return false;
 	});
 	
@@ -64,12 +134,17 @@ $(function(){
 		$(this).addClass('active').find('.icon.folder').removeClass('folder').addClass('folder-open');
 		
 		var path = $(this).attr('href').replace(/^#/, ''),
-			parent = $(this).closest('.partial');
-
+			parent = $(this).closest('.partial'),
+			type = $(this).data('type');
+			
+		// set previous folder history
+		if(type === 'folder'){
+			globals.prevDir = globals.curDir;
+			globals.curDir = path;
+		}
+			
 		// push params
-		params.push(
-			{name:'path', value: path}
-		);
+		params.path = path;
 
 		// get and load next tree layer
 		$.ajax({
@@ -102,17 +177,9 @@ $(function(){
 					// slide tree over
 					parent.children('.list').animate({'left':'-=200'}, 250);
 					$.each(resp, function(){
-							// build new tree
-							$('<li>').append(
-								$('<a/>').attr({'href':'#'+this.relative_path+'/'+this.name}).addClass(this.type).html(this.name).prepend(
-									$('<span/>').addClass('icon '+this.type)
-								)
-							).appendTo(parent.children('.list:last-child'));
-							
-							// since tree data is similar to stack data build stack using this same loop
-							$('<li>').append(
-								$('<span/>').addClass('icon '+this.type)
-							).appendTo(stack);
+
+							buildTree(this, parent.children('.list:last-child'));
+							buildStack(this, stack);
 							
 					});
 					
@@ -128,6 +195,7 @@ $(function(){
 
 		return false;
 	});
+	
 	
 	// files in tree
 	$('.list a.file', '#w').live('click', function(){
@@ -187,10 +255,14 @@ $(function(){
 				// index of download pane
 				var downloadIndex = $('.control .button.download', '#e').index(),
 					margin = -downloadIndex * globals.paneWidth;
+					
+					console.log(margin);
 				// change to pane-download
 				$('.pane', '#e').animate({
 					'marginLeft': margin
-				}, 500);
+				}, 500, function(){
+					// do something when done
+				});
 
 			},
 			stop: function(event, ui) {
