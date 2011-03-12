@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>Documents/workspace/manager/application/manager/models/storage.php</string>
+	<string>css/admin.css</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,118 +21,179 @@
 	<integer>241</integer>
 	<key>metaData</key>
 	<dict>
-		<key>Documents/workspace/manager/application/manager/controllers/home.php</key>
+		<key>application/manager/views/layout/default.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>3</integer>
+				<integer>34</integer>
 				<key>line</key>
-				<integer>16</integer>
+				<integer>38</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>Documents/workspace/manager/application/manager/models/storage.php</key>
+		<key>application/manager/views/layout/footer.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>48</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>18</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>Documents/workspace/manager/application/manager/views/layout/default.php</key>
+		<key>application/manager/views/layout/frame.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>45</integer>
+				<integer>24</integer>
 				<key>line</key>
-				<integer>19</integer>
+				<integer>8</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>Documents/workspace/manager/application/manager/views/layout/frame.php</key>
+		<key>application/manager/views/layout/header.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>7</integer>
+				<integer>0</integer>
 				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>application/manager/views/layout/scripts.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>12</integer>
+				<key>line</key>
+				<integer>15</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>application/manager/views/pane.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
 				<integer>6</integer>
+				<key>line</key>
+				<integer>2</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+		<key>application/manager/views/stack.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>Documents/workspace/manager/application/manager/views/tree.php</key>
+		<key>application/manager/views/tree.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>98</integer>
+				<integer>6</integer>
 				<key>line</key>
-				<integer>7</integer>
+				<integer>2</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>Documents/workspace/manager/css/admin.css</key>
+		<key>css/admin.css</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>36</integer>
+				<integer>20</integer>
 				<key>line</key>
-				<integer>330</integer>
+				<integer>226</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>286</integer>
+			<integer>191</integer>
 		</dict>
-		<key>Documents/workspace/manager/js/script.js</key>
+		<key>js/script.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>48</integer>
+				<integer>2</integer>
 				<key>line</key>
-				<integer>89</integer>
+				<integer>205</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>76</integer>
+			<integer>170</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>Documents/workspace/manager/js/script.js</string>
-		<string>Documents/workspace/manager/application/manager/views/layout/default.php</string>
-		<string>Documents/workspace/manager/css/admin.css</string>
-		<string>Documents/workspace/manager/application/manager/views/layout/frame.php</string>
-		<string>Documents/workspace/manager/application/manager/views/tree.php</string>
-		<string>Documents/workspace/manager/application/manager/controllers/home.php</string>
-		<string>Documents/workspace/manager/application/manager/models/storage.php</string>
+		<string>js/script.js</string>
+		<string>application/manager/views/layout/scripts.php</string>
+		<string>application/manager/views/pane.php</string>
+		<string>application/manager/views/stack.php</string>
+		<string>application/manager/views/tree.php</string>
+		<string>application/manager/views/layout/default.php</string>
+		<string>application/manager/views/layout/footer.php</string>
+		<string>application/manager/views/layout/frame.php</string>
+		<string>application/manager/views/layout/header.php</string>
+		<string>css/admin.css</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{2204, 47}, {968, 726}}</string>
+	<string>{{2032, 86}, {1078, 894}}</string>
 </dict>
 </plist>
