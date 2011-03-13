@@ -328,13 +328,28 @@ $(function(){
 						if(typeof resp.data === 'object' && resp.status === 'success'){
 							
 							$(that).inlineDialog('close');
-							// add new item to tree
-							buildTree(resp.data, $('.list:eq('+treePosition+')', '#w')).effect('highlight');	
+							
+							// refresh current tree/stack
+							$.post(appPath + 'partial/tree', params, function(json){
+								var stack = $('.stack', '#c'),
+									tree = $('.list:eq('+treePosition+')', '#w');
+									
+								stack.empty();
+								tree.empty();
+								
+								$.each(json, function(){
+									buildTree(this, tree);
+									buildStack(this, stack);
+								});
+							}, 'json');
+							
 							$.gritter.add({
 								title: 'Success',
 								text: 'Folder <strong>'+resp.data.name+'</strong> has been created',
 								image: appPath + 'css/img/icons/folder-plus.png'
 							});
+							
+							
 						}
 					},
 					error: function(){

@@ -37,7 +37,7 @@ class Storage extends CI_Model
 					$contents[$name]['type'] = 'file';
 					
 				// append unique hash
-				$contents[$name]['hash'] = md5($content['date'] + $content['size']);
+				$contents[$name]['hash'] = md5($content['date'] + $content['name'] + $content['size']);
 			}
 		}
 		return $contents;
@@ -58,7 +58,7 @@ class Storage extends CI_Model
 		);
 		
 		// create the physical directory
-		$status = mkdir($path.'/'.$data['name'], 0755, true);
+		$status = mkdir($path.'/'.$data['name'], 0755);
 		
 		if($status) $response['status'] = 'success';
 		else $response['status'] = 'fail';
