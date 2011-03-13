@@ -8,6 +8,7 @@ function setFrameHeight(height){
 function setPath(path){
 	// prep path
 	path = path.replace(/(^storage(\/)?)?/gi, '');
+	path = path.replace(/\//gi, '<span class="slash">/</span>');
 	return $('#path', '#frame').html(path);
 }
 

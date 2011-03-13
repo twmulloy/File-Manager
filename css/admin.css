@@ -94,6 +94,8 @@ body{
 	width: 100%;
 }
 
+
+
 /* layout */
 #w{
 	position: absolute;
@@ -179,18 +181,26 @@ body{
 }
 
 #frame #path{
-	-webkit-text-shadow: -1px -1px 0 #333;
-	-moz-text-shadow: -1px -1px 0 #333;
-	text-shadow: -1px -1px 0 #333;
-	color: #fff;
+	font-size: 14px;
+	-webkit-text-shadow: 0 -1px 0 #000;
+	-moz-text-shadow: 0 -1px 0 #000;
+	text-shadow: 0 -1px 0 #000;
+	color: #555;
 	font-weight: 600;
 	float: left;
 	margin-left: 200px;
 	padding-left: 10px;
 }
 
+#frame #path .slash{
+	margin: 0 5px;
+	color: #333;
+}
+
 #frame #path:before{
-	content: 'root/';
+	content: '/';
+	color: #333;
+	margin-right: 5px;
 }
 
 #frame #search{
