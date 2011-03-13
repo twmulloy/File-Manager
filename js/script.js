@@ -11,7 +11,8 @@ function buildStack(data, appendTo){
 	
 	return $('<li>').attr({
 				'data-type':data.type, 
-				'data-name':data.name
+				'data-name':data.name,
+				'data-hash':data.hash
 			}).append(
 			$('<span/>').addClass('icon '+data.type)
 		)
@@ -89,19 +90,6 @@ function bindStack(){
 		}
 	});
 	//.disableSelection();
-	
-	/* controls */
-	$('a.icon.delete', '#c').inlineDialog({
-		content: 'Are you sure you want to delete this?',
-		buttons: {
-			'No': function(){
-				$(this).inlineDialog('close');
-			},
-			'Yes': function(){
-			}
-		}
-	});
-
 	return false;
 }
 
@@ -398,13 +386,26 @@ $(function(){
 			//console.log(event, ui);
 		},
 		drop: function(event, ui){
+			
 			// clone but remove residual draggable stuff
 			var item = ui.draggable.clone(),
 				type = item.data('type'),
-				name = item.data('name');
+				name = item.data('name'),
+				hash = item.data('hash'),
+				list = $(this).find('.queue');
+			
+			// check if hash exists in list, deny if it does
+			if(list.find('*[data-hash="'+hash+'"]').length){
+				// notify of collision
+				return $.gritter.add({
+					title: 'Alert',
+					text: type + ' <strong>' + name + '</strong> is already in download queue',
+					image: appPath + 'css/img/icons/exclamation.png'
+				});
+			}
 				
 			// build new item
-			$('<li/>').append(
+			$('<li/>').attr({'data-hash':hash}).append(
 					$('<span/>').attr({'class':'icon '+type})
 				)
 				.append(
@@ -415,13 +416,13 @@ $(function(){
 					)
 				)
 				.append(item.find('.details'))
-				.appendTo($(this).find('.queue'))
+				.appendTo(list)
 				.effect('highlight');
 			
 			// notify
 			$.gritter.add({
-				title: 'Download Queue',
-				text: 'Added ' + type + ' <strong>' + name + '</strong> to queue',
+				title: 'Success',
+				text: 'Added ' + type + ' <strong>' + name + '</strong> to download queue',
 				image: appPath + 'css/img/icons/plus-circle.png'
 			});
 		}

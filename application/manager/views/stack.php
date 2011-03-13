@@ -2,7 +2,7 @@
 <ul class="stack">
 	<?php foreach($dir_content as $item): ?>
 	<?php #if($item['type'] == 'file'): ?>
-	<li data-type="<?=$item['type']?>" data-name="<?=$item['name']?>">
+	<li data-type="<?=$item['type']?>" data-name="<?=$item['name']?>" data-hash="<?=$item['hash']?>">
 		<span class="icon <?=$item['type']?>"></span>
 		
 		<ul class="controls">

@@ -35,6 +35,9 @@ class Storage extends CI_Model
 					$contents[$name]['type'] = 'folder';
 				else
 					$contents[$name]['type'] = 'file';
+					
+				// append unique hash
+				$contents[$name]['hash'] = md5($content['date'] + $content['size']);
 			}
 		}
 		return $contents;

@@ -14,6 +14,7 @@
 			<div id="c" class="partial"> 
 				<span class="loading">Loading...</span>
 				<?=$stack?>
+				<div id="create-folder"></div>
 			</div><!-- end middle -->
 
 			<div id="w" class="partial"> 
@@ -28,7 +29,4 @@
 
 		</div> 
 	</div>
-	<div id="create-folder"></div>
-	<div id="confirm-delete-stack"></div>
-	<div id="confirm-delete-download"></div>
 </div>
