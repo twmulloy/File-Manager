@@ -7,9 +7,9 @@ function setFrameHeight(height){
 // maintain dom consistency
 function buildStack(data, appendTo){
 	// only files
-	if(data.type !== 'file'){ return false; }
+	//if(data.type !== 'file'){ return false; }
 	
-	return $('<li>').append(
+	return $('<li>').attr({'data-type':data.type}).append(
 			$('<span/>').addClass('icon '+data.type)
 		)
 		.append(
@@ -24,7 +24,7 @@ function buildTree(data, appendTo){
 	// only folders
 	if(data.type !== 'folder'){ return false; }
 	// build new tree
-	return $('<li>').append(
+	return $('<li>').attr('data-name',data.name).append(
 		$('<a/>')
 			.attr({
 				'href':'#'+data.relative_path+'/'+data.name,
@@ -70,15 +70,28 @@ function bindStack(){
 				'marginLeft': margin
 			}, 500);
 		}
-	}).disableSelection();	
-				
+	}).disableSelection();
+
 	return false;
 }
 
+// sort a list alphabetically, requires 'data-name' at <li>
 function sortList(list){
-	$.each(list.children('li'), function(){
-		console.log($(this));
+	var list = list.children('li'),
+		count = list.length,
+		array = [];
+		
+	$.each(list, function(){
+		array.push($(this).data('name'));
 	});
+	
+	array.sort();
+	
+	// rebuild tree
+	$.each(array, function(){
+		//console.log(this.toString());
+	});
+
 }
 
 var globals = {
@@ -354,8 +367,20 @@ $(function(){
 		over: function(event, ui){
 			//console.log(event, ui);
 		},
-		drop: function(){
-			alert('got it');
+		drop: function(event, ui){
+			// clone but remove residual draggable stuff
+			var item = ui.draggable.clone().attr({'class':'', 'style':''}),
+				type = item.data('type'),
+				name = item.data('name');
+				
+			item.appendTo($(this).find('.queue')).effect('highlight');
+			
+			// notify
+			$.gritter.add({
+				title: 'Download Queue',
+				text: 'Added ' + type + ' <strong>' + name + '</strong> to queue',
+				image: appPath + 'css/img/icons/plus-circle.png'
+			});
 		}
 	});
 

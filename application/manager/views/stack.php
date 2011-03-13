@@ -1,8 +1,8 @@
 <?php if(isset($dir_content)): ?>
 <ul class="stack">
 	<?php foreach($dir_content as $item): ?>
-	<?php if($item['type'] == 'file'): ?>
-	<li>
+	<?php #if($item['type'] == 'file'): ?>
+	<li data-type=" <?=$item['type']?>" data-name=" <?=$item['name']?>">
 		<span class="icon <?=$item['type']?>"></span>
 		<ul class="details">
 			<li><?=$item['name']?></li>
@@ -11,7 +11,7 @@
 		</ul>
 
 	</li>
-	<?php endif; ?>
+	<?php #endif; ?>
 	<?php endforeach; ?>
 </ul>
 <?php else: ?>

@@ -244,7 +244,8 @@ body{
 	background-position: center center;
 	float: left;
 }
-#frame .stack .icon{
+#frame .stack .icon,
+#frame .queue .icon{
 	display: block;
 	width: 16px;
 	height: 16px;
@@ -253,6 +254,7 @@ body{
 	background-position: center center;
 	float: left;
 }
+
 #frame li .icon.folder{
 	background-image: url('img/icons/folder-horizontal.png');
 }
@@ -276,7 +278,10 @@ body{
 	text-decoration: none;
 	display: block;
 	padding: 0 10px;
-	height: 30px;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #222;
+	padding: 10px 0;
+	overflow: hidden;
 }
 
 

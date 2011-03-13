@@ -37,7 +37,6 @@ class Storage extends CI_Model
 					$contents[$name]['type'] = 'file';
 			}
 		}
-		
 		return $contents;
 		
 	}
