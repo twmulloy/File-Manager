@@ -75,6 +75,12 @@ function bindStack(){
 	return false;
 }
 
+function sortList(list){
+	$.each(list.children('li'), function(){
+		console.log($(this));
+	});
+}
+
 var globals = {
 	originalIndex: 0,
 	paneWidth: 0,
@@ -276,15 +282,7 @@ $(function(){
 					data: thisParams,
 					type: 'post',
 					dataType: 'json',
-					success: function(resp){
-						if(!resp){ 
-							return $.gritter.add({
-								title: 'Error',
-								text: 'Folder already exists',
-								image: appPath + 'css/img/icons/folder-exclamation.png'
-							});
-						}
-						
+					success: function(resp){	
 						if(resp.status === 'fail'){
 							return $.gritter.add({
 								title: 'Error',
@@ -297,15 +295,24 @@ $(function(){
 							
 							$(that).inlineDialog('close');
 							// add new item to tree
-							buildTree(resp.data, $('.list:eq('+treePosition+')', '#w'));
-							
-							
+							buildTree(resp.data, $('.list:eq('+treePosition+')', '#w')).effect('highlight');	
 							$.gritter.add({
 								title: 'Success',
 								text: 'Folder <strong>'+resp.data.name+'</strong> has been created',
 								image: appPath + 'css/img/icons/folder-plus.png'
 							});
 						}
+					},
+					error: function(){
+						return $.gritter.add({
+							title: 'Error',
+							text: 'Folder already exists',
+							image: appPath + 'css/img/icons/folder-exclamation.png'
+						});
+					},
+					complete: function(){
+						// arrange the list
+						sortList($('.list:eq('+treePosition+')', '#w'));
 					}
 				});
 				
