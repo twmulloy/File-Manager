@@ -9,15 +9,23 @@ function buildStack(data, appendTo){
 	// only files
 	//if(data.type !== 'file'){ return false; }
 	
-	return $('<li>').attr({'data-type':data.type}).append(
+	return $('<li>').attr({
+				'data-type':data.type, 
+				'data-name':data.name
+			}).append(
 			$('<span/>').addClass('icon '+data.type)
+		)
+		.append(
+			$('<ul/>').addClass('controls')
+				.append($('<li/>').append($('<a/>').attr({'class':'icon delete'})))
 		)
 		.append(
 			$('<ul/>')
 				.append($('<li/>').html(data.name))
 				.append($('<li/>').html(data.size))
 				.append($('<li/>').html(data.date))
-		).appendTo(appendTo);
+		)
+		.appendTo(appendTo);
 }
 
 function buildTree(data, appendTo){
@@ -70,7 +78,8 @@ function bindStack(){
 				'marginLeft': margin
 			}, 500);
 		}
-	}).disableSelection();
+	});
+	//.disableSelection();
 
 	return false;
 }
@@ -369,7 +378,7 @@ $(function(){
 		},
 		drop: function(event, ui){
 			// clone but remove residual draggable stuff
-			var item = ui.draggable.clone().attr({'class':'', 'style':''}),
+			var item = ui.draggable.clone().removeAttr('class').removeAttr('style'),
 				type = item.data('type'),
 				name = item.data('name');
 				

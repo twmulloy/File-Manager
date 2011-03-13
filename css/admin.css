@@ -79,7 +79,6 @@ a.button:hover span.icon.uparrow { background-position: 0 -839px }
 a.button span.icon.user { background-position: 0 -854px }
 a.button:hover span.icon.user { background-position: 0 -869px }
 
-
 /* reset */
 *{padding:0; margin:0; outline:0; color:inherit;}
 ul, ol, nav{list-style: none; margin: 0;}
@@ -129,6 +128,43 @@ body{
 	overflow: hidden;
 }
 
+/* icons */
+#frame li .icon.folder{
+	background-image: url('img/icons/folder-horizontal.png');
+}
+#frame li .icon.folder-open{
+	background-image: url('img/icons/folder-horizontal-open.png');
+}
+#frame li .icon.file{
+	background-image: url('img/icons/document.png');
+}
+#frame li .icon.delete{
+	background-image: url('img/icons/minus-circle.png');
+}
+#frame li .icon.create{
+	background-image: url('img/icons/plus-circle.png');
+}
+
+#frame .list .icon{
+	display: block;
+	width: 16px;
+	height: 43px;
+	margin-right: 10px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	float: left;
+}
+#frame .stack .icon,
+#frame .queue .icon{
+	display: block;
+	width: 16px;
+	height: 16px;
+	margin: 10px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	float: left;
+}
+
 /* block list */
 #frame .loading{
 	display: none;
@@ -147,6 +183,16 @@ body{
 	border: 1px solid #222;
 	box-shadow: 0 0 3px #000;
 	-moz-box-shadow: 0 0 3px #000;
+}
+
+#frame .stack .controls{
+	float: right;
+}
+#frame .stack .controls li{
+	float: left;
+}
+#frame .stack .controls li > a{
+	margin: 0;
 }
 	/* ui fix */
 	#frame .stack .ui-draggable-dragging{
@@ -234,45 +280,8 @@ body{
 	background: #000;
 }
 
-/* icons */
-#frame .list .icon{
-	display: block;
-	width: 16px;
-	height: 43px;
-	margin-right: 10px;
-	background-repeat: no-repeat;
-	background-position: center center;
-	float: left;
-}
-#frame .stack .icon,
-#frame .queue .icon{
-	display: block;
-	width: 16px;
-	height: 16px;
-	margin: 10px;
-	background-repeat: no-repeat;
-	background-position: center center;
-	float: left;
-}
-
-#frame li .icon.folder{
-	background-image: url('img/icons/folder-horizontal.png');
-}
-#frame li .icon.folder-open{
-	background-image: url('img/icons/folder-horizontal-open.png');
-}
-#frame li .icon.file{
-	background-image: url('img/icons/document.png');
-}
-
 #frame .queue > li{
 	background: url('img/bg.mesh.png');
-}
-
-#frame .queue > li:hover{
-
-}
-#frame .queue > li{
 	font-size: 12px;
 	color: #E6E6E6;
 	text-decoration: none;
@@ -284,16 +293,6 @@ body{
 	overflow: hidden;
 }
 
-
-/* background information */
-#frame .silhouette{
-	text-align: center;
+#frame .queue > li .controls{
+	float: right;
 }
-#frame .silhouette p{
-	color: #333;
-	font-size: 32px;
-	text-shadow: #000 0px 1px 1px;
-	text-transform: uppercase;
-	
-}
-
