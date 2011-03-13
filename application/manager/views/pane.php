@@ -22,6 +22,8 @@
 		<ul class="queue">
 
 		</ul>
+		
+		<a href="#" class="button">Download *.zip</a>
 
 	</div>
 	<!-- end droppable region -->

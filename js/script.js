@@ -4,6 +4,13 @@ function setFrameHeight(height){
 	return false;
 }
 
+// clean up and set the path
+function setPath(path){
+	// prep path
+	path = path.replace(/(^storage(\/)?)?/gi, '');
+	return $('#path', '#frame').html(path);
+}
+
 // maintain dom consistency
 function buildStack(data, appendTo){
 	// only files
@@ -88,8 +95,8 @@ function bindStack(){
 				'marginLeft': margin
 			}, 500);
 		}
-	});
-	//.disableSelection();
+	})
+	.disableSelection();
 	return false;
 }
 
@@ -97,7 +104,7 @@ var globals = {
 	originalIndex: 0,
 	paneWidth: 0,
 	curDir: '', // current directory
-	prevDir: '' // root of storage directory
+	trail: [] // root of storage directory
 };
 
 $(function(){
@@ -146,15 +153,14 @@ $(function(){
 				// remove forward tree
 				tree.eq(treePosition + 1).remove();
 			});
-		}	
-		
-		// reset dir
-		if(!treePosition){
+		}else{
+			// reset dirs
 			globals.curDir = '';
-			globals.prevDir = '';
+			globals.trail = [];
 		}
 		
-		params.path = globals.prevDir;
+		// grab last trail and remove
+		params.path = globals.curDir = globals.trail.pop();
 		
 		$.ajax({
 			url: appPath + 'partial/tree',
@@ -184,6 +190,7 @@ $(function(){
 			complete: function(){
 				// end loading
 				$('.loading', '#c').hide();
+				setPath(globals.curDir);
 			}
 		});
 		
@@ -200,15 +207,17 @@ $(function(){
 			parent = $(this).closest('.partial'),
 			type = $(this).data('type');
 			
-		// set previous folder history
-		if(type === 'folder'){
-			globals.prevDir = globals.curDir;
-			globals.curDir = path;
-		}
-			
+		if(!path || !type){ return alert('path or type error'); }
+		
 		// push params
 		params.path = path;
-
+			
+		// set previous folder history
+		if(type == 'folder'){
+			globals.trail.push(globals.curDir);
+			globals.curDir = path;
+		}
+		
 		// get and load next tree layer
 		$.ajax({
 				url : appPath + 'partial/tree',
@@ -252,6 +261,9 @@ $(function(){
 					// end loading
 					parent.find('.loading').hide();
 					$('.loading', '#c').hide();
+					
+					// set path
+					setPath(globals.curDir);
 				}
 		});
 		return false;

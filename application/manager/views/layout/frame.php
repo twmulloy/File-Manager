@@ -3,10 +3,8 @@
 
 <div id="frame" > 
 	<div id="header">
-		<ul>
-			<li id="search"><?=form_input()?></li>
-			<li id="path">some/current/path</li>
-		</ul>
+		<div id="search"><?=form_input()?></div>
+		<div id="path"></div>
 	</div>
 	
 	<div class="content"> 
