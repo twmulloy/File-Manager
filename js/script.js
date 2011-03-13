@@ -53,7 +53,16 @@ function bindStack(){
 		scroll: false,
 		stack: '.stack',
 		zIndex: 2,
-		helper: 'clone',
+		helper: function(event){
+			var that = $(this);
+			// build a better helper
+			return $('<li/>').attr({
+				'data-type':that.data('type'),
+				'data-name':that.data('name')
+			})
+			.append(that.find('span.icon').clone())
+			.append(that.find('.details').clone());
+		},
 		start: function(event, ui) {
 			// record original pane position to global
 			globals.originalIndex = $('.control .button.active', '#e').index();
@@ -80,6 +89,18 @@ function bindStack(){
 		}
 	});
 	//.disableSelection();
+	
+	/* controls */
+	$('a.icon.delete', '#c').inlineDialog({
+		content: 'Are you sure you want to delete this?',
+		buttons: {
+			'No': function(){
+				$(this).inlineDialog('close');
+			},
+			'Yes': function(){
+			}
+		}
+	});
 
 	return false;
 }
@@ -278,6 +299,9 @@ $(function(){
 	$('.dialog-inline').inlineDialog({
 		content: $('<input/>').attr({'placeholder':'Name'}),
 		buttons: {
+			'Cancel':function(){
+				$(this).inlineDialog('close');
+			},
 			'Add': function(){
 				var folder = $('.ui-inline-dialog-content').find('input').val(),
 					that = this;
@@ -338,9 +362,6 @@ $(function(){
 					}
 				});
 				
-			},
-			'Cancel':function(){
-				$(this).inlineDialog('close');
 			}
 		}
 	});
@@ -378,11 +399,24 @@ $(function(){
 		},
 		drop: function(event, ui){
 			// clone but remove residual draggable stuff
-			var item = ui.draggable.clone().removeAttr('class').removeAttr('style'),
+			var item = ui.draggable.clone(),
 				type = item.data('type'),
 				name = item.data('name');
 				
-			item.appendTo($(this).find('.queue')).effect('highlight');
+			// build new item
+			$('<li/>').append(
+					$('<span/>').attr({'class':'icon '+type})
+				)
+				.append(
+					$('<ul/>').attr({'class':'controls'}).append(
+						$('<li/>').append(
+							$('<a/>').attr({'class':'icon delete','href':'#confirm-delete-download'})
+						)
+					)
+				)
+				.append(item.find('.details'))
+				.appendTo($(this).find('.queue'))
+				.effect('highlight');
 			
 			// notify
 			$.gritter.add({
@@ -402,7 +436,6 @@ $(function(){
 		$.post(url, data);
 		return false;
 	});
-	
 });
 
 /* hashchange */

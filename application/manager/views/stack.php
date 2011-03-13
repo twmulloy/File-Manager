@@ -6,7 +6,7 @@
 		<span class="icon <?=$item['type']?>"></span>
 		
 		<ul class="controls">
-			<li><a href="#" class="icon delete"></a></li>
+			<li><a href="#confirm-delete-stack" class="icon delete"></a></li>
 		</ul>
 		<ul class="details">
 			<li><?=$item['name']?></li>
@@ -19,7 +19,5 @@
 	<?php endforeach; ?>
 </ul>
 <?php else: ?>
-<div class="silhouette">
-	<p>Empty</p>
-</div>
+<p>Empty</p>
 <?php endif; ?>

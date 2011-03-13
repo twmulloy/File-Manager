@@ -24,9 +24,11 @@
 			<div id="e" class="partial"> 
 				<span class="loading">Loading...</span>
 				<?=$pane?>
-				
 			</div><!-- end right-->
 
 		</div> 
-	</div> 
+	</div>
+	<div id="create-folder"></div>
+	<div id="confirm-delete-stack"></div>
+	<div id="confirm-delete-download"></div>
 </div>
