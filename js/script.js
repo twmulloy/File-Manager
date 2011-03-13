@@ -21,7 +21,7 @@ function buildStack(data, appendTo){
 				.append($('<li/>').append($('<a/>').attr({'class':'icon delete'})))
 		)
 		.append(
-			$('<ul/>')
+			$('<ul/>').addClass('details')
 				.append($('<li/>').html(data.name))
 				.append($('<li/>').html(data.size))
 				.append($('<li/>').html(data.date))
