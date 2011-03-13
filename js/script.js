@@ -251,7 +251,8 @@ $(function(){
 		content: $('<input/>').attr({'placeholder':'Name'}),
 		buttons: {
 			'Add': function(){
-				var folder = $('.ui-inline-dialog-content').find('input').val();
+				var folder = $('.ui-inline-dialog-content').find('input').val(),
+					that = this;
 				
 				// alert notification
 				if(!folder){
@@ -276,7 +277,35 @@ $(function(){
 					type: 'post',
 					dataType: 'json',
 					success: function(resp){
-						console.log(resp)
+						if(!resp){ 
+							return $.gritter.add({
+								title: 'Error',
+								text: 'Folder already exists',
+								image: appPath + 'css/img/icons/folder-exclamation.png'
+							});
+						}
+						
+						if(resp.status === 'fail'){
+							return $.gritter.add({
+								title: 'Error',
+								text: 'Folder could not be created',
+								image: appPath + 'css/img/icons/folder-exclamation.png'
+							});
+						}
+						
+						if(typeof resp.data === 'object' && resp.status === 'success'){
+							
+							$(that).inlineDialog('close');
+							// add new item to tree
+							buildTree(resp.data, $('.list:eq('+treePosition+')', '#w'));
+							
+							
+							$.gritter.add({
+								title: 'Success',
+								text: 'Folder <strong>'+resp.data.name+'</strong> has been created',
+								image: appPath + 'css/img/icons/folder-plus.png'
+							});
+						}
 					}
 				});
 				

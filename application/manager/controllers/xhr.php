@@ -21,12 +21,9 @@ class Xhr extends CI_Controller {
 
 		switch($this->data['item']){
 			case 'folder':
-				$this->storage->createDirectory($this->data, $this->path);
+				$data['array'] = $this->storage->createDirectory($this->data, $this->path);
 				break;
 		}
-		
-		$data['array'] = array();
-		
 		$this->load->view('layout/json', $data);
 	}
 	

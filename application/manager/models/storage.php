@@ -46,10 +46,22 @@ class Storage extends CI_Model
 		
 		$path = $this->getPath($path);
 		
-		mkdir($path.'/'.$data['name'], 0755, true);
+		// build response array, needs to make required data for tree
+		$response = array(
+			'data'=> array(
+				'name'	=> $data['name'],
+				'type'	=> 'folder',
+				'relative_path'	=> $path
+			)
+		);
 		
-		print_r($data);
-		print_r($path);
+		// create the physical directory
+		$status = mkdir($path.'/'.$data['name'], 0755, true);
+		
+		if($status) $response['status'] = 'success';
+		else $response['status'] = 'fail';
+		
+		return $response;
 	}
 
 }
