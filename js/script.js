@@ -93,25 +93,6 @@ function bindStack(){
 	return false;
 }
 
-// sort a list alphabetically, requires 'data-name' at <li>
-function sortList(list){
-	var list = list.children('li'),
-		count = list.length,
-		array = [];
-		
-	$.each(list, function(){
-		array.push($(this).data('name'));
-	});
-	
-	array.sort();
-	
-	// rebuild tree
-	$.each(array, function(){
-		//console.log(this.toString());
-	});
-
-}
-
 var globals = {
 	originalIndex: 0,
 	paneWidth: 0,
@@ -360,8 +341,6 @@ $(function(){
 						});
 					},
 					complete: function(){
-						// arrange the list
-						sortList($('.list:eq('+treePosition+')', '#w'));
 					}
 				});
 				
