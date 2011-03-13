@@ -4,7 +4,7 @@
 <div id="frame" > 
 	<div id="header">
 		<div id="search"><?=form_input()?></div>
-		<div id="path"></div>
+		<div id="path">&nbsp;</div>
 	</div>
 	
 	<div class="content"> 

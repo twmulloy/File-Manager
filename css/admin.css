@@ -185,6 +185,12 @@ body{
 	color: #fff;
 	font-weight: 600;
 	float: left;
+	margin-left: 200px;
+	padding-left: 10px;
+}
+
+#frame #path:before{
+	content: 'root/';
 }
 
 #frame #search{
