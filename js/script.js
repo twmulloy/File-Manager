@@ -250,9 +250,8 @@ $(function(){
 					// slide tree over
 					parent.children('.list').animate({'left':'-=200'}, 250);
 					$.each(resp, function(){
-							buildTree(this, parent.children('.list:last-child'));
-							buildStack(this, stack);
-							
+						buildTree(this, parent.children('.list:last-child'));
+						buildStack(this, stack);	
 					});
 					
 					// bind new stack
@@ -335,6 +334,9 @@ $(function(){
 									buildTree(this, tree);
 									buildStack(this, stack);
 								});
+								
+								bindStack();
+								
 							}, 'json');
 							
 							$.gritter.add({
