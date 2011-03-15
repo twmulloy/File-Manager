@@ -40,7 +40,7 @@ class Storage extends CI_Model
 					
 					
 				// append unique hash
-				$contents[$name]['hash'] = $this->generateHash($content['relative_path']);
+				$contents[$name]['hash'] = $this->generateHash($content['server_path']);
 				
 			}
 		}
@@ -98,8 +98,19 @@ class Storage extends CI_Model
 		// build array of data
 		foreach($queue as $item){
 			// reverse hash
-			$path = $this->_reverseHash($item['hash']);
-			$this->zip->read_file($path, TRUE); 
+			$path = $this->reverseHash($item['hash']);
+			
+			switch($item['type']){
+				
+				case 'folder':
+					$this->zip->read_dir($path.'/', false); 
+					break;
+					
+				case 'file':
+					$this->zip->read_file($path, false);
+					break;
+					
+			}
 		}
 		$this->zip->download('test.zip');
 

@@ -22,8 +22,13 @@
 		<ul class="queue">
 
 		</ul>
+
+		<?=form_open('download/zip', array('target'=>'_blank'))?>
 		
+		
+		<?#=form_submit('submit', 'Download *.zip')?>
 		<a href="#" class="button download-zip">Download *.zip</a>
+		<?=form_close()?>
 
 	</div>
 	<!-- end droppable region -->

@@ -455,11 +455,11 @@ $(function(){
 		return false;
 	});
 	
-	// magical download zip
+	/* magical zip */
 	$('.button.download-zip', '#e').click(function(){
 		var domQueue = $('ul.queue > li', '#pane-download'),
-			
-			queue = [];
+			queue = [],
+			form = $(this).closest('form');
 			
 		// nothing in queue
 		if(!domQueue.length){
@@ -470,27 +470,26 @@ $(function(){
 			});
 		}
 			
+		// clear form for new queue
+		$(form).children('input[type="hidden"]').remove();
+		
 		// build download queue
-		$.each(domQueue, function(){
-			var item = {
-				hash : $(this).data('hash'),
-				type : $(this).data('type')
-			}
+		$.each(domQueue, function(index){
 			
-			queue.push(item);
+			$('<input/>').attr({
+					'type':'hidden',
+					'name':'data[queue]['+index+'][hash]'
+				}).val($(this).data('hash')).appendTo(form);
+			
+			$('<input/>').attr({
+					'type':'hidden',
+					'name':'data[queue]['+index+'][type]'
+				}).val($(this).data('type')).appendTo(form);
+
 		});
-		
-		// merge with needed csrf
-		params.data.queue = queue;
-		
-		
-		$.post(
-			appPath + 'download/zip', 
-			params, 
-			function(resp, status, xhr){
-				//console.log(resp);
-			}
-		);
+
+		// submit the queue
+		$(form).submit();
 		
 		return false;
 	});
