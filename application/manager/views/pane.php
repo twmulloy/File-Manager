@@ -23,7 +23,7 @@
 
 		</ul>
 		
-		<a href="#" class="button">Download *.zip</a>
+		<a href="#" class="button download-zip">Download *.zip</a>
 
 	</div>
 	<!-- end droppable region -->

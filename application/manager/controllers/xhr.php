@@ -45,6 +45,5 @@ class Xhr extends CI_Controller {
 		$this->load->view('layout/json', $data);
 	}
 
-
 	
 }

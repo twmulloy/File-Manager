@@ -419,7 +419,10 @@ $(function(){
 			}
 				
 			// build new item
-			$('<li/>').attr({'data-hash':hash}).append(
+			$('<li/>').attr({
+					'data-hash':hash,
+					'data-type':type
+				}).append(
 					$('<span/>').attr({'class':'icon '+type})
 				)
 				.append(
@@ -449,6 +452,46 @@ $(function(){
 				data = form.serializeArray();
 				
 		$.post(url, data);
+		return false;
+	});
+	
+	// magical download zip
+	$('.button.download-zip', '#e').click(function(){
+		var domQueue = $('ul.queue > li', '#pane-download'),
+			
+			queue = [];
+			
+		// nothing in queue
+		if(!domQueue.length){
+			return $.gritter.add({
+				title: 'Alert',
+				text: 'Download queue is empty',
+				image: appPath + 'css/img/icons/exclamation.png'
+			});
+		}
+			
+		// build download queue
+		$.each(domQueue, function(){
+			var item = {
+				hash : $(this).data('hash'),
+				type : $(this).data('type')
+			}
+			
+			queue.push(item);
+		});
+		
+		// merge with needed csrf
+		params.data.queue = queue;
+		
+		
+		$.post(
+			appPath + 'download/zip', 
+			params, 
+			function(resp, status, xhr){
+				//console.log(resp);
+			}
+		);
+		
 		return false;
 	});
 });

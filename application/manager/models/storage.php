@@ -31,13 +31,17 @@ class Storage extends CI_Model
 		if(count($contents)){
 			foreach($contents as $name => $content){
 				// determine whether folder or file
-				if(is_dir($content['server_path'])) 
+				if(is_dir($content['server_path'])){
 					$contents[$name]['type'] = 'folder';
-				else
+				}else{
 					$contents[$name]['type'] = 'file';
+					$contents[$name]['mime'] = get_mime_by_extension($content['server_path']);
+				}
+					
 					
 				// append unique hash
-				$contents[$name]['hash'] = md5($content['date'] + $content['name'] + $content['size']);
+				$contents[$name]['hash'] = $this->generateHash($content['relative_path']);
+				
 			}
 		}
 		return $contents;
@@ -64,6 +68,41 @@ class Storage extends CI_Model
 		else $response['status'] = 'fail';
 		
 		return $response;
+	}
+	
+	/**
+	 * hash generator, to maintain consistency.
+	 * this is a 2-way encryption hash to allow us to pass the storage path for building a zip
+	 *
+	 * @param string $server_path
+	 * @return hash
+	 * @author Thomas Mulloy
+	 */
+	function generateHash($path){
+		return $this->encrypt->encode($path);
+	}
+	
+	function reverseHash($hash){
+		return $this->encrypt->decode($hash);
+	}
+	
+	/**
+	 * send array of hashes
+	 *
+	 * @param array $hashes 
+	 * @return zip archive of hashes for download
+	 * @author Thomas Mulloy
+	 */
+	function buildZipFromHashes(array $queue){
+		$this->load->library('zip');
+		// build array of data
+		foreach($queue as $item){
+			// reverse hash
+			$path = $this->_reverseHash($item['hash']);
+			$this->zip->read_file($path, TRUE); 
+		}
+		$this->zip->download('test.zip');
+
 	}
 
 }
