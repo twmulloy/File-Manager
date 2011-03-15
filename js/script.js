@@ -469,7 +469,10 @@ $(function(){
 				image: appPath + 'css/img/icons/exclamation.png'
 			});
 		}
-			
+		
+		// starting work
+		$('.loading', '#e').show();
+		
 		// clear form for new queue
 		$(form).children('input[type="hidden"]').remove();
 		
@@ -485,11 +488,20 @@ $(function(){
 					'type':'hidden',
 					'name':'data[queue]['+index+'][type]'
 				}).val($(this).data('type')).appendTo(form);
+				
+			// remove item from queue
+			/*
+			$(this).fadeOut(function(){
+				$(this).remove();
+			});
+			*/
 
 		});
 
 		// submit the queue
 		$(form).submit();
+		
+		$('.loading', '#e').hide();
 		
 		return false;
 	});
