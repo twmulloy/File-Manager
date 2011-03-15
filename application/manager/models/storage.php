@@ -112,7 +112,10 @@ class Storage extends CI_Model
 					
 			}
 		}
-		$this->zip->download('test.zip');
+		
+		$zip_name = 'download_'.date('Ymd_His').'.zip';
+		
+		return $this->zip->download($zip_name);
 
 	}
 
