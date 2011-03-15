@@ -203,6 +203,12 @@ $(function(){
 		return false;
 	});
 	
+	// move forward via folder in stack double click
+	$('.stack', '#c').dblclick(function(){
+		alert('sup');
+		return false;
+	});
+	
 	// move forward through tree
 	$('.list a.folder', '#w').live('click', function(){
 		
@@ -455,6 +461,23 @@ $(function(){
 		return false;
 	});
 	
+
+	/* clear download queue */
+	$('.button.queue-clear', '#pane-download').click(function(){
+		var form = $(this).closest('form');
+		// dom list
+		$('ul.queue > li', '#pane-download').remove();
+		// reset form
+		$(form).children('input[type="hidden"]').remove();
+		
+		$.gritter.add({
+			title: 'Success',
+			text: 'Download queue has been cleared'
+		});
+		
+		return false;
+	});
+	
 	/* magical zip */
 	$('.button.download-zip', '#e').click(function(){
 		var domQueue = $('ul.queue > li', '#pane-download'),
@@ -469,10 +492,7 @@ $(function(){
 				image: appPath + 'css/img/icons/exclamation.png'
 			});
 		}
-		
-		// starting work
-		$('.loading', '#e').show();
-		
+
 		// clear form for new queue
 		$(form).children('input[type="hidden"]').remove();
 		
@@ -500,9 +520,6 @@ $(function(){
 
 		// submit the queue
 		$(form).submit();
-		
-		$('.loading', '#e').hide();
-		
 		return false;
 	});
 });
