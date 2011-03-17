@@ -472,7 +472,7 @@ $(function(){
 		
 		$.gritter.add({
 			title: 'Success',
-			text: 'Download queue has been cleared'
+			text: 'Download queue cleared'
 		});
 		
 		return false;

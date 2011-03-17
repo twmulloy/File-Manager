@@ -24,7 +24,7 @@ class Storage extends CI_Model
 	function getDirectory($file = null){
 		
 		$file = $this->getPath($file);
-		
+
 		// get only top level files
 		$contents = get_dir_file_info($file, true);
 		
@@ -35,7 +35,7 @@ class Storage extends CI_Model
 					$contents[$name]['type'] = 'folder';
 				}else{
 					$contents[$name]['type'] = 'file';
-					$contents[$name]['mime'] = get_mime_by_extension($content['server_path']);
+					#$contents[$name]['mime'] = get_mime_by_extension($content['server_path']);
 				}
 					
 					
