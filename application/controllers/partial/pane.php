@@ -5,20 +5,21 @@ class Pane extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		
+		// only allow ajax requests
+		if(!$this->input->is_ajax_request()) return false;
 	}
 
 	function index()
 	{
-		// only allow ajax requests
-		if(!$this->input->is_ajax_request()) return false;
-
 		// required params
 		if(!$this->input->post('path')) return false;
 		
-		$data['array'] = array();
+		$json = array();
 		
-		// return json encode with data
-		$this->load->view('layout/json', $data);
+		return $this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($json));
 	}
 	
 	

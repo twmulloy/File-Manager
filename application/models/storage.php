@@ -35,10 +35,8 @@ class Storage extends CI_Model
 					$contents[$name]['type'] = 'folder';
 				}else{
 					$contents[$name]['type'] = 'file';
-					#$contents[$name]['mime'] = get_mime_by_extension($content['server_path']);
 				}
-					
-					
+						
 				// append unique hash
 				$contents[$name]['hash'] = $this->generateHash($content['server_path']);
 				

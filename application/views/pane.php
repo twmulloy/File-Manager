@@ -12,11 +12,11 @@
 	<div id="pane-upload">
 		<h3>Upload Queue</h3>
 		<ul id="files" class="queue"></ul>
-		<form id="file_upload" action="upload.php" method="POST" enctype="multipart/form-data">
-		    <input type="file" name="file" multiple>
-		    <button>Upload</button>
-		    <div>Upload files</div>
-		</form>
+		<?=form_open('upload', array('id'=>'file_upload', 'enctype'=>'multipart/form-data'))?>
+			<input type="file" name="file" multiple />
+			<button>Upload</button>
+			<div>Upload file(s)</div>
+		<?=form_close()?>
 		<script>
 		/*global $ */
 		$(function () {
@@ -56,7 +56,7 @@
 		<h3>Download Queue</h3>
 		<ul class="queue"></ul>
 		<?=form_open('download/zip', array('target'=>'_blank'))?>
-		<a href="#" class="button primary left download-zip">Download *.zip</a><a href="#" class="button negative right queue-clear">Clear Queue</a>
+		<a href="#" class="button primary left download-zip">Download .zip</a><a href="#" class="button negative right queue-clear">Clear Queue</a>
 		<?=form_close()?>
 	</div>
 	<!-- end droppable region -->

@@ -1,83 +1,83 @@
 /* css3 buttons */
-a.button { display: inline-block; padding: 7px 9px; font-size: 12px; line-height:1; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC url('img/css3buttons_backgrounds.png') 0 0 no-repeat; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; -webkit-background-clip: padding-box; border-radius: 2px; outline: none; position: relative; zoom: 1; *display: inline; }
-a.button.primary { font-weight: bold }
-a.button:hover { color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5; }
-a.button:active,
-a.button.active { background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none; }
-a.button:active { top: 1px }
-a.button.negative:hover { color: #FFFFFF; background-position: 0 -121px; background-color: #D84743; border-color: #911D1B; }
-a.button.negative:active,
-a.button.negative.active { background-position: 0 -161px; background-color: #A5211E; border-color: #911D1B; }
-a.button.pill { -webkit-border-radius: 19px; -moz-border-radius: 19px; border-radius: 19px; padding: 6px 12px; }
-a.button.left { -webkit-border-bottom-right-radius: 0px; -webkit-border-top-right-radius: 0px; -moz-border-radius-bottomright: 0px; -moz-border-radius-topright: 0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px; margin-right: 0px; }
-a.button.middle { margin-right: 0px; margin-left: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px; border-left: none; }
-a.button.right { -webkit-border-bottom-left-radius: 0px; -webkit-border-top-left-radius: 0px; -moz-border-radius-bottomleft: 0px; -moz-border-radius-topleft: 0px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; margin-left: 0px; border-left: none;}
-a.button.left:active,
-a.button.middle:active,
-a.button.right:active { top: 0px }
-a.button.big { font-size: 16px; padding: 7px 16px; }
-a.button span.icon { display: inline-block; width: 14px; height: 12px; margin: auto 7px auto auto; position: relative; top: 1px; background-image: url('img/css3buttons_icons.png'); background-repeat: no-repeat; }
-a.big.button span.icon { top: 0px }
-a.button span.icon.book { background-position: 0 0 }
-a.button:hover span.icon.book { background-position: 0 -15px }
-a.button span.icon.calendar { background-position: 0 -30px }
-a.button:hover span.icon.calendar { background-position: 0 -45px }
-a.button span.icon.chat { background-position: 0 -60px }
-a.button:hover span.icon.chat { background-position: 0 -75px }
-a.button span.icon.check { background-position: 0 -90px }
-a.button:hover span.icon.check { background-position: 0 -103px }
-a.button span.icon.clock { background-position: 0 -116px }
-a.button:hover span.icon.clock { background-position: 0 -131px }
-a.button span.icon.cog { background-position: 0 -146px }
-a.button:hover span.icon.cog { background-position: 0 -161px }
-a.button span.icon.comment { background-position: 0 -176px }
-a.button:hover span.icon.comment { background-position: 0 -190px }
-a.button span.icon.cross { background-position: 0 -204px }
-a.button:hover span.icon.cross { background-position: 0 -219px }
-a.button span.icon.downarrow { background-position: 0 -234px }
-a.button:hover span.icon.downarrow { background-position: 0 -249px }
-a.button span.icon.fork { background-position: 0 -264px }
-a.button:hover span.icon.fork { background-position: 0 -279px }
-a.button span.icon.heart { background-position: 0 -294px }
-a.button:hover span.icon.heart { background-position: 0 -308px }
-a.button span.icon.home { background-position: 0 -322px }
-a.button:hover span.icon.home { background-position: 0 -337px }
-a.button span.icon.key { background-position: 0 -352px }
-a.button:hover span.icon.key { background-position: 0 -367px }
-a.button span.icon.leftarrow { background-position: 0 -382px }
-a.button:hover span.icon.leftarrow { background-position: 0 -397px }
-a.button span.icon.lock { background-position: 0 -412px }
-a.button:hover span.icon.lock { background-position: 0 -427px }
-a.button span.icon.loop { background-position: 0 -442px }
-a.button:hover span.icon.loop { background-position: 0 -457px }
-a.button span.icon.magnifier { background-position: 0 -472px }
-a.button:hover span.icon.magnifier { background-position: 0 -487px }
-a.button span.icon.mail { background-position: 0 -502px }
-a.button:hover span.icon.mail { background-position: 0 -514px }
-a.button span.icon.move { background-position: 0 -526px }
-a.button:hover span.icon.move { background-position: 0 -541px }
-a.button span.icon.pen { background-position: 0 -556px }
-a.button:hover span.icon.pen { background-position: 0 -571px }
-a.button span.icon.pin { background-position: 0 -586px }
-a.button:hover span.icon.pin { background-position: 0 -601px }
-a.button span.icon.plus { background-position: 0 -616px }
-a.button:hover span.icon.plus { background-position: 0 -631px }
-a.button span.icon.reload { background-position: 0 -646px }
-a.button:hover span.icon.reload { background-position: 0 -660px }
-a.button span.icon.rightarrow { background-position: 0 -674px }
-a.button:hover span.icon.rightarrow { background-position: 0 -689px }
-a.button span.icon.rss { background-position: 0 -704px }
-a.button:hover span.icon.rss { background-position: 0 -719px }
-a.button span.icon.tag { background-position: 0 -734px }
-a.button:hover span.icon.tag { background-position: 0 -749px }
-a.button span.icon.trash { background-position: 0 -764px }
-a.button:hover span.icon.trash { background-position: 0 -779px }
-a.button span.icon.unlock { background-position: 0 -794px }
-a.button:hover span.icon.unlock { background-position: 0 -809px }
-a.button span.icon.uparrow { background-position: 0 -824px }
-a.button:hover span.icon.uparrow { background-position: 0 -839px }
-a.button span.icon.user { background-position: 0 -854px }
-a.button:hover span.icon.user { background-position: 0 -869px }
+.button { display: inline-block; padding: 7px 9px; font-size: 12px; line-height:1; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC url('img/css3buttons_backgrounds.png') 0 0 no-repeat; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; -webkit-background-clip: padding-box; border-radius: 2px; outline: none; position: relative; zoom: 1; *display: inline; }
+.button.primary { font-weight: bold }
+.button:hover { color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5; }
+.button:active,
+.button.active { background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none; }
+.button:active { top: 1px }
+.button.negative:hover { color: #FFFFFF; background-position: 0 -121px; background-color: #D84743; border-color: #911D1B; }
+.button.negative:active,
+.button.negative.active { background-position: 0 -161px; background-color: #A5211E; border-color: #911D1B; }
+.button.pill { -webkit-border-radius: 19px; -moz-border-radius: 19px; border-radius: 19px; padding: 6px 12px; }
+.button.left { -webkit-border-bottom-right-radius: 0px; -webkit-border-top-right-radius: 0px; -moz-border-radius-bottomright: 0px; -moz-border-radius-topright: 0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px; margin-right: 0px; }
+.button.middle { margin-right: 0px; margin-left: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px; border-left: none; }
+.button.right { -webkit-border-bottom-left-radius: 0px; -webkit-border-top-left-radius: 0px; -moz-border-radius-bottomleft: 0px; -moz-border-radius-topleft: 0px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; margin-left: 0px; border-left: none;}
+.button.left:active,
+.button.middle:active,
+.button.right:active { top: 0px }
+.button.big { font-size: 16px; padding: 7px 16px; }
+.button span.icon { display: inline-block; width: 14px; height: 12px; margin: auto 7px auto auto; position: relative; top: 1px; background-image: url('img/css3buttons_icons.png'); background-repeat: no-repeat; }
+.big.button span.icon { top: 0px }
+.button span.icon.book { background-position: 0 0 }
+.button:hover span.icon.book { background-position: 0 -15px }
+.button span.icon.calendar { background-position: 0 -30px }
+.button:hover span.icon.calendar { background-position: 0 -45px }
+.button span.icon.chat { background-position: 0 -60px }
+.button:hover span.icon.chat { background-position: 0 -75px }
+.button span.icon.check { background-position: 0 -90px }
+.button:hover span.icon.check { background-position: 0 -103px }
+.button span.icon.clock { background-position: 0 -116px }
+.button:hover span.icon.clock { background-position: 0 -131px }
+.button span.icon.cog { background-position: 0 -146px }
+.button:hover span.icon.cog { background-position: 0 -161px }
+.button span.icon.comment { background-position: 0 -176px }
+.button:hover span.icon.comment { background-position: 0 -190px }
+.button span.icon.cross { background-position: 0 -204px }
+.button:hover span.icon.cross { background-position: 0 -219px }
+.button span.icon.downarrow { background-position: 0 -234px }
+.button:hover span.icon.downarrow { background-position: 0 -249px }
+.button span.icon.fork { background-position: 0 -264px }
+.button:hover span.icon.fork { background-position: 0 -279px }
+.button span.icon.heart { background-position: 0 -294px }
+.button:hover span.icon.heart { background-position: 0 -308px }
+.button span.icon.home { background-position: 0 -322px }
+.button:hover span.icon.home { background-position: 0 -337px }
+.button span.icon.key { background-position: 0 -352px }
+.button:hover span.icon.key { background-position: 0 -367px }
+.button span.icon.leftarrow { background-position: 0 -382px }
+.button:hover span.icon.leftarrow { background-position: 0 -397px }
+.button span.icon.lock { background-position: 0 -412px }
+.button:hover span.icon.lock { background-position: 0 -427px }
+.button span.icon.loop { background-position: 0 -442px }
+.button:hover span.icon.loop { background-position: 0 -457px }
+.button span.icon.magnifier { background-position: 0 -472px }
+.button:hover span.icon.magnifier { background-position: 0 -487px }
+.button span.icon.mail { background-position: 0 -502px }
+.button:hover span.icon.mail { background-position: 0 -514px }
+.button span.icon.move { background-position: 0 -526px }
+.button:hover span.icon.move { background-position: 0 -541px }
+.button span.icon.pen { background-position: 0 -556px }
+.button:hover span.icon.pen { background-position: 0 -571px }
+.button span.icon.pin { background-position: 0 -586px }
+.button:hover span.icon.pin { background-position: 0 -601px }
+.button span.icon.plus { background-position: 0 -616px }
+.button:hover span.icon.plus { background-position: 0 -631px }
+.button span.icon.reload { background-position: 0 -646px }
+.button:hover span.icon.reload { background-position: 0 -660px }
+.button span.icon.rightarrow { background-position: 0 -674px }
+.button:hover span.icon.rightarrow { background-position: 0 -689px }
+.button span.icon.rss { background-position: 0 -704px }
+.button:hover span.icon.rss { background-position: 0 -719px }
+.button span.icon.tag { background-position: 0 -734px }
+.button:hover span.icon.tag { background-position: 0 -749px }
+.button span.icon.trash { background-position: 0 -764px }
+.button:hover span.icon.trash { background-position: 0 -779px }
+.button span.icon.unlock { background-position: 0 -794px }
+.button:hover span.icon.unlock { background-position: 0 -809px }
+.button span.icon.uparrow { background-position: 0 -824px }
+.button:hover span.icon.uparrow { background-position: 0 -839px }
+.button span.icon.user { background-position: 0 -854px }
+.button:hover span.icon.user { background-position: 0 -869px }
 
 /* reset */
 *{padding:0; margin:0; outline:0; color:inherit;}
@@ -332,4 +332,332 @@ body{
 
 #frame .queue > li .controls{
 	float: right;
+}
+
+/* uploader */
+.file_upload {
+  position: relative;
+  overflow: hidden;
+  direction: ltr;
+  cursor: pointer;
+	line-height: 30px;
+	text-align: center;
+	background: #fff;
+}
+
+.file_upload input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  border: 300px solid transparent;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  filter: alpha(opacity=0);
+  -o-transform: translate(-300px, -300px) scale(10);
+  -moz-transform: translate(-800px, 0) scale(10);
+  cursor: pointer;
+}
+
+.file_upload iframe, .file_upload button {
+  display: none;
+}
+
+.file_upload_preview img {
+  width: 80px;
+}
+
+.file_upload_progress .ui-progressbar-value {
+  background: url('img/pbar-ani.gif');
+}
+
+.file_upload_progress div {
+  width: 150px;
+  height: 15px;
+}
+
+.file_upload_cancel button {
+  cursor: pointer;
+}
+
+/* jQuery UI */
+.ui-slider {
+  position: relative;
+  text-align: left;
+  background: -moz-linear-gradient(top, #606060, #7a7a7a);
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow: inset 0 1px 1px #484848, 0 1px 0 #cacaca;
+	-webkit-box-shadow: inset 0 1px 1px #484848, 0 1px 0 #cacaca;
+	box-shadow: inset 0 1px 1px #383838, 0 1px 0 #cacaca;
+}
+.ui-slider .ui-slider-handle {
+  position: absolute;
+  background: -moz-linear-gradient(top, #e0e0e0, #a2a2a2);
+  background: -webkit-gradient(linear, left top, left bottom, from(#e0e0e0), to(#a2a2a2));
+  background: linear-gradient(top, #e0e0e0, #a2a2a2);
+  border: none; outline: none;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -moz-box-shadow: inset 0 1px 0 #ddd, inset 0 0 0 1px #bbb, 0 0 0 1px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: inset 0 1px 0 #eee, 0 0 0 1px rgba(0,0,0,0.4);
+  box-shadow: inset 0 1px 0 #eee, 0 0 0 1px rgba(0,0,0,0.4);
+  width: 10px; height: 10px;
+  z-index: 2;
+  cursor: pointer;
+}
+.ui-slider .ui-state-hover, .ui-slider .ui-state-active { background-position: 0 0; }
+.ui-slider .ui-slider-range { background: #a3cae0; position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+.ui-slider .ui-slider-range { -moz-box-shadow: 0 1px 2px rgba(17,35,45,0.6) inset; -webkit-box-shadow: 0 1px 2px rgba(17,35,45,0.6) inset; }
+
+.ui-slider-horizontal { height: 6px; }
+.ui-slider-horizontal .ui-slider-handle { top: -3px; margin-left: -6px; }
+.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+.ui-slider-horizontal .ui-slider-range-min { left: 0; }
+.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+
+.ui-slider-vertical { width: 5px; height: 100px; }
+.ui-slider-vertical .ui-slider-handle { left: -8px; margin-left: 0; margin-bottom: -13px; }
+.ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
+.ui-slider-vertical .ui-slider-range-min { bottom: 0; }
+.ui-slider-vertical .ui-slider-range-max { top: 0; }
+
+.ui-selectable-helper { position: absolute; z-index: 1000; background: rgba(255,255,255,0.33); border: 1px solid rgba(255,255,255,0.66); }
+
+.ui-widget-overlay {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+}
+
+.ui-popdown-dialog {
+  background: -moz-linear-gradient(top, #FFF, #e8ebef);
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#e8ebef));
+  background: linear-gradient(top, #FFF, #e8ebef);
+  -moz-box-shadow: 0px 1px 10px #000, inset 0 -1px 0 #FFF; /* FF3.5+ */
+  -webkit-box-shadow: 0px 1px 4px #000; /* Saf3.0+, Chrome */
+  box-shadow: 0px 1px 4px #000; /* Opera 10.5, IE 9.0 */
+  filter:  progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=1px, Color='#000'); /* IE6,IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=1px, Color='#000')"; /* IE8 */
+}
+.ui-popdown-dialog-title {
+  display: block;
+  background: #FFF;
+  padding: 20px 20px 0;
+  
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+.ui-popdown-dialog-content { clear: both; }
+.ui-popdown-dialog-content form {
+  padding: 20px;
+  min-width: 400px;
+}
+.ui-popdown-dialog-content form .text input {
+  max-width: 60%;
+}
+.ui-popdown-dialog-content form .submit {
+  margin: 0 -20px -20px;
+  padding: 20px;
+}
+.ui-popdown-dialog-content label {
+  float: left;
+  margin-right: 1%;
+  width: 30%;
+  
+  line-height: 22px;
+  text-align: right;
+}
+
+.ui-inline-dialog {
+	background: url(img/tab.png) no-repeat top center;
+	padding-top: 10px;
+}
+.ui-inline-dialog.bottom { padding-top: 0; padding-bottom: 10px; }
+.ui-inline-dialog-title {
+	display: block;
+	font-size: 15px; font-weight: 500;
+	color: #fff;
+	text-shadow: #000 0 -1px 1px;
+	padding: 14px;
+	-moz-border-radius-topright: 7px;
+	border-top-right-radius: 7px;
+	-moz-border-radius-topleft: 7px;
+	border-top-left-radius: 7px;
+	
+	background: #444546;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444546', endColorstr='#1E1A1B'); /* for IE */
+	background: -moz-linear-gradient(top, #444546, #1E1A1B);
+	background: -webkit-gradient(linear, left top, left bottom, from(#444546), to(#1E1A1B));
+	background: linear-gradient(top, #444546, #1E1A1B);
+
+}
+.ui-inline-dialog-container {
+	position: relative;
+	background: #333;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222'); /* for IE */
+	background: -moz-linear-gradient(top, #333, #222);
+	background: -webkit-gradient(linear, left top, left bottom, from(#333), to(#222));
+	background: linear-gradient(top, #333, #222);
+	border: 1px solid #111;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: inset 0 1px 0 #555;
+	-webkit-box-shadow: inset 0 1px 0 #555;
+	box-shadow: inset 0 1px 0 #555;
+	padding: 5px;
+}
+.ui-inline-dialog-content {
+	background: #111;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#111111', endColorstr='#222222'); /* for IE */
+  background: -moz-linear-gradient(top, #111, #222);
+  background: -webkit-gradient(linear, left top, left bottom, from(#111), to(#222));
+  background: linear-gradient(top, #111, #222);;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow: inset 0 1px 0 #111, 0 1px 0 #555;
+	-webkit-box-shadow: inset 0 1px 2px #000, 0 1px 0 #555;
+	box-shadow: inset 0 1px 2px #000, 0 1px 0 #555;
+	padding: 10px;
+	
+	font-size: 12px;
+	color: #fff;
+	text-shadow: 0 1px 0 #000;
+}
+
+.ui-inline-dialog-content input{
+	background: none;
+	border: 0;
+	color: #fff;
+}
+
+.ui-inline-dialog-buttonpane {
+  padding-top: 5px;
+  white-space: nowrap;
+}
+
+  .ui-inline-dialog-buttonpane .ui-button {
+    float: none;
+    display: inline-block;
+    margin: 0;
+    text-shadow: 0 -1px 0 #000;
+		background: #333;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222'); /* for IE */
+		
+		background: -moz-linear-gradient(top, #333, #222);
+    background: -webkit-gradient(linear, left top, left bottom, from(#333), to(#222));
+    background: linear-gradient(top, #333, #222);
+    border: 1px solid #111;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: inset 0 1px 0 #444, inset 0 0 0 1px #2f2f2f, 0 1px 0 #333;
+    -webkit-box-shadow: inset 0 1px 0 #333, inset 0 0 0 1px #333, 0 1px 0 #333;
+    box-shadow: inset 0 1px 0 #333, inset 0 0 0 1px #333, 0 1px 0 #333;
+    padding: 5px 10px;
+    color: #fff;
+    line-height: 1em;
+  }
+
+
+  .ui-inline-dialog-buttonpane .ui-button + .ui-button { margin-left: 0.3em; }
+
+/* gritter */ 
+	/* ie6 trash */
+* html #gritter-notice-wrapper {
+	position:absolute; 
+}
+* html .gritter-top {
+	margin-bottom:-10px;
+}
+* html .gritter-item {
+	padding-bottom:0;
+}
+* html .gritter-bottom {
+	margin-bottom:0;
+}
+* html .gritter-close {
+	background:url('img/gritter-close-ie6.gif');
+	width:22px;
+	height:22px;
+	top:7px;
+	left:7px;
+}
+
+/* the norm */
+#gritter-notice-wrapper {
+	position:fixed;
+	top:20px;
+	right:20px;
+	width:301px;
+	z-index:9999;
+}
+.gritter-item-wrapper {
+	position:relative;
+	margin:0 0 10px 0;
+	background:url('.'); /* ie7/8 fix */ 
+}
+.gritter-top {
+	background:url('img/gritter.png') no-repeat left -30px;
+	height:10px;
+}
+.hover .gritter-top {
+	background-position:right -30px;
+}
+.gritter-bottom {
+	background:url('img/gritter.png') no-repeat left bottom;
+	height:8px;
+	margin:0;
+}
+.hover .gritter-bottom {
+	background-position: bottom right;
+}
+.gritter-item {
+	display:block;
+	background:url('img/gritter.png') no-repeat left -40px;
+	color:#eee;
+	padding:2px 11px 8px 11px;
+	font-size: 11px;
+	font-family:verdana;
+}
+.hover .gritter-item {
+	background-position:right -40px;
+}
+.gritter-item p {
+	padding:0;
+	margin:0;
+}
+.gritter-close {
+	position:absolute;
+	top:5px;
+	left:3px;
+	background:url('img/gritter.png') no-repeat left top;
+	cursor:pointer;
+	width:30px;
+	height:30px;
+}
+.gritter-title {
+	font-size:14px;
+	font-weight:bold;
+	padding:0 0 7px 0;
+	display:block;
+	text-shadow:1px 1px #000; /* Not supported by IE :( */
+}
+.gritter-image {
+	width:48px;
+	height:48px;
+	float:left;
+}
+.gritter-with-image,
+.gritter-without-image {
+	padding:0 0 5px 0;
+}
+.gritter-with-image {
+	width:220px;
+	float:right;
 }

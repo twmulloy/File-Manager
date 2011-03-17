@@ -19,30 +19,44 @@ class Xhr extends CI_Controller {
 	
 	function create(){
 
+		$json = array();
+
 		switch($this->data['item']){
 			case 'folder':
-				$data['array'] = $this->storage->createDirectory($this->data, $this->path);
+				$json = $this->storage->createDirectory($this->data, $this->path);
 				break;
 		}
-		$this->load->view('layout/json', $data);
+		
+		return $this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($json));
 	}
 	
 	function read(){
 		
-		$data['array'] = array();
-		$this->load->view('layout/json', $data);
+		$json = array();
+		
+		return $this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($json));
 	}
 	
 	function update(){
 		
-		$data['array'] = array();
-		$this->load->view('layout/json', $data);
+		$json = array();
+		
+		return $this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($json));
 	}
 	
 	function delete(){
 		
-		$data['array'] = array();
-		$this->load->view('layout/json', $data);
+		$json = array();
+		
+		return $this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($json));
 	}
 
 	
