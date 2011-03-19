@@ -13,6 +13,7 @@
 		<h3>Upload Queue</h3>
 		<ul id="files" class="queue"></ul>
 		<?=form_open_multipart('upload', array('id'=>'file_upload'))?>
+			<input type="hidden" name="path" value="" />
 			<input type="file" name="file" multiple />
 			<button>Upload</button>
 			<div>Upload file(s)</div>

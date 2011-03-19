@@ -168,6 +168,9 @@ $(function(){
 		// grab last trail and remove
 		params.path = globals.curDir = globals.trail.pop();
 		
+		// set current upload path
+		$('input[name="path"]').val(params.path);
+		
 		$.ajax({
 			url: appPath + 'partial/tree',
 			data: params,
@@ -223,6 +226,8 @@ $(function(){
 		
 		// push params
 		params.path = path;
+		// set current upload path
+		$('input[type="hidden"][name="path"]', '#e').val(params.path);
 			
 		// set previous folder history
 		if(type == 'folder'){
