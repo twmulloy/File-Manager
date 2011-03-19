@@ -31,7 +31,7 @@ function buildStack(data, appendTo){
 		)
 		.append(
 			$('<ul/>').addClass('controls')
-				.append($('<li/>').append($('<a/>').attr({'class':'icon delete'})))
+				.append($('<li/>').append($('<a/>').attr({'class':'icon delete', 'href':'#'})))
 		)
 		.append(
 			$('<ul/>').addClass('details')
@@ -285,13 +285,6 @@ $(function(){
 		return false;
 	});
 	
-	
-	// files in tree
-	$('.list a.file', '#w').live('click', function(){
-		alert('i am a file');
-		return false;
-	});
-	
 	// new folder
 	$('.dialog-inline').inlineDialog({
 		content: $('<input/>').attr({'placeholder':'Name'}),
@@ -439,7 +432,7 @@ $(function(){
 				.append(
 					$('<ul/>').attr({'class':'controls'}).append(
 						$('<li/>').append(
-							$('<a/>').attr({'class':'icon delete','href':'#confirm-delete-download'})
+							$('<a/>').attr({'class':'icon delete', 'href':'#'})
 						)
 					)
 				)
@@ -454,6 +447,12 @@ $(function(){
 				image: appPath + 'css/img/icons/plus-circle.png'
 			});
 		}
+	});
+	
+	// delete
+	$('a.delete', '#c, #e').live('click', function(){
+		alert('delete?');
+		return false;
 	});
 
 	// css3 submit buttons
@@ -484,18 +483,11 @@ $(function(){
 					$('<div/>')
 						.addClass('file_upload_cancel')
 						.append(
-							$('<button/>')
+							$('<a/>')
 								.attr({
-									'class':'ui-state-default ui-corner-all',
-									'title':'Cancel'
+									'class':'button pill'
 								})
-								.append(
-									$('<span/>')
-										.attr({
-											'class':'ui-icon ui-icon-cancel'
-										})
-										.html('Cancel')
-								)
+								.html('Cancel')
 						)
 				);
 			},
@@ -509,9 +501,11 @@ $(function(){
 					});
 					*/
 					
-					return $('<li/>').html(file.data.name + ' error');
+					return $('<li/>')
+						.html('<span class="icon file-error"></span>' + file.data.name + file.explain);
 				}
-				return $('<li/>').html(file.data.file_name);
+				return $('<li/>')
+					.html('<span class="icon file"></span>'+file.data.file_name);
 			},
 			onComplete: function (event, files, index, xhr, handler) {
 				handler.onCompleteAll(files);

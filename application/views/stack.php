@@ -6,7 +6,7 @@
 		<span class="icon <?=$item['type']?>"></span>
 		
 		<ul class="controls">
-			<li><a href="#confirm-delete-stack" class="icon delete"></a></li>
+			<li><a href="#" class="icon delete"></a></li>
 		</ul>
 		<ul class="details">
 			<li><?=$item['name']?></li>

@@ -130,6 +130,9 @@ body{
 #frame li .icon.file{
 	background-image: url('img/icons/document.png');
 }
+#frame li .icon.file-error{
+	background-image: url('img/icons/document-broken.png');
+}
 #frame li .icon.delete{
 	background-image: url('img/icons/minus-circle.png');
 }

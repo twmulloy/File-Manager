@@ -10,7 +10,7 @@
 	</div>
 
 	<div id="pane-upload">
-		<h3>Upload Queue</h3>
+		<h3>Upload History</h3>
 		<ul id="files" class="queue"></ul>
 		<?=form_open_multipart('upload', array('id'=>'file_upload'))?>
 			<input type="hidden" name="path" value="" />

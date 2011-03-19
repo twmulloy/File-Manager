@@ -2,4 +2,5 @@
 
 // relative to index.php
 $config['storage_directory']	= 'storage';
-$config['storage_mode'] 			= 'local';
+#$config['storage_mode'] 			= 'local';
+$config['thumb_directory']		= 'img/thumb';
