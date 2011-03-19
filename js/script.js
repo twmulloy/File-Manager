@@ -461,7 +461,95 @@ $(function(){
 		return false;
 	});
 	
-
+	/* upload */
+	$('#file_upload').fileUploadUI({
+		uploadTable: $('#files'),
+		downloadTable: $('#files'),
+		buildUploadRow: function (files, index) {
+			return $('<li/>')
+				.html(files[index].name)
+				.append(
+					$('<div/>')
+						.addClass('file_upload_progress')
+						.append(
+							$('<div/>')
+						)
+				)
+				.append(
+					$('<div/>')
+						.addClass('file_upload_cancel')
+						.append(
+							$('<button/>')
+								.attr({
+									'class':'ui-state-default ui-corner-all',
+									'title':'Cancel'
+								})
+								.append(
+									$('<span/>')
+										.attr({
+											'class':'ui-icon ui-icon-cancel'
+										})
+										.html('Cancel')
+								)
+						)
+				);
+			},
+			buildDownloadRow: function(file){
+				if(file.status !== 'success'){
+					/*
+					$.gritter.add({
+						title: 'Error',
+						text: '<strong>'+file.data.name+'</strong> ' + file.explain,
+						image: appPath + 'css/img/icons/exclamation.png'
+					});
+					*/
+					
+					return $('<li/>').html(file.data.name + ' error');
+				}
+				return $('<li/>').html(file.data.file_name);
+			},
+			onComplete: function (event, files, index, xhr, handler) {
+				handler.onCompleteAll(files);
+			},
+			onAbort: function (event, files, index, xhr, handler) {
+				handler.removeNode(handler.uploadRow);
+				handler.onCompleteAll(files);
+			},
+			onCompleteAll: function (files) {
+				// The files array is a shared object between the instances of an upload selection.
+				// We extend it with a uploadCounter to calculate when all uploads have completed:
+				if (!files.uploadCounter) {
+				    files.uploadCounter = 1;  
+				} else {
+				    files.uploadCounter = files.uploadCounter + 1;
+				}
+				if (files.uploadCounter === files.length) {
+				    /* your code after all uplaods have completed */
+						
+						// refresh current tree/stack
+						$.post(appPath + 'partial/tree', params, function(json){
+							var stack = $('.stack', '#c');
+								
+							stack.empty();
+							
+							$.each(json, function(){
+								buildStack(this, stack);
+							});
+							
+							bindStack();
+							
+							$.gritter.add({
+								title: 'Done',
+								text: 'Upload finished',
+								image: ''
+							});
+							
+						}, 'json');
+						
+				}
+			}
+	});
+	
 	/* clear download queue */
 	$('.button.queue-clear', '#pane-download').click(function(){
 		var form = $(this).closest('form');

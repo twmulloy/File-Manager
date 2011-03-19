@@ -116,5 +116,4 @@ class Storage extends CI_Model
 		return $this->zip->download($zip_name);
 
 	}
-
 }

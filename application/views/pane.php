@@ -12,43 +12,11 @@
 	<div id="pane-upload">
 		<h3>Upload Queue</h3>
 		<ul id="files" class="queue"></ul>
-		<?=form_open('upload', array('id'=>'file_upload', 'enctype'=>'multipart/form-data'))?>
+		<?=form_open_multipart('upload', array('id'=>'file_upload'))?>
 			<input type="file" name="file" multiple />
 			<button>Upload</button>
 			<div>Upload file(s)</div>
 		<?=form_close()?>
-		<script>
-		/*global $ */
-		$(function () {
-		    $('#file_upload').fileUploadUI({
-		        uploadTable: $('#files'),
-		        downloadTable: $('#files'),
-		        buildUploadRow: function (files, index) {
-		            return $('<li/>').html(files[index].name)
-													.append(
-														$('<div/>').addClass('file_upload_progress')
-															.append($('<div/>'))
-													)
-													.append(
-														$('<div/>').addClass('file_upload_cancel')
-															.append(
-																$('<button/>').attr({
-																	'class':'ui-state-default ui-corner-all',
-																	'title':'Cancel'
-																}).append(
-																		$('<span/>').attr({
-																			'class':'ui-icon ui-icon-cancel'
-																		}).html('Cancel')
-																	)
-															)
-													);
-		        },
-		        buildDownloadRow: function (file) {
-		            return $('<li/>').html(file.name);
-		        }
-		    });
-		});
-		</script>
 	</div>
 
 	<!-- droppable region -->

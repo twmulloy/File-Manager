@@ -1,8 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Upload extends CI_Controller {
-	
-	protected $file;
 
 	function __construct()
 	{
@@ -13,20 +11,36 @@ class Upload extends CI_Controller {
 	}
 
 	function index(){
-		$file = $_FILES['file'];
+		$config['upload_path'] 		= 'storage';
+		$config['allowed_types']	= 'gif|jpg|png|pdf|txt';
+		$config['overwrite']			= true;
+		$config['remove_spaces']	= true;
 		
-		// do something with the file...
+		$this->load->library('upload', $config);
 		
-		$json = $file;
+		if($this->upload->do_upload('file')){
+			$result = array(
+				'status'=>'success',
+				'data'=>$this->upload->data()
+			);
+		}else{
+			$result = array(
+				'status'=>'fail',
+				'explain'=>$this->upload->display_errors('', ''),
+				'data'=>$_FILES['file']
+			);
+		}
 		
-		// From uploader documentation:"
-		// They will only register a load event if the Content-type of the response is set to text/plain or text/html, 
-		// not if it is set to application/json.
-		
+		#$upload = $this->storage->uploadFile($file);
+		/*
+			From uploader documentation:
+			They will only register a load event if the Content-type of the response is set to text/plain or text/html, 
+			not if it is set to application/json.
+		*/
 		return $this->output
 			->set_content_type('text/html')
 			#->set_content_type('application/json')
-			->set_output(json_encode($json));
+			->set_output(json_encode($result));
 		
 	}
 	
