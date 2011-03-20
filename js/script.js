@@ -449,9 +449,29 @@ $(function(){
 		}
 	});
 	
-	// delete
-	$('a.delete', '#c, #e').live('click', function(){
-		alert('delete?');
+	// remove from queue
+	$('a.delete', '.queue').live('click', function(){
+		$(this).closest('*[data-type]').fadeOut('fast', function(){
+			$(this).remove();
+		});
+		return false;
+	});
+	
+	$('a.delete', '#c, #w').live('click', function(){
+		alert('delete an item');
+		
+		$.ajax({
+			type: 'delete',
+			url: appPath + 'xhr/delete',
+			data: params,
+			dataType: 'json',
+			success: function(resp){
+				console.log(resp);
+			}
+			
+			
+		});
+		
 		return false;
 	});
 

@@ -55,9 +55,25 @@ class Upload extends CI_Controller {
 	
 	// additional work for images
 	private function is_image(array $data){
-		$this->load->model('image');
-		$this->image->makeThumb($data);
 
+		$path = $this->config->item('thumb_directory');
+		
+		// generate thumb
+		$config['image_library'] = 'ImageMagick';
+		$config['library_path'] = '/Applications/MAMP/bin/ImageMagick/ImageMagick-6.6.7';
+		$config['create_thumb'] = true;
+		$config['source_image'] = $data['file_path'];
+		$config['new_image'] = $path . '/' . $data['file_name'];
+		$config['width'] = 64;
+		$config['height'] = 64;
+		
+		$this->load->library('image_lib', $config);
+	
+		if(!$this->image_lib->resize()){
+			error_log($this->image_lib->display_errors('',''));
+		}
+		
+		return;
 	}
 	
 }

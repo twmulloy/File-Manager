@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>application/controllers/upload.php</string>
+	<string>info.php</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,59 +21,103 @@
 	<integer>265</integer>
 	<key>metaData</key>
 	<dict>
-		<key>application/controllers/partial/tree.php</key>
+		<key>application/config/upload.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
 				<integer>17</integer>
+				<key>line</key>
+				<integer>2</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>36</integer>
-				<key>line</key>
-				<integer>19</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>17</integer>
-			</dict>
 		</dict>
 		<key>application/controllers/upload.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>4</integer>
+				<integer>85</integer>
 				<key>line</key>
-				<integer>27</integer>
+				<integer>62</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>34</integer>
+		</dict>
+		<key>application/views/stack.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>8</integer>
+				<key>line</key>
+				<integer>3</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>css/admin.css</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>56</integer>
+				<key>line</key>
+				<integer>133</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>105</integer>
+		</dict>
+		<key>info.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>12</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>js/script.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>19</integer>
+				<key>line</key>
+				<integer>453</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>483</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>application/controllers/upload.php</string>
-		<string>application/controllers/partial/tree.php</string>
+		<string>info.php</string>
+		<string>application/config/upload.php</string>
+		<string>js/script.js</string>
+		<string>application/views/stack.php</string>
+		<string>css/admin.css</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{1930, 51}, {968, 726}}</string>
+	<string>{{1929, 24}, {968, 726}}</string>
 </dict>
 </plist>
