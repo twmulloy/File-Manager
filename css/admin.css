@@ -102,7 +102,8 @@ body{
 	top: 30px;
 	width: 200px;
 	background: url('img/bg.light.png');
-	overflow: hidden;
+	overflow-x: hidden;
+	/*overflow-y: auto;*/
 }
 #c{
 	margin: 0 275px 0 200px;
@@ -113,11 +114,12 @@ body{
 	min-width: 600px;
 }
 #e{
-	position: fixed;
+	position: absolute;
 	right: 0;
 	top: 30px;
 	width: 275px;
-	overflow: hidden;
+	overflow-x: hidden;
+	/*overflow-y: auto;*/
 }
 
 /* icons */
@@ -159,7 +161,6 @@ body{
 	background-position: center center;
 	float: left;
 }
-
 /* block list */
 #frame .loading{
 	width: 32px;
@@ -339,13 +340,44 @@ body{
 
 /* uploader */
 .file_upload {
+	width: 125px;
   position: relative;
   overflow: hidden;
   direction: ltr;
   cursor: pointer;
-	line-height: 30px;
+	line-height: 26px;
 	text-align: center;
-	background: #fff;
+	float: left;
+	
+	color: #3C3C3D; 
+	text-shadow: 1px 1px 0 #FFFFFF; 
+	background: #ECECEC url('img/css3buttons_backgrounds.png') 0 0 no-repeat; 
+	white-space: nowrap; 
+	cursor: pointer; 
+	text-decoration: none; 
+	border: 1px solid #CACACA; 
+	-webkit-border-radius: 2px; 
+	-moz-border-radius: 2px; 
+	-webkit-background-clip: padding-box; 
+	border-radius: 2px; 
+	outline: none; 
+	zoom: 1;
+	-webkit-border-bottom-right-radius: 0px; 
+	-webkit-border-top-right-radius: 0px; 
+	-moz-border-radius-bottomright: 0px; 
+	-moz-border-radius-topright: 0px; 
+	border-bottom-right-radius: 0px; 
+	border-top-right-radius: 0px; 
+	margin-right: 0px;
+}
+
+.file_upload:hover { 
+	color: #FFFFFF; 
+	border-color: #388AD4; 
+	text-decoration: none; 
+	text-shadow: -1px -1px 0 rgba(0,0,0,0.3); 
+	background-position: 0 -40px; 
+	background-color: #2D7DC5; 
 }
 
 .file_upload input {

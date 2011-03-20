@@ -11,11 +11,10 @@ class Upload extends CI_Controller {
 	}
 
 	function index(){
-		
-		$path = $this->storage->getPath($this->input->post('path'));
-		$config['upload_path'] 		= $path;
+		$path = $this->input->post('path');
+		$config['upload_path'] 		= $path ? $this->storage->getPath($path) : $this->config->item('storage_directory');
 		$config['allowed_types']	= 'gif|jpg|jpeg|png|tiff|psd|pdf|txt';
-		$config['overwrite']			= true;
+		$config['overwrite'] 			= true;
 		$config['remove_spaces']	= true;
 		
 		$this->load->library('upload', $config);
@@ -30,9 +29,10 @@ class Upload extends CI_Controller {
 			);
 			
 			// for images
+			/*
 			if(isset($data['is_image']) && $data['is_image'] == true)
 				$this->is_image($data);
-			
+			*/
 		}else{
 			$result = array(
 				'status'=>'fail',
@@ -40,6 +40,9 @@ class Upload extends CI_Controller {
 				'data'=>$_FILES['file']
 			);
 		}
+		
+		unset($config);
+		
 
 		/*
 			From uploader documentation:

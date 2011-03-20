@@ -20,9 +20,13 @@ function setPath(path){
 	
 	$.bbq.pushState({'!':clean});
 	
+	// set current upload path
+	$('input[name="path"]').val(clean);
+	
 	if(clean){
 		clean = clean.replace(/\//gi, '<span class="slash">/</span>');
 	}
+	
 	return $('#path', '#frame').html(clean);
 }
 
@@ -123,6 +127,8 @@ var globals = {
 };
 
 $(function(){
+	
+	setPath('');
 
 	// hide loading
 	$('.loading').hide();
@@ -176,9 +182,6 @@ $(function(){
 		
 		// grab last trail and remove
 		params.path = globals.curDir = globals.trail.pop();
-		
-		// set current upload path
-		$('input[name="path"]').val(params.path);
 		
 		$.ajax({
 			url: appPath + 'partial/tree',
@@ -235,8 +238,6 @@ $(function(){
 		
 		// push params
 		params.path = path;
-		// set current upload path
-		$('input[type="hidden"][name="path"]', '#e').val(params.path);
 			
 		// set previous folder history
 		if(type == 'folder'){
@@ -302,7 +303,8 @@ $(function(){
 				$(this).inlineDialog('close');
 			},
 			'Add': function(){
-				var folder = $('.ui-inline-dialog-content').find('input').val(),
+				var input = $('.ui-inline-dialog-content').find('input'),
+					folder = input.val(),
 					that = this;
 				
 				// alert notification
@@ -374,6 +376,8 @@ $(function(){
 						});
 					},
 					complete: function(){
+						// reset dialog
+						input.val('');
 					}
 				});
 				
@@ -594,6 +598,17 @@ $(function(){
 			text: 'Download queue cleared'
 		});
 		
+		return false;
+	});
+	
+	/* clear upload history */
+	$('.button.queue-clear', '#pane-upload').click(function(){
+		// dom list
+		$('ul.queue > li', '#pane-upload').remove();
+		$.gritter.add({
+			title: 'Success',
+			text: 'Upload history cleared'
+		});
 		return false;
 	});
 	

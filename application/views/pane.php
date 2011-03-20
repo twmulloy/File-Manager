@@ -18,6 +18,7 @@
 			<button>Upload</button>
 			<div>Upload file(s)</div>
 		<?=form_close()?>
+		<a href="#" class="button negative right queue-clear">Clear History</a>
 	</div>
 
 	<!-- droppable region -->
