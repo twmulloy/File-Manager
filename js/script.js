@@ -5,16 +5,25 @@ function setFrameHeight(height){
 }
 
 // clean up and set the path
-function setPath(path){
+function cleanPath(path){
+	var clean = path;
 	// prep path
-	if(path){
-		path = path.replace(/(^storage(\/)?)?/gi, '');
-		path = path.replace(/\//gi, '<span class="slash">/</span>');
+	if(clean){
+		clean = clean.replace(/(^storage(\/)?)?/gi, '');
 	}else{
-		path = null;
+		clean = '';
 	}
-
-	return $('#path', '#frame').html(path);
+	return clean;
+}
+function setPath(path){
+	var clean = cleanPath(path);
+	
+	$.bbq.pushState({'!':clean});
+	
+	if(clean){
+		clean = clean.replace(/\//gi, '<span class="slash">/</span>');
+	}
+	return $('#path', '#frame').html(clean);
 }
 
 // maintain dom consistency
@@ -629,51 +638,4 @@ $(function(){
 		$(form).submit();
 		return false;
 	});
-});
-
-/* hashchange */
-$(function(){
-	/*
-		var area = '.partial',
-			loading = '.loading';
-
-		// cache
-		$(area).each(function(){
-			$(this).data('partial', {
-				cache: {
-
-				}
-			});
-		});
-
-		// push state to history
-		$('a[href^=#]', area).live( 'click', function(e){
-			var state = {},
-				id = $(this).closest(area).attr('id'),
-				url = $(this).attr('href').replace(/^#/, '');
-
-			// Set the state
-			state[id] = url;
-			$.bbq.pushState(state);
-			return false;
-		});
-
-		// hashchange
-		$(window).bind( 'hashchange', function(e) {
-			$(area).each(function(){
-				var that = $(this),
-					data = that.data('partial'),
-					url = $.bbq.getState( that.attr( 'id' ) ) || '';
-
-				// do nothing if hash unchanged
-				if ( data.url === url ) { return; }
-
-				// Store the url for the next time around.
-				data.url = url;
-			});
-		});
-
-		$(window).trigger( 'hashchange' );
-
-		*/
 });
