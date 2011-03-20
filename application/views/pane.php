@@ -11,7 +11,6 @@
 
 	<div id="pane-upload">
 		<h3>Upload History</h3>
-		<ul id="files" class="queue"></ul>
 		<?=form_open_multipart('upload', array('id'=>'file_upload'))?>
 			<input type="hidden" name="path" value="" />
 			<input type="file" name="file" multiple />
@@ -19,15 +18,16 @@
 			<div>Upload file(s)</div>
 		<?=form_close()?>
 		<a href="#" class="button negative right queue-clear">Clear History</a>
+		<ul id="files" class="queue"></ul>
 	</div>
 
 	<!-- droppable region -->
 	<div id="pane-download" class="droppable">
-		<h3>Download Queue</h3>
-		<ul class="queue"></ul>
 		<?=form_open('download/zip', array('target'=>'_blank'))?>
 		<a href="#" class="button primary left download-zip">Download .zip</a><a href="#" class="button negative right queue-clear">Clear Queue</a>
 		<?=form_close()?>
+		<h3>Download Queue</h3>
+		<ul class="queue"></ul>
 	</div>
 	<!-- end droppable region -->
 </div>

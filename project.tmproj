@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>css/admin.css</string>
+	<string>js/script.js</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,20 +21,6 @@
 	<integer>265</integer>
 	<key>metaData</key>
 	<dict>
-		<key>application/controllers/partial/pane.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>13</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
 		<key>application/controllers/upload.php</key>
 		<dict>
 			<key>caret</key>
@@ -93,20 +79,6 @@
 				<integer>10</integer>
 			</dict>
 		</dict>
-		<key>application/views/pane.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>10</integer>
-				<key>line</key>
-				<integer>17</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
 		<key>application/views/stack.php</key>
 		<dict>
 			<key>caret</key>
@@ -126,28 +98,44 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>15</integer>
+				<integer>18</integer>
 				<key>line</key>
-				<integer>417</integer>
+				<integer>119</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>487</integer>
+			<integer>88</integer>
 		</dict>
 		<key>js/script.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>line</key>
-				<integer>17</integer>
+				<integer>474</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>2</integer>
+			<integer>457</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>26</integer>
+				<key>line</key>
+				<integer>474</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>2</integer>
+				<key>line</key>
+				<integer>474</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
@@ -158,12 +146,10 @@
 		<string>js/script.js</string>
 		<string>application/controllers/xhr.php</string>
 		<string>application/views/stack.php</string>
-		<string>application/controllers/partial/pane.php</string>
-		<string>application/views/pane.php</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{577, 105}, {968, 726}}</string>
+	<string>{{78, 33}, {968, 726}}</string>
 </dict>
 </plist>

@@ -102,8 +102,7 @@ body{
 	top: 30px;
 	width: 200px;
 	background: url('img/bg.light.png');
-	overflow-x: hidden;
-	/*overflow-y: auto;*/
+	overflow: hidden;
 }
 #c{
 	margin: 0 275px 0 200px;
@@ -118,8 +117,7 @@ body{
 	right: 0;
 	top: 30px;
 	width: 275px;
-	overflow-x: hidden;
-	/*overflow-y: auto;*/
+	overflow: hidden;
 }
 
 /* icons */

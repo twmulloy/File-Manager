@@ -27,10 +27,12 @@ class Upload extends CI_Controller {
 			);
 			
 			// for images
-			/*
-			if(isset($data['is_image']) && $data['is_image'] == true)
+
+			if(isset($data['is_image']) && $data['is_image'] == true){
 				$this->is_image($data);
-			*/
+			}
+				
+
 		}else{
 			$result = array(
 				'status'=>'fail',
@@ -52,25 +54,8 @@ class Upload extends CI_Controller {
 	
 	// additional work for images
 	private function is_image(array $data){
-
-		$path = $this->config->item('thumb_directory');
-		
-		// generate thumb
-		$config['image_library'] = 'ImageMagick';
-		$config['library_path'] = '/Applications/MAMP/bin/ImageMagick/ImageMagick-6.6.7';
-		$config['create_thumb'] = true;
-		$config['source_image'] = $data['file_path'];
-		$config['new_image'] = $path . '/' . $data['file_name'];
-		$config['width'] = 64;
-		$config['height'] = 64;
-		
-		$this->load->library('image_lib', $config);
-	
-		if(!$this->image_lib->resize()){
-			error_log($this->image_lib->display_errors('',''));
-		}
-		
-		return;
+		$this->load->model('image');
+		return $this->image->createThumb($data);
 	}
 	
 }
