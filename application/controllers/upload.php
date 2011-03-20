@@ -8,7 +8,9 @@ class Upload extends CI_Controller {
 		
 		// only allow ajax requests
 		if(!$this->input->is_ajax_request()) return false;
-		
+	}
+
+	function index(){
 		$path = $this->input->post('path');
 		$config['upload_path'] 		= $path ? $this->storage->getPath($path) : $this->config->item('storage_directory');
 		$config['allowed_types']	= 'gif|jpg|jpeg|png|tiff|psd|pdf|txt';
@@ -16,13 +18,9 @@ class Upload extends CI_Controller {
 		$config['remove_spaces']	= true;
 		$this->load->library('upload', $config);
 		unset($config);
-	}
-
-	function index(){
+		
 		if($this->upload->do_upload('file')){
-			
 			$data = $this->upload->data();
-			
 			$result = array(
 				'status'=>'success',
 				'data'=> $data
