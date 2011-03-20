@@ -466,9 +466,11 @@ $(function(){
 		return false;
 	});
 	
-	$('a.delete', '#c, #w').live('click', function(){
+	/* delete item from stack */
+	$('a.delete', '#c .stack').live('click', function(){
 		alert('delete an item');
 		
+		/*
 		$.ajax({
 			type: 'delete',
 			url: appPath + 'xhr/delete',
@@ -480,6 +482,7 @@ $(function(){
 			
 			
 		});
+		*/
 		
 		return false;
 	});
