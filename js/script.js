@@ -34,13 +34,28 @@ function setPath(path){
 function buildStack(data, appendTo){
 	// only files
 	//if(data.type !== 'file'){ return false; }
+	var visual = $('<div/>').addClass('visual');
 	
-	return $('<li>').attr({
+	if(typeof data.thumb === 'object'){
+		visual = visual.append(
+			$('<img/>').attr({
+				'href':data.thumb.path
+			})
+		);
+	}
+
+	
+	return $('<li>')
+		.attr({
 				'data-type':data.type, 
 				'data-name':data.name,
 				'data-hash':data.hash
-			}).append(
-			$('<span/>').addClass('icon '+data.type)
+		})
+		.append(
+			$('<span/>').addClass('icon type '+data.type)
+		)
+		.append(
+			visual
 		)
 		.append(
 			$('<ul/>').addClass('controls')

@@ -4,3 +4,4 @@
 $config['storage_directory']	= 'storage';
 #$config['storage_mode'] 			= 'local';
 $config['thumb_directory']		= 'img/thumb';
+$config['thumb_size']					= 128; // image is cropped to square

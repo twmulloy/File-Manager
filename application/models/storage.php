@@ -28,15 +28,26 @@ class Storage extends CI_Model
 		// get only top level files
 		$contents = get_dir_file_info($file, true);
 		
+		$this->load->library('image_lib');
+		$thumbPath = $this->config->item('thumb_directory');
+		
 		if(count($contents)){
 			foreach($contents as $name => $content){
+				
 				// determine whether folder or file
 				if(is_dir($content['server_path'])){
 					$contents[$name]['type'] = 'folder';
 				}else{
 					$contents[$name]['type'] = 'file';
+					
+					// thumb details
+					$thumb = $this->image_lib->get_image_properties($content['server_path'], true);
+					if($thumb['image_type']){
+						$contents[$name]['thumb'] = $thumb;
+						$contents[$name]['thumb']['path'] = $thumbPath . '/' . $name;
+					} 
 				}
-						
+								
 				// append unique hash
 				$contents[$name]['hash'] = $this->generateHash($content['server_path']);
 				

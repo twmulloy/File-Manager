@@ -27,7 +27,6 @@ class Upload extends CI_Controller {
 			);
 			
 			// for images
-
 			if(isset($data['is_image']) && $data['is_image'] == true){
 				$this->is_image($data);
 			}

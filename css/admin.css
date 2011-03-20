@@ -159,6 +159,9 @@ body{
 	background-position: center center;
 	float: left;
 }
+#frame .stack .icon.type{
+	position: absolute;
+}
 /* block list */
 #frame .loading{
 	width: 32px;
@@ -212,16 +215,24 @@ body{
 #frame .stack{
 	margin: 5px;
 }
+
+#frame .stack .visual{
+	width: 128px;
+	height: 128px;
+	overflow: hidden;
+}
+
 #frame .stack > li{
 	background: #111;
-	width: 250px;
-	height: 125px;
+	width: 256px;
+	height: 128px;
 	float: left;
 	margin: 5px;
 	display: block;
 	border: 1px solid #222;
 	box-shadow: 0 0 3px #000;
 	-moz-box-shadow: 0 0 3px #000;
+	overflow: hidden;
 }
 
 #frame .stack .controls{
