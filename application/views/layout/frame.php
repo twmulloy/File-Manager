@@ -18,6 +18,8 @@
 			<div id="w" class="partial"> 
 				<span class="loading">Loading...</span>				
 				<?=$tree?>
+				
+				<div id="delete-stack"></div>
 			</div><!-- end left -->
 
 			<div id="e" class="partial"> 

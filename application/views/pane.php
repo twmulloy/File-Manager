@@ -23,10 +23,10 @@
 
 	<!-- droppable region -->
 	<div id="pane-download" class="droppable">
+		<h3>Download Queue</h3>
 		<?=form_open('download/zip', array('target'=>'_blank'))?>
 		<a href="#" class="button primary left download-zip">Download .zip</a><a href="#" class="button negative right queue-clear">Clear Queue</a>
 		<?=form_close()?>
-		<h3>Download Queue</h3>
 		<ul class="queue"></ul>
 	</div>
 	<!-- end droppable region -->

@@ -34,6 +34,11 @@ class Storage extends CI_Model
 		if(count($contents)){
 			foreach($contents as $name => $content){
 				
+				// convert data
+				$contents[$name]['short_name'] = ellipsize($name, 18, .5);
+				$contents[$name]['formatted_date'] = date('Y-m-d h:m:sA', $contents[$name]['date']);
+				$contents[$name]['formatted_size'] = $this->cleanFilesize($contents[$name]['size']);
+				
 				// determine whether folder or file
 				if(is_dir($content['server_path'])){
 					$contents[$name]['type'] = 'folder';
@@ -127,4 +132,18 @@ class Storage extends CI_Model
 		return $this->zip->download($zip_name);
 
 	}
+	
+	function cleanFilesize($size){
+		if(strlen($size) <= 9 && strlen($size) >= 7){
+			$size = number_format($size / 1048576,1);
+			return $size .'MB';
+		}elseif(strlen($size) >= 10){
+			$size = number_format($size / 1073741824,1);
+			return $size.'GB';
+		}else{
+			$size = number_format($size / 1024,1);
+			return $size.'KB';
+		}
+	}
+	
 }

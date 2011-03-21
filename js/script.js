@@ -1,6 +1,6 @@
 function setFrameHeight(height){
 	$('#frame').css({'height':height});
-	$('.partial').css({'height':height});
+	$('.partial').css({'height':height - 30});
 	return false;
 }
 
@@ -38,8 +38,8 @@ function buildStack(data, appendTo){
 	
 	if(typeof data.thumb === 'object'){
 		visual = visual.append(
-			$('<img/>').attr({
-				'href':data.thumb.path
+			$('<img>').attr({
+				'src':data.thumb.path
 			})
 		);
 	}
@@ -54,18 +54,16 @@ function buildStack(data, appendTo){
 		.append(
 			$('<span/>').addClass('icon type '+data.type)
 		)
+		.append(visual)
 		.append(
-			visual
-		)
-		.append(
-			$('<ul/>').addClass('controls')
+			$('<ul/>').attr({'class':'admin controls'})
 				.append($('<li/>').append($('<a/>').attr({'class':'icon delete', 'href':'#'})))
 		)
 		.append(
 			$('<ul/>').addClass('details')
-				.append($('<li/>').html(data.name))
-				.append($('<li/>').html(data.size))
-				.append($('<li/>').html(data.date))
+				.append($('<li/>').html(data.short_name))
+				.append($('<li/>').html(data.formatted_size))
+				.append($('<li/>').html(data.formatted_date))
 		)
 		.appendTo(appendTo);
 }
@@ -78,10 +76,11 @@ function buildTree(data, appendTo){
 		$('<a/>')
 			.attr({
 				'href':'#'+data.relative_path+'/'+data.name,
-				'data-type':data.type
+				'data-type':data.type,
+				'title':data.name
 			})
 			.addClass(data.type)
-			.html(data.name)
+			.html(data.short_name)
 			.prepend(
 				$('<span/>').addClass('icon '+data.type)
 		)
@@ -486,23 +485,44 @@ $(function(){
 	});
 	
 	/* delete item from stack */
-	$('a.delete', '#c .stack').live('click', function(){
-		alert('delete an item');
-		
-		/*
-		$.ajax({
-			type: 'delete',
-			url: appPath + 'xhr/delete',
-			data: params,
-			dataType: 'json',
-			success: function(resp){
-				console.log(resp);
+	$( "#delete-stack" ).dialog({
+		autoOpen: false,
+		resizable: false,
+		position: ['center', 50],
+		draggable: false,
+		modal: true,
+		title: 'Confirm',
+		width: 512,
+		open: function(event, ui){
+			console.log(ui);
+		},
+		buttons: {
+			
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			},
+			
+			'Delete': function() {
+				/*
+				$.ajax({
+					type: 'delete',
+					url: appPath + 'xhr/delete',
+					data: params,
+					dataType: 'json',
+					success: function(resp){
+						console.log(resp);
+					}
+
+
+				});
+				*/
+			
 			}
-			
-			
-		});
-		*/
-		
+		}
+	});
+	
+	$('a.delete', '#c .stack').live('click', function(){
+		$( "#delete-stack" ).dialog('open');
 		return false;
 	});
 
