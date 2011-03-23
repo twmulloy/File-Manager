@@ -21,6 +21,10 @@ class Upload extends CI_Controller {
 		
 		if($this->upload->do_upload('file')){
 			$data = $this->upload->data();
+			
+			// append additional values
+			$data['short_name'] = ellipsize($data['file_name'], 18, .5);
+			
 			$result = array(
 				'status'=>'success',
 				'data'=> $data

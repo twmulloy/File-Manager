@@ -12,14 +12,14 @@
 			<div id="c" class="partial"> 
 				<span class="loading">Loading...</span>
 				<?=$stack?>
-				<div id="create-folder"></div>
+				<div id="delete-stack"></div>
+				<div id="item-info"></div>
 			</div><!-- end middle -->
 
 			<div id="w" class="partial"> 
 				<span class="loading">Loading...</span>				
 				<?=$tree?>
-				
-				<div id="delete-stack"></div>
+				<div id="create-folder"></div>
 			</div><!-- end left -->
 
 			<div id="e" class="partial"> 

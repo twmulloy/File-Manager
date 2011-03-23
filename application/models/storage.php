@@ -146,4 +146,36 @@ class Storage extends CI_Model
 		}
 	}
 	
+	// get all the details for a single directory or file
+	function getInfo($hash, $path){
+		// decrypt hash
+		$file = $this->reverseHash($hash);
+		$info = get_file_info($file);
+		
+		if(!is_array($info)) return false;
+		
+		// add additional information
+		$info['formatted_date'] = date('Y-m-d h:m:sA', $info['date']);
+		$info['formatted_size'] = $this->cleanFilesize($info['size']);
+		
+		// check if has thumb
+
+		$this->load->library('image_lib');
+		$thumbPath = $this->config->item('thumb_directory');
+		
+		$image = $this->image_lib->get_image_properties($info['server_path'], true);
+		
+		if($image['image_type']){
+			$info['is_image'] = true;
+			$info['image'] = $image;
+			$info['image']['path'] = $this->getPath($path) . '/' . $info['name'];
+			$info['thumb'] = $thumbPath . '/' . $info['name'];
+		}
+
+		
+		// this is where to add any additional data...
+		
+		return $info;
+	}
+	
 }

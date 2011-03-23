@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>js/script.js</string>
+	<string>css/admin.css</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,72 +21,42 @@
 	<integer>265</integer>
 	<key>metaData</key>
 	<dict>
-		<key>application/controllers/upload.php</key>
+		<key>application/config/storage.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>2</integer>
+				<integer>30</integer>
 				<key>line</key>
-				<integer>20</integer>
+				<integer>6</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>application/controllers/xhr.php</key>
+		<key>application/views/layout/frame.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>18</integer>
+				<integer>27</integer>
 				<key>line</key>
 				<integer>21</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>17</integer>
-		</dict>
-		<key>application/models/storage.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>56</integer>
-				<key>line</key>
-				<integer>10</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
 			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>16</integer>
-				<key>line</key>
-				<integer>10</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>56</integer>
-				<key>line</key>
-				<integer>10</integer>
-			</dict>
 		</dict>
 		<key>application/views/stack.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>8</integer>
+				<integer>7</integer>
 				<key>line</key>
-				<integer>3</integer>
+				<integer>18</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -98,58 +68,41 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>18</integer>
+				<integer>17</integer>
 				<key>line</key>
-				<integer>119</integer>
+				<integer>108</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>88</integer>
+			<integer>82</integer>
 		</dict>
 		<key>js/script.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>2</integer>
+				<integer>40</integer>
 				<key>line</key>
-				<integer>474</integer>
+				<integer>2</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>457</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>26</integer>
-				<key>line</key>
-				<integer>474</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>474</integer>
-			</dict>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>application/controllers/upload.php</string>
-		<string>css/admin.css</string>
-		<string>application/models/storage.php</string>
 		<string>js/script.js</string>
-		<string>application/controllers/xhr.php</string>
+		<string>application/views/layout/frame.php</string>
+		<string>css/admin.css</string>
+		<string>application/config/storage.php</string>
 		<string>application/views/stack.php</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{78, 33}, {968, 726}}</string>
+	<string>{{1935, 43}, {968, 726}}</string>
 </dict>
 </plist>

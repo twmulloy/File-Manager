@@ -1,7 +1,7 @@
 function setFrameHeight(height){
 	$('#frame').css({'height':height});
-	$('.partial').css({'height':height - 30});
-	return false;
+	$('.partial').css({'height':height - 30}); //30px is the header height
+	return height;
 }
 
 // clean up and set the path
@@ -34,7 +34,24 @@ function setPath(path){
 function buildStack(data, appendTo){
 	// only files
 	//if(data.type !== 'file'){ return false; }
-	var visual = $('<div/>').addClass('visual');
+	var visual = $('<div/>').addClass('visual'),
+		details = $('<ul/>')
+			.addClass('details')
+			.append(
+				$('<li/>')
+					.append(
+						$('<a/>')
+						.attr({
+							'href':'#', 
+							'title':data.name, 
+							'class':'name'
+						})
+						.html(data.short_name)
+					)
+			)
+			.append(
+				$('<li/>').html(data.formatted_size)
+			);
 	
 	if(typeof data.thumb === 'object'){
 		visual = visual.append(
@@ -49,22 +66,11 @@ function buildStack(data, appendTo){
 		.attr({
 				'data-type':data.type, 
 				'data-name':data.name,
-				'data-hash':data.hash
+				'data-hash':data.hash,
+				'class':data.type
 		})
-		.append(
-			$('<span/>').addClass('icon type '+data.type)
-		)
 		.append(visual)
-		.append(
-			$('<ul/>').attr({'class':'admin controls'})
-				.append($('<li/>').append($('<a/>').attr({'class':'icon delete', 'href':'#'})))
-		)
-		.append(
-			$('<ul/>').addClass('details')
-				.append($('<li/>').html(data.short_name))
-				.append($('<li/>').html(data.formatted_size))
-				.append($('<li/>').html(data.formatted_date))
-		)
+		.append(details)
 		.appendTo(appendTo);
 }
 
@@ -94,15 +100,16 @@ function bindStack(){
 		scroll: false,
 		stack: '.stack',
 		zIndex: 2,
-		helper: function(event){
+		helper: function(){
 			var that = $(this);
 			// build a better helper
 			return $('<li/>').attr({
 				'data-type':that.data('type'),
-				'data-name':that.data('name')
+				'data-name':that.data('name'),
+				'class':that.data('type')+' drag'
 			})
-			.append(that.find('span.icon').clone())
-			.append(that.find('.details').clone());
+			.append(that.find('.visual').clone())
+			.append(that.find('.name').clone());
 		},
 		start: function(event, ui) {
 			// record original pane position to global
@@ -155,18 +162,17 @@ $(function(){
 			crud : null,
 			data : {} 
 		},
-		appPath = window.location.pathname;
+		appPath = window.location.pathname,
+		height = setFrameHeight($(document).height());	// set initial height
 
 	// handle static notifications
 	$('.notifications').notify();
 	
 	
 	/* layout */
-	// set initial height
-	setFrameHeight($(document).height());
 	// bind onresize
 	$(window).resize(function(){
-		setFrameHeight($(this).height());
+		height = setFrameHeight($(this).height());
 	});
 
 	
@@ -232,9 +238,71 @@ $(function(){
 		return false;
 	});
 	
+	// information dialog
+	$( "#item-info" ).dialog({
+		autoOpen: false,
+		position: [50,50],
+		width: 'auto',
+		title: 'Information',
+		open: function(event, ui){
+			var thisParams = params,
+				that = $(this);
+				
+			// clear
+			that.empty();
+			
+			thisParams.data = {
+				'hash':that.data('hash')
+			};
+			// load in information
+			$.ajax({
+				url: appPath + 'partial/info',
+				type: 'post',
+				dataType: 'json',
+				data: thisParams,
+				success: function(resp){
+					if(!resp && typeof resp !== 'object'){ return false; }
+					
+					var visual = '';
+					
+					if(resp.is_image){
+						visual = $('<img/>').attr({
+							'src':resp.image.path
+						})
+					}
+					
+					$('<div/>')
+						.addClass('visual')
+						.append(visual)
+						.appendTo(that);
+					
+					$('<ul/>')
+						.append($('<li/>').html(resp.name))
+						.append($('<li/>').html(resp.formatted_size))
+						.append($('<li/>').html(resp.formatted_date))
+						.appendTo(that);
+					
+				}
+			})
+		},
+		buttons: {	
+			Close: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+	
 	// move forward via folder in stack double click
-	$('.stack', '#c').dblclick(function(){
-		alert('sup');
+	$('li.file', '#c .stack').live('dblclick', function(){
+		// set the dialog information
+		var item = $(this),
+			hash = item.data('hash'),
+			dialogInfo = $( "#item-info" );
+		
+		// close any existing dialog
+		dialogInfo.dialog('close');
+			
+		dialogInfo.data('hash', hash).dialog('open');
 		return false;
 	});
 	
@@ -437,6 +505,7 @@ $(function(){
 				type = item.data('type'),
 				name = item.data('name'),
 				hash = item.data('hash'),
+				short_name = item.find('.name').html(),
 				list = $(this).find('.queue');
 			
 			// check if hash exists in list, deny if it does
@@ -450,22 +519,20 @@ $(function(){
 			}
 				
 			// build new item
-			$('<li/>').attr({
-					'data-hash':hash,
-					'data-type':type
-				}).append(
-					$('<span/>').attr({'class':'icon '+type})
-				)
-				.append(
-					$('<ul/>').attr({'class':'controls'}).append(
-						$('<li/>').append(
-							$('<a/>').attr({'class':'icon delete', 'href':'#'})
-						)
+			$('<li/>')
+					.attr({
+						'data-hash':hash,
+						'data-type':type
+					})
+					.append(
+						$('<span/>').attr({'class':'icon '+type})
 					)
-				)
-				.append(item.find('.details'))
-				.appendTo(list)
-				.effect('highlight');
+					.append(
+						$('<a/>').attr({'class':'icon delete', 'href':'#'})
+					)
+					.append(short_name)
+					.appendTo(list)
+					.effect('highlight');
 			
 			// notify
 			$.gritter.add({
@@ -494,7 +561,7 @@ $(function(){
 		title: 'Confirm',
 		width: 512,
 		open: function(event, ui){
-			console.log(ui);
+			//console.log(ui);
 		},
 		buttons: {
 			
@@ -573,10 +640,10 @@ $(function(){
 					*/
 					
 					return $('<li/>')
-						.html('<span class="icon file-error"></span>' + file.data.name + file.explain);
+						.html('<span class="icon file-error"></span>' + file.data.short_name + file.explain);
 				}
 				return $('<li/>')
-					.html('<span class="icon file"></span>'+file.data.file_name);
+					.html('<span class="icon file"></span>'+file.data.short_name);
 			},
 			onComplete: function (event, files, index, xhr, handler) {
 				handler.onCompleteAll(files);
