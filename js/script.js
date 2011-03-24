@@ -52,6 +52,20 @@ function buildStack(data, appendTo){
 			.append(
 				$('<li/>').html(data.formatted_size)
 			);
+			
+	// if admin logic here..
+	$('<li/>')
+		.attr({
+			'class':'admin controls'
+		})
+		.append(
+			$('<a/>')
+				.attr({
+					'class':'icon delete',
+					'href':'#'
+				})
+		)
+		.appendTo(details);
 	
 	if(typeof data.thumb === 'object'){
 		visual = visual.append(
