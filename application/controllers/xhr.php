@@ -32,24 +32,6 @@ class Xhr extends CI_Controller {
 		    ->set_output(json_encode($json));
 	}
 	
-	function read(){
-		
-		$json = array();
-		
-		return $this->output
-		    ->set_content_type('application/json')
-		    ->set_output(json_encode($json));
-	}
-	
-	function update(){
-		
-		$json = array();
-		
-		return $this->output
-		    ->set_content_type('application/json')
-		    ->set_output(json_encode($json));
-	}
-	
 	function delete(){
 		
 		$json = array();

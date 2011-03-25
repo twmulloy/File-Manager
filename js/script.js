@@ -1,6 +1,11 @@
 function setFrameHeight(height){
+	var headerHeight = $('#header', '#frame').height();
+	
 	$('#frame').css({'height':height});
-	$('.partial').css({'height':height - 30}); //30px is the header height
+	// pushed down by header
+	$('.partial', '#frame').css({'height':height-headerHeight});
+	// pushed down by header, controls (the extra 30)
+	$('.pane > div', '#frame').css({'height':height-headerHeight-30});
 	return height;
 }
 
@@ -49,12 +54,28 @@ function buildStack(data, appendTo){
 						.html(data.short_name)
 					)
 			)
-			.append(
+			
+	switch(data.type){
+		case 'folder':
+			var verbiage = ' Items';
+			if(data.count == 1){ verbiage = ' Item'}
+			
+			details.append(
+				$('<li/>').html(data.count + verbiage)
+			);
+			break;
+			
+		case 'file':
+		default:
+			details.append(
 				$('<li/>').html(data.formatted_size)
 			);
+			break;
+	}
+
 			
 	// if admin logic here..
-	$('<li/>')
+	var controls = $('<span/>')
 		.attr({
 			'class':'admin controls'
 		})
@@ -64,8 +85,7 @@ function buildStack(data, appendTo){
 					'class':'icon delete',
 					'href':'#'
 				})
-		)
-		.appendTo(details);
+		);
 	
 	if(typeof data.thumb === 'object'){
 		visual = visual.append(
@@ -77,6 +97,7 @@ function buildStack(data, appendTo){
 
 	
 	return $('<li>')
+		.append(controls)
 		.attr({
 				'data-type':data.type, 
 				'data-name':data.name,
@@ -101,10 +122,13 @@ function buildTree(data, appendTo){
 			})
 			.addClass(data.type)
 			.html(data.short_name)
+			.append(
+				$('<span/>').addClass('count').html(data.count)
+			)
 			.prepend(
 				$('<span/>').addClass('icon '+data.type)
-		)
-	).appendTo(appendTo);
+			)
+		).appendTo(appendTo);
 }
 
 function bindStack(){
@@ -126,6 +150,7 @@ function bindStack(){
 			.append(that.find('.name').clone());
 		},
 		start: function(event, ui) {
+			/*
 			// record original pane position to global
 			globals.originalIndex = $('.control .button.active', '#e').index();
 			globals.paneWidth = $('.pane > div', '#e').width();
@@ -136,18 +161,21 @@ function bindStack(){
 
 			// change to pane-download
 			$('.pane', '#e').animate({
-				'marginLeft': margin
+				'left': margin
 			}, 500, function(){
 				// do something when done
 			});
+			*/
 
 		},
 		stop: function(event, ui) {
+			/*
 			var margin = -globals.originalIndex * globals.paneWidth;
 			// scroll back to original pane
 			$('.pane', '#e').animate({
-				'marginLeft': margin
+				'left': margin
 			}, 500);
+			*/
 		}
 	})
 	.disableSelection();
@@ -177,7 +205,8 @@ $(function(){
 			data : {} 
 		},
 		appPath = window.location.pathname,
-		height = setFrameHeight($(document).height());	// set initial height
+		height = setFrameHeight($(document).height()),	// set initial height
+		gritterTimeout = 500;
 
 	// handle static notifications
 	$('.notifications').notify();
@@ -193,6 +222,7 @@ $(function(){
 
 	/* directory tree, left pane */
 	var treePosition = 0;
+	
 	// move backward through tree
 	$('.control .button.back', '#w').click(function(){
 		var parent = $(this).closest('.partial'),
@@ -227,20 +257,25 @@ $(function(){
 				$('.loading', '#c').show();
 			},
 			success: function(resp){
+
 				// don't do anything with false
 				if(!resp) return false;
 
 				// empty stack list in main window, otherwise create it
 				var stack = $('.stack', '#c');
-				if(stack.length){ stack.empty(); }
-				else{ stack = $('<ul/>').addClass('stack').appendTo('#c'); }
-
+				if(stack.length){ 
+					stack.empty(); 
+					tree.empty(); 
+				}else{ 
+					stack = $('<ul/>').addClass('stack').appendTo('#c'); 
+				}
 				$.each(resp, function(){
+					buildTree(this, parent.children('.list').eq(treePosition));
 					buildStack(this, stack);
 				});
 				
 				// bind new stack
-				bindStack();			
+				bindStack();
 			},
 			complete: function(){
 				// end loading
@@ -306,7 +341,7 @@ $(function(){
 		}
 	});
 	
-	// move forward via folder in stack double click
+	// open details
 	$('li.file', '#c .stack').live('dblclick', function(){
 		// set the dialog information
 		var item = $(this),
@@ -408,7 +443,8 @@ $(function(){
 					return $.gritter.add({
 						title: 'Alert',
 						text: 'Folder name is required',
-						image: appPath + 'css/img/icons/folder-exclamation.png'
+						image: appPath + 'css/img/icons/folder-exclamation.png',
+						time: gritterTimeout
 					});
 				}
 				
@@ -430,7 +466,8 @@ $(function(){
 							return $.gritter.add({
 								title: 'Error',
 								text: 'Folder could not be created',
-								image: appPath + 'css/img/icons/folder-exclamation.png'
+								image: appPath + 'css/img/icons/folder-exclamation.png',
+								time: gritterTimeout
 							});
 						}
 						
@@ -458,7 +495,8 @@ $(function(){
 							$.gritter.add({
 								title: 'Success',
 								text: 'Folder <strong>'+resp.data.name+'</strong> has been created',
-								image: appPath + 'css/img/icons/folder-plus.png'
+								image: appPath + 'css/img/icons/folder-plus.png',
+								time: gritterTimeout
 							});
 							
 							
@@ -468,7 +506,8 @@ $(function(){
 						return $.gritter.add({
 							title: 'Error',
 							text: 'Folder already exists',
-							image: appPath + 'css/img/icons/folder-exclamation.png'
+							image: appPath + 'css/img/icons/folder-exclamation.png',
+							time: gritterTimeout
 						});
 					},
 					complete: function(){
@@ -528,7 +567,8 @@ $(function(){
 				return $.gritter.add({
 					title: 'Alert',
 					text: type + ' <strong>' + name + '</strong> is already in download queue',
-					image: appPath + 'css/img/icons/exclamation.png'
+					image: appPath + 'css/img/icons/exclamation.png',
+					time: gritterTimeout
 				});
 			}
 				
@@ -552,7 +592,8 @@ $(function(){
 			$.gritter.add({
 				title: 'Success',
 				text: 'Added ' + type + ' <strong>' + name + '</strong> to download queue',
-				image: appPath + 'css/img/icons/plus-circle.png'
+				image: appPath + 'css/img/icons/plus-circle.png',
+				time: gritterTimeout
 			});
 		}
 	});
@@ -575,7 +616,7 @@ $(function(){
 		title: 'Confirm',
 		width: 512,
 		open: function(event, ui){
-			//console.log(ui);
+			//console.log($(ui));
 		},
 		buttons: {
 			
@@ -649,7 +690,8 @@ $(function(){
 					$.gritter.add({
 						title: 'Error',
 						text: '<strong>'+file.data.name+'</strong> ' + file.explain,
-						image: appPath + 'css/img/icons/exclamation.png'
+						image: appPath + 'css/img/icons/exclamation.png',
+						time: gritterTimeout
 					});
 					*/
 					
@@ -692,7 +734,8 @@ $(function(){
 							$.gritter.add({
 								title: 'Done',
 								text: 'Upload finished',
-								image: ''
+								image: '',
+								time: gritterTimeout
 							});
 							
 						}, 'json');
@@ -723,7 +766,8 @@ $(function(){
 		$('ul.queue > li', '#pane-upload').remove();
 		$.gritter.add({
 			title: 'Success',
-			text: 'Upload history cleared'
+			text: 'Upload history cleared',
+			time: gritterTimeout
 		});
 		return false;
 	});
@@ -739,7 +783,8 @@ $(function(){
 			return $.gritter.add({
 				title: 'Alert',
 				text: 'Download queue is empty',
-				image: appPath + 'css/img/icons/exclamation.png'
+				image: appPath + 'css/img/icons/exclamation.png',
+				time: gritterTimeout
 			});
 		}
 

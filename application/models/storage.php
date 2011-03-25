@@ -42,6 +42,7 @@ class Storage extends CI_Model
 				// determine whether folder or file
 				if(is_dir($content['server_path'])){
 					$contents[$name]['type'] = 'folder';
+					$contents[$name]['count'] = count(get_dir_file_info($content['server_path'], true));
 				}else{
 					$contents[$name]['type'] = 'file';
 					
