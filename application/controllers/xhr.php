@@ -34,7 +34,14 @@ class Xhr extends CI_Controller {
 	
 	function delete(){
 		
+		
+		
 		$json = array();
+		
+		if(!isset($this->data['hash'])) return false;
+		
+		// send to delete
+		$json = $this->storage->deletePath($this->data['hash']);
 		
 		return $this->output
 		    ->set_content_type('application/json')

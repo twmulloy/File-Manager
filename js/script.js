@@ -614,37 +614,80 @@ $(function(){
 		draggable: false,
 		modal: true,
 		title: 'Confirm',
-		width: 512,
+		minWidth: 384,
+		maxWidth: 512,
 		open: function(event, ui){
-			//console.log($(ui));
+			$(this).empty();
+			
+			if($(this).data('type') === 'folder'){
+				$(this).append($('<p/>').html('Delete folder <strong>' + $(this).data('name')+'</strong> and all contents?'));
+			}else{
+				$(this).append($('<p/>').html('Delete file <strong>' + $(this).data('name')+'</strong>?'));
+			}
+			
 		},
 		buttons: {
 			
-			Cancel: function() {
-				$( this ).dialog( "close" );
+			'No': function() {
+				$(this).dialog( "close" );
 			},
 			
-			'Delete': function() {
-				/*
+			'Yes': function(){
+				var hash = $(this).data('hash'),
+					that = $(this);
+				if(!hash){ $( this ).dialog( "close" ); }
+				
+				var thisParams = params;
+
+				thisParams.data = {
+					'hash':hash
+				};
+
 				$.ajax({
-					type: 'delete',
+					type: 'post',
 					url: appPath + 'xhr/delete',
-					data: params,
+					data: thisParams,
 					dataType: 'json',
 					success: function(resp){
-						console.log(resp);
+						if(!resp){ return false; }
+						
+						// failure
+						if(resp.status !== 'success'){
+							that.dialog('close');
+							$.gritter.add({
+								title: 'Error',
+								text: 'Could not delete',
+								image: appPath + 'css/img/icons/exclamation.png',
+								time: gritterTimeout
+							});
+						}
+						
+						//success...
+						
 					}
 
-
 				});
-				*/
 			
 			}
 		}
 	});
 	
 	$('a.delete', '#c .stack').live('click', function(){
-		$( "#delete-stack" ).dialog('open');
+		// set the dialog information
+		var item = $(this).closest('li'),
+			hash = item.data('hash'),
+			name = item.data('name'),
+			type = item.data('type'),
+			dialogDel = $( "#delete-stack" );
+		
+		// close any existing dialog
+		dialogDel.dialog('close');
+			
+		dialogDel.data({
+				'hash':hash,
+				'name': name,
+				'type':type
+			}).dialog('open');
 		return false;
 	});
 

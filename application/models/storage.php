@@ -160,7 +160,6 @@ class Storage extends CI_Model
 		$info['formatted_size'] = $this->cleanFilesize($info['size']);
 		
 		// check if has thumb
-
 		$this->load->library('image_lib');
 		$thumbPath = $this->config->item('thumb_directory');
 		
@@ -177,6 +176,33 @@ class Storage extends CI_Model
 		// this is where to add any additional data...
 		
 		return $info;
+	}
+	
+	// delete file or all contents of a path
+	function deletePath($hash){
+		// reverse hash
+		$path = $this->reverseHash($hash);
+		$status = 0;
+		// check if it exists
+		if(file_exists($path)){
+			if(is_dir($path)){
+				// delete files of folder (and directories contained)
+				$status = delete_files($path, true);
+				// delete the actual folder
+				if($status) rmdir($path);
+			}else{
+				// delete a file
+				$status = unlink($path);
+			}
+		}
+		
+		$response = array();
+		
+		if($status) $response['status'] = 'success';
+		else $response['status'] = 'fail';
+		
+		return $response;
+
 	}
 	
 }
