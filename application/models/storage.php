@@ -66,18 +66,22 @@ class Storage extends CI_Model
 	function createDirectory($data, $path){
 		
 		$path = $this->getPath($path);
+		$status = 0;
+		$response = array();
 		
-		// build response array, needs to make required data for tree
-		$response = array(
-			'data'=> array(
-				'name'	=> $data['name'],
-				'type'	=> 'folder',
-				'relative_path'	=> $path
-			)
-		);
-		
-		// create the physical directory
-		$status = mkdir($path.'/'.$data['name'], 0755);
+		if(!file_exists($path)){
+			// build response array, needs to make required data for tree
+			$response = array(
+				'data'=> array(
+					'name'	=> $data['name'],
+					'type'	=> 'folder',
+					'relative_path'	=> $path
+				)
+			);
+
+			// create the physical directory
+			$status = mkdir($path.'/'.$data['name'], 0755);
+		}
 		
 		if($status) $response['status'] = 'success';
 		else $response['status'] = 'fail';
@@ -183,8 +187,12 @@ class Storage extends CI_Model
 		// reverse hash
 		$path = $this->reverseHash($hash);
 		$status = 0;
+		$response = array();
+		
 		// check if it exists
 		if(file_exists($path)){
+			$response['data'] = get_file_info($path);
+			
 			if(is_dir($path)){
 				// delete files of folder (and directories contained)
 				$status = delete_files($path, true);
@@ -195,8 +203,6 @@ class Storage extends CI_Model
 				$status = unlink($path);
 			}
 		}
-		
-		$response = array();
 		
 		if($status) $response['status'] = 'success';
 		else $response['status'] = 'fail';

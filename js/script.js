@@ -206,7 +206,7 @@ $(function(){
 		},
 		appPath = window.location.pathname,
 		height = setFrameHeight($(document).height()),	// set initial height
-		gritterTimeout = 500;
+		gritterTimeout = 1000;
 
 	// handle static notifications
 	$('.notifications').notify();
@@ -443,7 +443,7 @@ $(function(){
 					return $.gritter.add({
 						title: 'Alert',
 						text: 'Folder name is required',
-						image: appPath + 'css/img/icons/folder-exclamation.png',
+						image: appPath + 'css/img/icons/48x48/attention.png',
 						time: gritterTimeout
 					});
 				}
@@ -466,7 +466,7 @@ $(function(){
 							return $.gritter.add({
 								title: 'Error',
 								text: 'Folder could not be created',
-								image: appPath + 'css/img/icons/folder-exclamation.png',
+								image: appPath + 'css/img/icons/48x48/cancel.png',
 								time: gritterTimeout
 							});
 						}
@@ -495,7 +495,7 @@ $(function(){
 							$.gritter.add({
 								title: 'Success',
 								text: 'Folder <strong>'+resp.data.name+'</strong> has been created',
-								image: appPath + 'css/img/icons/folder-plus.png',
+								image: appPath + 'css/img/icons/48x48/folder_plus.png',
 								time: gritterTimeout
 							});
 							
@@ -506,7 +506,7 @@ $(function(){
 						return $.gritter.add({
 							title: 'Error',
 							text: 'Folder already exists',
-							image: appPath + 'css/img/icons/folder-exclamation.png',
+							image: appPath + 'css/img/icons/48x48/attention.png',
 							time: gritterTimeout
 						});
 					},
@@ -567,7 +567,7 @@ $(function(){
 				return $.gritter.add({
 					title: 'Alert',
 					text: type + ' <strong>' + name + '</strong> is already in download queue',
-					image: appPath + 'css/img/icons/exclamation.png',
+					image: appPath + 'css/img/icons/48x48/attention.png',
 					time: gritterTimeout
 				});
 			}
@@ -592,7 +592,7 @@ $(function(){
 			$.gritter.add({
 				title: 'Success',
 				text: 'Added ' + type + ' <strong>' + name + '</strong> to download queue',
-				image: appPath + 'css/img/icons/plus-circle.png',
+				image: appPath + 'css/img/icons/48x48/download.png',
 				time: gritterTimeout
 			});
 		}
@@ -634,6 +634,7 @@ $(function(){
 			
 			'Yes': function(){
 				var hash = $(this).data('hash'),
+					item = $(this).data('item'),
 					that = $(this);
 				if(!hash){ $( this ).dialog( "close" ); }
 				
@@ -651,18 +652,39 @@ $(function(){
 					success: function(resp){
 						if(!resp){ return false; }
 						
+						that.dialog('close');
+						
 						// failure
 						if(resp.status !== 'success'){
-							that.dialog('close');
 							$.gritter.add({
 								title: 'Error',
 								text: 'Could not delete',
-								image: appPath + 'css/img/icons/exclamation.png',
+								image: appPath + 'css/img/icons/48x48/cancel.png',
 								time: gritterTimeout
 							});
 						}
 						
-						//success...
+						// success, perform cleanup
+						item.fadeOut(function(){
+							$(this).remove();
+							// rebuild tree
+							$.post(appPath + 'partial/tree', params, function(json){
+								var tree = $('.list:eq('+treePosition+')', '#w');
+								tree.empty();
+
+								$.each(json, function(){
+									buildTree(this, tree);
+								});
+							}, 'json');
+
+							$.gritter.add({
+								title: 'Success',
+								text: '</strong>'+resp.data.name+'</strong> was deleted',
+								image: appPath + 'css/img/icons',
+								time: gritterTimeout
+							});
+
+						});
 						
 					}
 
@@ -686,7 +708,8 @@ $(function(){
 		dialogDel.data({
 				'hash':hash,
 				'name': name,
-				'type':type
+				'type':type,
+				'item':item
 			}).dialog('open');
 		return false;
 	});
@@ -729,15 +752,6 @@ $(function(){
 			},
 			buildDownloadRow: function(file){
 				if(file.status !== 'success'){
-					/*
-					$.gritter.add({
-						title: 'Error',
-						text: '<strong>'+file.data.name+'</strong> ' + file.explain,
-						image: appPath + 'css/img/icons/exclamation.png',
-						time: gritterTimeout
-					});
-					*/
-					
 					return $('<li/>')
 						.html('<span class="icon file-error"></span>' + file.data.short_name + file.explain);
 				}
@@ -777,7 +791,7 @@ $(function(){
 							$.gritter.add({
 								title: 'Done',
 								text: 'Upload finished',
-								image: '',
+								image: appPath + 'css/img/icons/48x48/save.png',
 								time: gritterTimeout
 							});
 							
