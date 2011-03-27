@@ -9,6 +9,7 @@ class Storage extends CI_Model
 	{
 		parent::__construct();
 		$this->root = $this->config->item('storage_directory');
+		if(!$this->root) die('no storage directory set');
 	}
 	
 	// builds the real path
@@ -30,6 +31,7 @@ class Storage extends CI_Model
 		
 		$this->load->library('image_lib');
 		$thumbPath = $this->config->item('thumb_directory');
+		if(!$thumbPath) die('no thumb path set');
 		
 		if(count($contents)){
 			foreach($contents as $name => $content){
@@ -66,21 +68,20 @@ class Storage extends CI_Model
 	function createDirectory($data, $path){
 		
 		$path = $this->getPath($path);
+		$file = $path.'/'.$data['name'];
 		$status = 0;
 		$response = array();
 		
-		if(!file_exists($path)){
+		if(!file_exists($file)){
 			// build response array, needs to make required data for tree
-			$response = array(
-				'data'=> array(
+			$response['data'] = array(
 					'name'	=> $data['name'],
 					'type'	=> 'folder',
 					'relative_path'	=> $path
-				)
 			);
 
 			// create the physical directory
-			$status = mkdir($path.'/'.$data['name'], 0755);
+			$status = mkdir($file, 0755);
 		}
 		
 		if($status) $response['status'] = 'success';
@@ -210,5 +211,16 @@ class Storage extends CI_Model
 		return $response;
 
 	}
+	
+	// setter upper for file files
+	function search($query){
+		$this->load->helper('directory');
+		$map = directory_map('./'.$this->root.'/');
+		
+		echo '<pre>';
+		print_r($map);
+		die;
+	}
+	
 	
 }

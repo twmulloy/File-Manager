@@ -292,7 +292,8 @@ $(function(){
 		autoOpen: false,
 		position: [50,50],
 		width: 'auto',
-		title: 'Information',
+		height: 'auto',
+		title: 'Information &mdash; [esc] to close',
 		open: function(event, ui){
 			var thisParams = params,
 				that = $(this);
@@ -680,7 +681,7 @@ $(function(){
 							$.gritter.add({
 								title: 'Success',
 								text: '</strong>'+resp.data.name+'</strong> was deleted',
-								image: appPath + 'css/img/icons',
+								image: appPath + 'css/img/icons/48x48/delete.png',
 								time: gritterTimeout
 							});
 
@@ -811,7 +812,9 @@ $(function(){
 		
 		$.gritter.add({
 			title: 'Success',
-			text: 'Download queue cleared'
+			text: 'Download queue cleared',
+			image: appPath + 'css/img/icons/48x48/fire.png',
+			time: gritterTimeout
 		});
 		
 		return false;
@@ -824,6 +827,7 @@ $(function(){
 		$.gritter.add({
 			title: 'Success',
 			text: 'Upload history cleared',
+			image: appPath + 'css/img/icons/48x48/fire.png',
 			time: gritterTimeout
 		});
 		return false;
@@ -840,7 +844,7 @@ $(function(){
 			return $.gritter.add({
 				title: 'Alert',
 				text: 'Download queue is empty',
-				image: appPath + 'css/img/icons/exclamation.png',
+				image: appPath + 'css/img/icons/48x48/attention.png',
 				time: gritterTimeout
 			});
 		}
@@ -874,4 +878,24 @@ $(function(){
 		$(form).submit();
 		return false;
 	});
+	
+	// placeholder fallback
+	if(!Modernizr.input.placeholder){
+		var input = $('#search-input'),
+			placeholderText = input.attr('placeholder');
+			
+			input.val(placeholderText).addClass('placeholder');
+			
+			input.focus(function(){
+				if($(this).val() == placeholderText){
+					$(this).val('').removeClass('placeholder');
+				}
+			});
+
+			input.blur(function(){
+				if($(this).val() == placeholderText || !$(this).val() ){
+					$(this).addClass('placeholder').val(placeholderText);
+				}
+			});
+	}
 });
