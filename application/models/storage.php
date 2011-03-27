@@ -213,14 +213,48 @@ class Storage extends CI_Model
 	}
 	
 	// setter upper for file files
-	function search($query){
-		$this->load->helper('directory');
-		$map = directory_map('./'.$this->root.'/');
+	function search($search){
+		// search files
+		$files = get_dir_file_info($this->root, false);
 		
-		echo '<pre>';
-		print_r($map);
-		die;
+		$pattern = '/'.$search.'/i';
+		
+		// result array
+		$array = array();
+		
+		if(count($files)){
+			
+			// thumb stuff
+			$this->load->library('image_lib');
+			$thumbPath = $this->config->item('thumb_directory');
+			if(!$thumbPath) die('no thumb path set');
+			
+			foreach($files as $file => $info){
+
+				// match found
+				if(preg_match($pattern, $file)){
+					
+					$info['short_name'] = ellipsize($file, 18, .5);
+					$info['formatted_date'] = date('Y-m-d h:m:sA', $info['date']);
+					$info['formatted_size'] = $this->cleanFilesize($info['size']);
+					$info['type'] = 'file';
+					// append unique hash
+					$info['hash'] = $this->generateHash($info['server_path']);
+
+					// thumb details
+					$thumb = $this->image_lib->get_image_properties($info['server_path'], true);
+					if($thumb['image_type']){
+						$info['thumb'] = $thumb;
+						$info['thumb']['path'] = $thumbPath . '/' . $file;
+					}
+					
+					$array[] = $info;	
+				} 
+			}
+		}
+		return $array;
 	}
 	
+
 	
 }
