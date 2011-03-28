@@ -1,11 +1,7 @@
 function setFrameHeight(height){
-	var headerHeight = $('#header', '#frame').height();
-	
 	$('#frame').css({'height':height});
-	// pushed down by header
-	$('.partial', '#frame').css({'height':height-headerHeight});
-	// pushed down by header, controls (the extra 30)
-	$('.pane > div', '#frame').css({'height':height-headerHeight-30});
+	$('.partial', '#frame').css({'height':height});
+	$('.pane > div', '#frame').css({'height':height-30});
 	return height;
 }
 
@@ -31,6 +27,9 @@ function setPath(path){
 	if(clean){
 		clean = clean.replace(/\//gi, '<span class="slash">/</span>');
 	}
+	
+	// clear search input field
+	$('#search-input').val('');
 	
 	return $('#path', '#frame').html(clean);
 }
@@ -210,7 +209,6 @@ $(function(){
 
 	// handle static notifications
 	$('.notifications').notify();
-	
 	
 	/* layout */
 	// bind onresize
@@ -490,6 +488,7 @@ $(function(){
 								});
 								
 								bindStack();
+								setPath(params.path);
 								
 							}, 'json');
 							
@@ -883,7 +882,18 @@ $(function(){
 	$('#searchbox').submit(function(){
 		var search = $('#search-input').val(),
 			searchResults = 0,
-			thisParams = params;
+			thisParams = params,
+			stack = $('.stack', '#c');
+			
+		if(!search){
+			$.gritter.add({
+				title: 'Alert',
+				text: 'Please enter a search string',
+				image: appPath + 'css/img/icons/48x48/attention.png',
+				time: gritterTimeout
+			});
+			return false;
+		}
 
 		thisParams.data = {
 			'search':search
@@ -891,7 +901,8 @@ $(function(){
 		
 		// loading
 		$('.loading', '#c').show();
-		
+		stack.empty();
+
 		$.ajax({
 			type: 'post',
 			url: appPath + 'search',
@@ -899,12 +910,8 @@ $(function(){
 			data: thisParams,
 			success: function(json){
 				if(!json){ return false; }
-
-				var stack = $('.stack', '#c');
 				
 				searchResults = json.length;
-					
-				stack.empty();
 				
 				// similar results
 				$.each(json, function(){
@@ -914,12 +921,36 @@ $(function(){
 			},
 			complete: function(){
 				// header
-				var verbiage = 's';
-				if(searchResults === 1){ verbiage = ''; }
-				$('#path', '#frame').html('Found '+searchResults+' result'+verbiage+' for "'+search+'"');
+				var plural = 's',
+					cancel = $('<a/>').attr({'id':'search-reset', 'class':'button pill'}).html('Clear Search').prepend($('<span/>').attr({'class':'icon loop'}));
+				if(searchResults === 1){ plural = ''; }
+				
+				$('#path', '#frame').html('Found '+searchResults+' result'+plural+' for "'+search+'"').append(cancel);
 				$('.loading', '#c').hide();
 			}
 		});
+		
+		return false;
+	});
+	
+	// reset stack to current stack overridden by search
+	$('#search-reset').live('click',function(){
+		// refresh current tree/stack
+		$.post(appPath + 'partial/tree', params, function(json){
+			var stack = $('.stack', '#c');
+				
+			stack.empty();
+			
+			$.each(json, function(){
+				buildStack(this, stack);
+			});
+			
+			bindStack();
+			
+		}, 'json');
+		
+		// reset path header
+		setPath(params.path);
 		
 		return false;
 	});
