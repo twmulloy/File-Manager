@@ -214,7 +214,7 @@ $(function(){
 		},
 		appPath = window.location.pathname,
 		height = setFrameHeight($(document).height()),	// set initial height
-		gritterTimeout = 1000;
+		gritterTimeout = 1500;
 
 	// handle static notifications
 	$('.notifications').notify();
