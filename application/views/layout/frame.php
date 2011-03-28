@@ -17,6 +17,7 @@
 				<span class="loading">Loading...</span>
 				<?=$stack?>
 				<div id="delete-stack"></div>
+				<div id="rename-folder"></div>
 				<div id="item-info"></div>
 			</div><!-- end middle -->
 

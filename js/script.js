@@ -1,7 +1,7 @@
 function setFrameHeight(height){
 	$('#frame').css({'height':height});
 	$('.partial', '#frame').css({'height':height});
-	$('.pane > div', '#frame').css({'height':height-30});
+	$('.pane > div', '#frame').css({'height':height-60});
 	return height;
 }
 
@@ -52,7 +52,21 @@ function buildStack(data, appendTo){
 						})
 						.html(data.short_name)
 					)
-			)
+			);
+			
+	// if admin logic here..
+	var controls = $('<span/>')
+		.attr({
+			'class':'admin controls'
+		})
+		.append(
+			$('<a/>')
+				.attr({
+					'title': 'Delete',
+					'class':'icon delete',
+					'href':'#'
+				})
+		);
 			
 	switch(data.type){
 		case 'folder':
@@ -61,6 +75,16 @@ function buildStack(data, appendTo){
 			
 			details.append(
 				$('<li/>').html(data.count + verbiage)
+			);
+			
+			// folder specific admin
+			controls.append(
+				$('<a/>')
+					.attr({
+						'title': 'Rename folder',
+						'class':'icon rename',
+						'href':'#'
+					})
 			);
 			break;
 			
@@ -71,20 +95,6 @@ function buildStack(data, appendTo){
 			);
 			break;
 	}
-
-			
-	// if admin logic here..
-	var controls = $('<span/>')
-		.attr({
-			'class':'admin controls'
-		})
-		.append(
-			$('<a/>')
-				.attr({
-					'class':'icon delete',
-					'href':'#'
-				})
-		);
 	
 	if(typeof data.thumb === 'object'){
 		visual = visual.append(
@@ -93,7 +103,6 @@ function buildStack(data, appendTo){
 			})
 		);
 	}
-
 	
 	return $('<li>')
 		.append(controls)
@@ -712,6 +721,82 @@ $(function(){
 				'item':item
 			}).dialog('open');
 		return false;
+	});
+	
+	// inline folder rename
+	$('a.rename').live('click', function(){
+		var parent = $(this).closest('li');
+		if(!parent.hasClass('folder')){ return false; }
+		
+		// find folder name, turn to input
+		var li = parent.find('.details .name').closest('li'),
+			original = li.children().remove(),
+			input = 	$('<input/>')
+					.attr({
+						'id':'folder-'+parent.data('name'),
+						'class':'inline-edit',
+						'type':'text'
+					})
+					.val(parent.data('name'));
+		
+		li
+			.append(
+				input
+			);
+			
+		$('#folder-'+parent.data('name')).focus().select();
+		
+		return false;
+	});
+	
+	$('.inline-edit').live('blur', function(){
+		// old name, new name
+		var item = $(this).closest('li[data-name][data-hash]'),
+			hash = item.data('hash'),
+			from = item.data('name'),
+			to = $(this).val();
+			
+		// name didn't change just reset
+		if(from == to){
+			var parent = $(this).closest('li');
+			$(this).remove();
+			parent.empty().append($('<a/>').attr({'href':'#', 'class':'name', 'title':from}).html(from));
+			return false;
+		}
+
+		// pass data and open
+		$('#rename-folder').data({
+				'hash':hash,
+				'from':from,
+				'to':to
+			})
+			.dialog('open');
+		return false;
+	});
+	
+	$('#rename-folder').dialog({
+			autoOpen: false,
+			resizable: false,
+			position: ['center', 50],
+			draggable: false,
+			modal: true,
+			title: 'Confirm',
+			minWidth: 384,
+			maxWidth: 512,
+			open: function(event, ui){
+				$(this).empty();
+				$(this).append($('<p/>').html('Do you want to rename this folder from <strong>' + $(this).data('from')+'</strong> to <strong>'+$(this).data('to')+'</strong>?'));
+			},
+			buttons: {
+
+				'No': function() {
+					$(this).dialog( "close" );
+				},
+
+				'Yes': function(){
+
+				}
+			}
 	});
 
 	// css3 submit buttons
