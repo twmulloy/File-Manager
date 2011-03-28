@@ -255,6 +255,47 @@ class Storage extends CI_Model
 		return $array;
 	}
 	
+	// rename only folders
+	function rename($hash, $to){
+		// get existing folder name
+		$oldPath = $this->reverseHash($hash);
+		
+		$status = 0;
+		$response = array();
+		
+		// verify this exists
+		if(file_exists($oldPath)){
+			// construct path for renamed file
+			$newPath = explode('/', $oldPath);
+			// remove last segment (file name?)
+			array_pop($newPath);
+			// combine back into new path
+			$newPath = implode('/', $newPath);
+			// verify parent path exists
+			if(file_exists($newPath)){
+				// append the new name
+				$newPath = $newPath.'/'. $to;
+				// make sure new path doesn't exist
+				if(!file_exists($newPath)){
+					// finally rename it
+					$status = rename($oldPath, $newPath);
+					// get new data and return it
+					if($status){
+						$response['data'] = get_file_info($newPath);
+						// append additional data
+						$response['data']['short_name'] = ellipsize($response['data']['name'], 18, .5);
+						$response['data']['formatted_date'] = date('Y-m-d h:m:sA', $response['data']['date']);
+						$response['data']['formatted_size'] = $this->cleanFilesize($response['data']['size']);
+					}
+				}
+			}
+		}
+		
+		if($status) $response['status'] = 'success';
+		else $response['status'] = 'fail';
+		
+		return $response;
+	}
 
 	
 }

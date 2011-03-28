@@ -756,6 +756,9 @@ $(function(){
 			from = item.data('name'),
 			to = $(this).val();
 			
+		// close any open dialogs
+		$('#rename-folder').dialog('close');
+			
 		// name didn't change just reset
 		if(from == to){
 			var parent = $(this).closest('li');
@@ -768,7 +771,8 @@ $(function(){
 		$('#rename-folder').data({
 				'hash':hash,
 				'from':from,
-				'to':to
+				'to':to,
+				'item':item
 			})
 			.dialog('open');
 		return false;
@@ -789,12 +793,79 @@ $(function(){
 			},
 			buttons: {
 
-				'No': function() {
+				'No': function(){
+					// undo changes
+					var item = $(this).data('item'),
+						li = 	item.find('.details input[id^="folder-"]').closest('li');
+						li.empty().append($('<a/>').attr({'href':'#', 'class':'name', 'title':$(this).data('from')}).html($(this).data('from')));
+						
 					$(this).dialog( "close" );
 				},
 
 				'Yes': function(){
+					var hash = $(this).data('hash'),
+						item = $(this).data('item'),
+						to = $(this).data('to'),
+						from = $(this).data('from'),
+						that = $(this),
+						li = 	item.find('.details input[id^="folder-"]').closest('li');
+					if(!hash || !to){ $( this ).dialog( "close" ); }
 
+					var thisParams = params;
+
+					thisParams.data = {
+						'hash':hash,
+						'to':to
+					};
+					
+					$.ajax({
+						type: 'post',
+						url: appPath + 'xhr/update',
+						data: thisParams,
+						dataType: 'json',
+						success: function(resp){
+							if(!resp){ return false; }
+
+							that.dialog('close');
+
+							// failure
+							if(resp.status !== 'success'){
+								$.gritter.add({
+									title: 'Error',
+									text: 'Could not rename folder',
+									image: appPath + 'css/img/icons/48x48/cancel.png',
+									time: gritterTimeout
+								});
+							}
+
+							// rebuild tree/stack
+							$.post(appPath + 'partial/tree', params, function(json){
+								var tree = $('.list:eq('+treePosition+')', '#w'),
+									stack = $('.stack', '#c');
+									
+								tree.empty();
+								stack.empty();
+
+								$.each(json, function(){
+									buildTree(this, tree);
+									buildStack(this, stack);
+								});
+								
+								bindStack();
+								
+							}, 'json');
+
+							$.gritter.add({
+								title: 'Success',
+								text: '</strong>'+from+'</strong> was renamed to <strong>'+resp.data.name+'</strong>',
+								image: appPath + 'css/img/icons/48x48/pencil.png',
+								time: gritterTimeout
+							});
+							
+							
+						}
+
+					});
 				}
 			}
 	});

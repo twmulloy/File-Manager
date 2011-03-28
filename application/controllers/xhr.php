@@ -33,9 +33,7 @@ class Xhr extends CI_Controller {
 	}
 	
 	function delete(){
-		
-		
-		
+
 		$json = array();
 		
 		if(!isset($this->data['hash'])) return false;
@@ -46,6 +44,19 @@ class Xhr extends CI_Controller {
 		return $this->output
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode($json));
+	}
+	
+	function update(){
+		$json = array();
+		
+		if(!isset($this->data['hash']) || !isset($this->data['to'])) return false;
+		
+		// send to rename
+		$json = $this->storage->rename($this->data['hash'], $this->data['to']);
+		
+		return $this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($json));		
 	}
 
 	
