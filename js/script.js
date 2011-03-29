@@ -1,7 +1,7 @@
 function setFrameHeight(height){
 	$('#frame').css({'height':height});
 	$('.partial', '#frame').css({'height':height});
-	$('.pane > div', '#frame').css({'height':height-60});
+	$('.pane > div', '#frame').css({'height':height-30});
 	return height;
 }
 

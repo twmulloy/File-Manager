@@ -1,21 +1,21 @@
 /* css3 buttons */
-.button { display: inline-block; padding: 7px 9px; font-size: 12px; line-height:1; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC url('img/css3buttons_backgrounds.png') 0 0 no-repeat; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; -webkit-background-clip: padding-box; border-radius: 2px; outline: none; position: relative; zoom: 1; *display: inline; }
-.button.primary { font-weight: bold }
-.button:hover { color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5; }
+.button { 
+	font-weight: bold; 
+	display: inline-block; 
+	padding: 7px 9px; 
+	font-size: 12px; 
+	line-height:1; 
+	color: #999 !important; 
+	text-shadow: -1px -1px 0 #111; 
+	white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; outline: none; position: relative; zoom: 1; *display: inline; }
+.button:hover { color: #fff !important; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-color: #2D7DC5; }
 .button:active,
 .button.active { background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none; }
 .button:active { top: 1px }
 .button.negative:hover { color: #FFFFFF; background-position: 0 -121px; background-color: #D84743; border-color: #911D1B; }
 .button.negative:active,
-.button.negative.active { background-position: 0 -161px; background-color: #A5211E; border-color: #911D1B; }
-.button.pill { -webkit-border-radius: 19px; -moz-border-radius: 19px; border-radius: 19px; padding: 6px 12px; }
-.button.left { -webkit-border-bottom-right-radius: 0px; -webkit-border-top-right-radius: 0px; -moz-border-radius-bottomright: 0px; -moz-border-radius-topright: 0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px; margin-right: 0px; }
-.button.middle { margin-right: 0px; margin-left: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px; border-left: none; }
-.button.right { -webkit-border-bottom-left-radius: 0px; -webkit-border-top-left-radius: 0px; -moz-border-radius-bottomleft: 0px; -moz-border-radius-topleft: 0px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; margin-left: 0px; border-left: none;}
-.button.left:active,
-.button.middle:active,
-.button.right:active { top: 0px }
-.button.big { font-size: 16px; padding: 7px 16px; }
+.button.negative.active { background-color: #A5211E; }
+
 .button span.icon { display: inline-block; width: 14px; height: 12px; margin: auto 7px auto auto; position: relative; top: 1px; background-image: url('img/css3buttons_icons.png'); background-repeat: no-repeat; }
 .big.button span.icon { top: 0px }
 .button span.icon.book { background-position: 0 0 }
@@ -94,6 +94,27 @@ body{
 	width: 100%;
 }
 
+/* control */
+.control{
+	text-align: center;
+	height: 30px;
+	width: 200px;
+	background: #444546;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444546', endColorstr='#1E1A1B'); /* for IE */
+	background: -moz-linear-gradient(top, #444546, #1E1A1B);
+	background: -webkit-gradient(linear, left top, left bottom, from(#444546), to(#1E1A1B));
+	background: linear-gradient(top, #444546, #1E1A1B);
+	z-index:10;
+}
+
+#e .control{
+	width: 250px;
+}
+
+#w .loading,
+#e .loading{
+	margin-top: 30px;
+}
 
 
 /* layout */
@@ -103,6 +124,7 @@ body{
 	background: url('img/bg.light.png');
 	overflow-x: hidden;
 	overflow-y: auto;
+	height: 100%;
 	top: 0;
 }
 #c{
@@ -113,7 +135,7 @@ body{
 	background: url('img/bg.png');
 	box-shadow: inset 0 0 3px #000;
 	-moz-box-shadow: inset 0 0 3px #000;
-	min-width: 600px;
+	min-width: 615px;
 }
 #e{
 	position: absolute;
@@ -122,6 +144,7 @@ body{
 	width: 250px;
 	overflow-x: hidden;
 	overflow-y: auto;
+	height: 100%;
 }
 
 /* icons */
@@ -219,7 +242,7 @@ body{
 	-webkit-text-shadow: 0 -1px 0 #000;
 	-moz-text-shadow: 0 -1px 0 #000;
 	text-shadow: 0 -1px 0 #000;
-	color: #555;
+	color: #999;
 	font-weight: 600;
 	float: left;
 	padding-left: 10px;
@@ -228,12 +251,6 @@ body{
 #frame #path .slash{
 	margin: 0 5px;
 	color: #333;
-}
-
-#frame #path:before{
-	content: '/';
-	color: #333;
-	margin-right: 5px;
 }
 
 #frame #searchbox{
@@ -295,13 +312,13 @@ body{
 }
 /* stack */
 #frame .stack{
-	margin: 10px;
+	margin: 20px;
 }
 
 	#frame .stack > li{
-		background: #181818;
+		background: #333;
 		float: left;
-		margin: 5px;
+		margin: 12px;
 		display: block;
 		text-align: center;
 		white-space: nowrap;
@@ -406,6 +423,7 @@ body{
 #frame .list{
 	position: absolute;
 	width: 200px;
+
 }
 #frame .list > li{
 	background: #777 url('img/bg.list.item.png') repeat-x;
@@ -434,18 +452,20 @@ body{
 }
 
 #pane-download{
-	margin-left: 0px; /* increment each pane n * width (275px) */
+	margin-left: 250px; /* increment each pane n * width (275px) */
 }
 
 #pane-upload{
-	margin-left: 250px;
+	margin-left: 0px;
 }
 
 #pane-download.dropactive{
-	background: #fff;
+	background: #444 url('img/bg.drop.png') no-repeat center 200px;
 }
+
+
 #pane-download.drophover{
-	background: #000;
+	background: #333 url('img/bg.drop.png') no-repeat center 200px;
 }
 
 #frame .queue > li{
@@ -470,26 +490,13 @@ body{
 	line-height: 26px;
 	text-align: center;
 	float: left;
-	
-	color: #3C3C3D; 
+
 	text-shadow: 1px 1px 0 #FFFFFF; 
-	background: #ECECEC url('img/css3buttons_backgrounds.png') 0 0 no-repeat; 
 	white-space: nowrap; 
 	cursor: pointer; 
 	text-decoration: none; 
-	border: 1px solid #CACACA; 
-	-webkit-border-radius: 2px; 
-	-moz-border-radius: 2px; 
-	-webkit-background-clip: padding-box; 
-	border-radius: 2px; 
 	outline: none; 
 	zoom: 1;
-	-webkit-border-bottom-right-radius: 0px; 
-	-webkit-border-top-right-radius: 0px; 
-	-moz-border-radius-bottomright: 0px; 
-	-moz-border-radius-topright: 0px; 
-	border-bottom-right-radius: 0px; 
-	border-top-right-radius: 0px; 
 	margin-right: 0px;
 }
 

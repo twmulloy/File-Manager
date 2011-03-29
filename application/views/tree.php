@@ -1,5 +1,6 @@
 <div class="control">
-	<a class="button left back" href="#"><span class="icon leftarrow"></span>Back</a><a class="button right dialog-inline" href="#create-folder"><span class="icon plus"></span>New Folder</a>
+	<a class="button back" href="#"><span class="icon leftarrow"></span>Back</a>
+	<a class="button dialog-inline" href="#create-folder"><span class="icon plus"></span>New Folder</a>
 </div>
 <h3>Folders</h3>
 <ul class="list">
