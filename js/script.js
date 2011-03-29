@@ -19,7 +19,7 @@ function cleanPath(path){
 function setPath(path){
 	var clean = cleanPath(path);
 	
-	$.bbq.pushState({'!':clean});
+	//$.bbq.pushState({'!':clean});
 	
 	// set current upload path
 	$('input[name="path"]').val(clean);
@@ -102,7 +102,7 @@ function buildStack(data, appendTo){
 	}
 	
 	// admin controls
-	controls.append(
+	controls.prepend(
 		$('<li/>').addClass('admin').append(
 			$('<a/>')
 				.attr({
@@ -714,7 +714,7 @@ $(function(){
 	
 	$('a.delete', '#c .stack').live('click', function(){
 		// set the dialog information
-		var item = $(this).closest('li'),
+		var item = $(this).closest('li[data-name][data-type][data-hash]'),
 			hash = item.data('hash'),
 			name = item.data('name'),
 			type = item.data('type'),
@@ -734,7 +734,7 @@ $(function(){
 	
 	// inline folder rename
 	$('a.rename').live('click', function(){
-		var parent = $(this).closest('li');
+		var parent = $(this).closest('li[data-name][data-type][data-hash]');
 		if(!parent.hasClass('folder')){ return false; }
 		
 		// find folder name, turn to input
