@@ -2,7 +2,23 @@
 <ul class="stack">
 	<?php foreach($dir_content as $item): ?>
 	<li class="<?=$item['type']?>" data-type="<?=$item['type']?>" data-name="<?=$item['name']?>" data-hash="<?=$item['hash']?>">
-		<span class="admin controls"><a href="#" title="Delete" class="icon delete"></a><?php if($item['type'] == 'folder'):?><a href="#" title="Rename folder" class="icon rename"></a><?php endif; ?></span>
+		
+		<ul class="controls">
+			<li class="admin">
+				<a href="#" title="Delete" class="icon delete"></a>
+			</li>
+			<?php if($item['type'] == 'file'): ?>
+			<li>
+				<a href="#" title="Download" class="icon download"></a>
+			</li>
+			<?php endif; ?>
+			<?php if($item['type'] == 'folder'): ?>
+			<li>
+				<a href="#" title="Rename folder" class="icon rename"></a>
+			</li>
+			<?php endif; ?>
+		</ul>
+		
 		<div class="visual">
 		<?php if(isset($item['thumb']) && $item['thumb']['path']): ?>
 			<img src="<?=$item['thumb']['path']?>" />

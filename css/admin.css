@@ -146,6 +146,9 @@ body{
 #frame li .icon.create{
 	background-image: url('img/icons/plus-circle.png');
 }
+#frame li .icon.download{
+	background-image: url('img/icons/drive-download.png');
+}
 
 #frame .list .icon{
 	display: block;

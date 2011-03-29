@@ -52,21 +52,8 @@ function buildStack(data, appendTo){
 						})
 						.html(data.short_name)
 					)
-			);
-			
-	// if admin logic here..
-	var controls = $('<span/>')
-		.attr({
-			'class':'admin controls'
-		})
-		.append(
-			$('<a/>')
-				.attr({
-					'title': 'Delete',
-					'class':'icon delete',
-					'href':'#'
-				})
-		);
+			),
+		controls = $('<ul/>').addClass('controls');
 			
 	switch(data.type){
 		case 'folder':
@@ -78,18 +65,28 @@ function buildStack(data, appendTo){
 			);
 			
 			// folder specific admin
-			controls.append(
+			controls.append($('<li/>').append(
 				$('<a/>')
 					.attr({
 						'title': 'Rename folder',
 						'class':'icon rename',
 						'href':'#'
 					})
-			);
+				));
 			break;
 			
 		case 'file':
 		default:
+			
+			// download button
+			controls.append(
+				$('<li/>').append($('<a/>').attr({
+					'href':'#', 
+					'title':'Download', 
+					'class':'icon download'
+				}))
+			);
+		
 			details.append(
 				$('<li/>').html(data.formatted_size)
 			);
@@ -103,6 +100,18 @@ function buildStack(data, appendTo){
 			})
 		);
 	}
+	
+	// admin controls
+	controls.append(
+		$('<li/>').addClass('admin').append(
+			$('<a/>')
+				.attr({
+					'title': 'Delete',
+					'class':'icon delete',
+					'href':'#'
+				})
+		)
+	);
 	
 	return $('<li>')
 		.append(controls)
@@ -1031,6 +1040,50 @@ $(function(){
 
 		// submit the queue
 		$(form).submit();
+		return false;
+	});
+	
+	// download a single file/directory
+	$('.download', '.controls').live('click', function(){
+		var item = $(this).closest('li[data-hash][data-name]'),
+			name = item.data('name'),
+			hash = item.data('hash'),
+			thisParams = params;
+			
+		thisParams.data = {
+			'hash':hash,
+			'name':name
+		};
+		
+		var form = $('<form/>').attr({
+			'action':appPath+'download',
+			'method':'post',
+			'target':'_blank'
+		})
+		.append(
+			$('<input/>').attr({
+				'type':'hidden',
+				'name':'csrf_token_manager',
+				'value':params.csrf_token_manager
+			})
+		)
+		.append(
+			$('<input/>').attr({
+				'type':'hidden',
+				'name':'data[name]',
+				'value':name
+			})
+		)
+		.append(
+			$('<input/>').attr({
+				'type':'hidden',
+				'name':'data[hash]',
+				'value':hash
+			})
+		);
+		
+		form.submit();
+
 		return false;
 	});
 	
