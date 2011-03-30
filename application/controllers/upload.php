@@ -8,9 +8,28 @@ class Upload extends CI_Controller {
 		
 		// only allow ajax requests
 		if(!$this->input->is_ajax_request()) return false;
+		
+		session_start();
+		
 	}
 
 	function index(){
+		
+		// require admin
+		if(!isset($_SESSION['user']['admin']) || empty($_SESSION['user']['admin'])){
+			
+			$result = array(
+				'status'=>'fail',
+				'explain'=>'Permission denied',
+				'data'=>$_FILES['file']
+			);
+			
+			return $this->output
+				->set_content_type('text/html')
+				->set_output(json_encode($result));
+		}
+		
+		
 		$path = $this->input->post('path');
 		$config['upload_path'] 		= $path ? $this->storage->getPath($path) : $this->config->item('storage_directory');
 		$config['allowed_types']	= 'gif|jpg|jpeg|png|tiff|psd|pdf|txt|xls|docx';

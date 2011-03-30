@@ -1,6 +1,6 @@
 <div class="control">
 	<a class="button back" href="#"><span class="icon leftarrow"></span>Back</a>
-	<a class="button dialog-inline" href="#create-folder"><span class="icon plus"></span>New Folder</a>
+	<?php if($is_admin): ?><a class="button dialog-inline" href="#create-folder"><span class="icon plus"></span>New Folder</a><?php endif; ?>
 </div>
 <h3>Folders</h3>
 <ul class="list">

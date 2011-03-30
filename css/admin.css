@@ -222,7 +222,7 @@ body{
 	position: absolute;
 	text-indent: -10000px;
 	z-index: 10;
-	background: #fff url('img/ajax-loader.gif') no-repeat center center;
+	background: rgba(0,0,0,.5) url('img/ajax-loader.gif') no-repeat center center;
 }
 
 #frame #header {
@@ -312,13 +312,13 @@ body{
 }
 /* stack */
 #frame .stack{
-	margin: 20px;
+	margin: 10px;
 }
 
 	#frame .stack > li{
 		background: #333;
 		float: left;
-		margin: 12px;
+		margin: 6px;
 		display: block;
 		text-align: center;
 		white-space: nowrap;
@@ -491,13 +491,15 @@ body{
 	text-align: center;
 	float: left;
 
-	text-shadow: 1px 1px 0 #FFFFFF; 
+	color: #999;
+	text-shadow: -1px -1px 0 #111; 
 	white-space: nowrap; 
 	cursor: pointer; 
 	text-decoration: none; 
 	outline: none; 
 	zoom: 1;
 	margin-right: 0px;
+	font-weight: bold; 
 }
 
 .file_upload:hover { 

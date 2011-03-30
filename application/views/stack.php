@@ -4,18 +4,22 @@
 	<li class="<?=$item['type']?>" data-type="<?=$item['type']?>" data-name="<?=$item['name']?>" data-hash="<?=$item['hash']?>">
 		
 		<ul class="controls">
+			<?php if($is_admin): ?>
 			<li class="admin">
 				<a href="#" title="Delete" class="icon delete"></a>
 			</li>
+			<?php endif; ?>
 			<?php if($item['type'] == 'file'): ?>
 			<li>
 				<a href="#" title="Download" class="icon download"></a>
 			</li>
 			<?php endif; ?>
 			<?php if($item['type'] == 'folder'): ?>
+			<?php if($is_admin): ?>
 			<li>
 				<a href="#" title="Rename folder" class="icon rename"></a>
 			</li>
+			<?php endif; ?>
 			<?php endif; ?>
 		</ul>
 		

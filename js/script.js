@@ -65,14 +65,17 @@ function buildStack(data, appendTo){
 			);
 			
 			// folder specific admin
-			controls.append($('<li/>').append(
-				$('<a/>')
-					.attr({
-						'title': 'Rename folder',
-						'class':'icon rename',
-						'href':'#'
-					})
-				));
+			if(is_admin){
+				controls.append($('<li/>').append(
+					$('<a/>')
+						.attr({
+							'title': 'Rename folder',
+							'class':'icon rename',
+							'href':'#'
+						})
+					));				
+			}
+
 			break;
 			
 		case 'file':
@@ -101,17 +104,19 @@ function buildStack(data, appendTo){
 		);
 	}
 	
-	// admin controls
-	controls.prepend(
-		$('<li/>').addClass('admin').append(
-			$('<a/>')
-				.attr({
-					'title': 'Delete',
-					'class':'icon delete',
-					'href':'#'
-				})
-		)
-	);
+	if(is_admin){
+		controls.prepend(
+			$('<li/>').addClass('admin').append(
+				$('<a/>')
+					.attr({
+						'title': 'Delete',
+						'class':'icon delete',
+						'href':'#'
+					})
+			)
+		);		
+	}
+
 	
 	return $('<li>')
 		.append(controls)
@@ -165,34 +170,6 @@ function bindStack(){
 			})
 			.append(that.find('.visual').clone())
 			.append(that.find('.name').clone());
-		},
-		start: function(event, ui) {
-			/*
-			// record original pane position to global
-			globals.originalIndex = $('.control .button.active', '#e').index();
-			globals.paneWidth = $('.pane > div', '#e').width();
-
-			// index of download pane
-			var downloadIndex = $('.control .button.download', '#e').index(),
-				margin = -downloadIndex * globals.paneWidth;
-
-			// change to pane-download
-			$('.pane', '#e').animate({
-				'left': margin
-			}, 500, function(){
-				// do something when done
-			});
-			*/
-
-		},
-		stop: function(event, ui) {
-			/*
-			var margin = -globals.originalIndex * globals.paneWidth;
-			// scroll back to original pane
-			$('.pane', '#e').animate({
-				'left': margin
-			}, 500);
-			*/
 		}
 	})
 	.disableSelection();
@@ -442,7 +419,8 @@ $(function(){
 		});
 		return false;
 	});
-	
+
+if(is_admin){
 	// new folder
 	$('.dialog-inline').inlineDialog({
 		content: $('<input/>').attr({'placeholder':'Name'}),
@@ -537,7 +515,9 @@ $(function(){
 			}
 		}
 	});
-	
+}
+
+if(is_admin){
 	// right panel
 	$('.control .button', '#e').click(function(){
 		var parent = $(this).closest('.partial'),
@@ -557,6 +537,7 @@ $(function(){
 
 		return false;
 	});
+}
 	
 	// enable dragging on stack items
 	bindStack();
@@ -624,6 +605,7 @@ $(function(){
 		return false;
 	});
 	
+if(is_admin){
 	/* delete item from stack */
 	$( "#delete-stack" ).dialog({
 		autoOpen: false,
@@ -674,7 +656,7 @@ $(function(){
 						
 						// failure
 						if(resp.status !== 'success'){
-							$.gritter.add({
+							return $.gritter.add({
 								title: 'Error',
 								text: 'Could not delete',
 								image: appPath + 'css/img/icons/48x48/cancel.png',
@@ -711,7 +693,9 @@ $(function(){
 			}
 		}
 	});
-	
+}
+
+if(is_admin){
 	$('a.delete', '#c .stack').live('click', function(){
 		// set the dialog information
 		var item = $(this).closest('li[data-name][data-type][data-hash]'),
@@ -731,7 +715,9 @@ $(function(){
 			}).dialog('open');
 		return false;
 	});
+}
 	
+if(is_admin){
 	// inline folder rename
 	$('a.rename').live('click', function(){
 		var parent = $(this).closest('li[data-name][data-type][data-hash]');
@@ -878,6 +864,7 @@ $(function(){
 				}
 			}
 	});
+}
 
 	// css3 submit buttons
 	$('.submit').click(function(){
@@ -890,6 +877,8 @@ $(function(){
 	});
 	
 	/* upload */
+if(is_admin){
+		
 	$('#file_upload').fileUploadUI({
 		uploadTable: $('#files'),
 		downloadTable: $('#files'),
@@ -918,7 +907,7 @@ $(function(){
 			buildDownloadRow: function(file){
 				if(file.status !== 'success'){
 					return $('<li/>')
-						.html('<span class="icon file-error"></span>' + file.data.short_name + file.explain);
+						.html('<span class="icon file-error"></span>' + file.data.name + '<span class="explain">' + file.explain + '</span>');
 				}
 				return $('<li/>')
 					.html('<span class="icon file"></span>'+file.data.short_name);
@@ -965,6 +954,7 @@ $(function(){
 				}
 			}
 	});
+}
 	
 	/* clear download queue */
 	$('.button.queue-clear', '#pane-download').click(function(){
@@ -983,6 +973,8 @@ $(function(){
 		
 		return false;
 	});
+
+if(is_admin){
 	
 	/* clear upload history */
 	$('.button.queue-clear', '#pane-upload').click(function(){
@@ -996,6 +988,8 @@ $(function(){
 		});
 		return false;
 	});
+	
+}
 	
 	/* magical zip */
 	$('.button.download-zip', '#e').click(function(){
