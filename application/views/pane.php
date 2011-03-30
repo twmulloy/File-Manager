@@ -1,4 +1,4 @@
-<div class="control">
+<div class="control header">
 	<?php if($is_admin): ?>
 		<a class="button upload active" href="#"><span class="icon uparrow"></span>Upload</a>
 		<a class="button download" href="#"><span class="icon downarrow"></span>Download</a>

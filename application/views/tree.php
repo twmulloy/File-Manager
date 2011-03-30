@@ -1,4 +1,4 @@
-<div class="control">
+<div class="control header">
 	<a class="button back" href="#"><span class="icon leftarrow"></span>Back</a>
 	<?php if($is_admin): ?><a class="button dialog-inline" href="#create-folder"><span class="icon plus"></span>New Folder</a><?php endif; ?>
 </div>
