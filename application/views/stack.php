@@ -1,7 +1,7 @@
 <?php if(isset($dir_content)): ?>
 <ul class="stack">
 	<?php foreach($dir_content as $item): ?>
-	<li class="<?=$item['type']?>" data-type="<?=$item['type']?>" data-name="<?=$item['name']?>" data-hash="<?=$item['hash']?>">
+	<li class="<?=$item['type']?> <?php if(!isset($item['thumb']) && $item['type'] != 'folder') echo 'doc'; ?>" data-type="<?=$item['type']?>" data-name="<?=$item['name']?>" data-hash="<?=$item['hash']?>">
 		
 		<ul class="controls">
 			<?php if($is_admin): ?>

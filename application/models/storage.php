@@ -56,6 +56,7 @@ class Storage extends CI_Model
 					} 
 				}
 								
+				$contents[$name]['mime'] = get_mime_by_extension($name);
 				// append unique hash
 				$contents[$name]['hash'] = $this->generateHash($content['server_path']);
 				

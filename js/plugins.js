@@ -1237,7 +1237,7 @@ return sa?s:s[0];},_verifyWrapper:function(){if($('#gritter-notice-wrapper').len
     _createButtons: function(buttons) {
       var self = this,
           hasButtons = false,
-          uiDialogButtonPane = $('<div></div>')
+          uiDialogButtonPane = $('<div/>')
             .addClass(
               'ui-inline-dialog-buttonpane ' +
               'ui-widget-content '    +
@@ -1262,7 +1262,7 @@ return sa?s:s[0];},_verifyWrapper:function(){if($('#gritter-notice-wrapper').len
           props = $.isFunction( props ) ?
                     { click: props, text: name } : props;
                     
-          var button = $('<button></button>', props)
+          var button = $('<button/>', props)
                 .unbind('click')
                 .click(function() {
                   props.click.apply(self.element[0], arguments);

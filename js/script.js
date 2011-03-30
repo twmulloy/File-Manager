@@ -116,6 +116,12 @@ function buildStack(data, appendTo){
 			)
 		);		
 	}
+	
+	// document type
+	var doc = '';
+	if(data.mime && data.type !== 'folder'){
+		doc = 'doc';
+	}
 
 	
 	return $('<li>')
@@ -124,7 +130,7 @@ function buildStack(data, appendTo){
 				'data-type':data.type, 
 				'data-name':data.name,
 				'data-hash':data.hash,
-				'class':data.type
+				'class':data.type + ' ' + doc
 		})
 		.append(visual)
 		.append(details)
@@ -1155,6 +1161,89 @@ if(is_admin){
 		// reset path header
 		setPath(params.path);
 		
+		return false;
+	});
+	
+	/* send message */
+	$( "#send-mail" ).dialog({
+		autoOpen: false,
+		resizable: false,
+		position: ['center', 50],
+		draggable: false,
+		modal: true,
+		title: 'Send request for file(s)',
+		width: 335,
+		buttons: {
+			
+			'Cancel': function() {
+				$(this).dialog( "close" );
+			},
+			
+			'Send': function(){
+				var thisParams = params,
+					data = $(this).find('form').serializeArray(),
+					email = data[0].value,
+					message = data[1].value,
+					that = $(this);
+				
+				// basic check
+				if(!email || !message){
+					return $.gritter.add({
+						title: 'Alert',
+						text: 'Please complete all fields',
+						image: appPath + 'css/img/icons/48x48/attention.png',
+						time: gritterTimeout
+					});
+				}	
+				
+				thisParams.data = {
+					'email':email,
+					'message':message
+				}
+				
+				// send the message
+				$.ajax({
+					url: appPath + 'email', 
+					type: 'post',
+					data: thisParams, 
+					dataType: 'json',
+					success: function(resp){
+						if(!resp){ return false; }
+						
+						if(resp.status !== 'success'){
+							return $.gritter.add({
+								title: 'Error',
+								text: 'Could not send message, please try again later.',
+								image: appPath + 'css/img/icons/48x48/cancel.png',
+								time: gritterTimeout
+							});
+						}
+						
+						$.gritter.add({
+							title: 'Success',
+							text: 'Message sent!',
+							image: appPath + 'css/img/icons/48x48/mail.png',
+							time: gritterTimeout
+						});
+						
+						that.dialog('close');
+						
+					}
+				});
+
+			}
+		}
+	});
+	
+	// open email
+	$('#send-email-button', '#c').click(function(){
+		// set the dialog information
+		var msg = $( "#send-mail" );
+		
+		// close any existing dialog
+		msg.dialog('close');
+			
+		msg.dialog('open');
 		return false;
 	});
 	

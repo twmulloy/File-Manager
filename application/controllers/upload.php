@@ -8,14 +8,12 @@ class Upload extends CI_Controller {
 		
 		// only allow ajax requests
 		if(!$this->input->is_ajax_request()) return false;
-		
-		session_start();
-		
 	}
 
 	function index(){
 		
 		// require admin
+		session_start();
 		if(!isset($_SESSION['user']['admin']) || empty($_SESSION['user']['admin'])){
 			
 			$result = array(

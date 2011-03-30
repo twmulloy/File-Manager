@@ -8,16 +8,15 @@
 	color: #999 !important; 
 	text-shadow: -1px -1px 0 #111; 
 	white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; outline: none; position: relative; zoom: 1; *display: inline; }
-.button:hover { color: #fff !important; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-color: #2D7DC5; }
+.button:hover { color: #fff !important; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); }
 .button:active,
-.button.active { background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none; }
+.button.active { color: #FFFFFF !important; text-shadow: none;}
 .button:active { top: 1px }
-.button.negative:hover { color: #FFFFFF; background-position: 0 -121px; background-color: #D84743; border-color: #911D1B; }
+.button.negative:hover { color: #FFFFFF; background-color: #D84743;  }
 .button.negative:active,
 .button.negative.active { background-color: #A5211E; }
 
 .button span.icon { display: inline-block; width: 14px; height: 12px; margin: auto 7px auto auto; position: relative; top: 1px; background-image: url('img/css3buttons_icons.png'); background-repeat: no-repeat; }
-.big.button span.icon { top: 0px }
 .button span.icon.book { background-position: 0 0 }
 .button:hover span.icon.book { background-position: 0 -15px }
 .button span.icon.calendar { background-position: 0 -30px }
@@ -52,8 +51,8 @@
 .button:hover span.icon.loop { background-position: 0 -457px }
 .button span.icon.magnifier { background-position: 0 -472px }
 .button:hover span.icon.magnifier { background-position: 0 -487px }
-.button span.icon.mail { background-position: 0 -502px }
-.button:hover span.icon.mail { background-position: 0 -514px }
+.button span.icon.mail { background-position: 0 -500px }
+.button:hover span.icon.mail { background-position: 0 -512px }
 .button span.icon.move { background-position: 0 -526px }
 .button:hover span.icon.move { background-position: 0 -541px }
 .button span.icon.pen { background-position: 0 -556px }
@@ -94,6 +93,23 @@ body{
 	width: 100%;
 }
 
+form ul li{
+	margin: 5px 0;
+}
+
+form ul li label{
+	display: block;
+}
+
+form ul li input{
+	width: 300px;
+}
+
+form ul li textarea{
+	width: 300px;
+	height: 200px;
+}
+
 /* control */
 .control{
 	text-align: center;
@@ -116,6 +132,9 @@ body{
 	margin-top: 30px;
 }
 
+.controls li{
+	float: left;
+}
 
 /* layout */
 #w{
@@ -242,7 +261,7 @@ body{
 	-webkit-text-shadow: 0 -1px 0 #000;
 	-moz-text-shadow: 0 -1px 0 #000;
 	text-shadow: 0 -1px 0 #000;
-	color: #999;
+	color: #eee;
 	font-weight: 600;
 	float: left;
 	padding-left: 10px;
@@ -250,19 +269,32 @@ body{
 
 #frame #path .slash{
 	margin: 0 5px;
-	color: #333;
+	color: #666;
 }
 
 #frame #searchbox{
 	float: right;
 }
 
+.ie7 #searchbox, 
+.ie8 #searchbox{
+	position: absolute;
+	right: 250px;
+}
+
 #searchbox{
-	padding: 3px;
+	padding: 5px;
 }
 
 #search-input, #search-submit{
 	float: left;
+}
+
+.ie7 #search-input, 
+.ie8 #search-input{
+	line-height: 22px;
+	height: 22px;
+	padding-left: 5px;
 }
 
 #search-input{
@@ -313,6 +345,7 @@ body{
 /* stack */
 #frame .stack{
 	margin: 10px;
+	margin-top: 35px;
 }
 
 	#frame .stack > li{
@@ -352,6 +385,12 @@ body{
 		box-shadow: #000 0 1px 3px;
 	}
 	
+	#frame .stack .doc .visual{
+		background: none;
+		-moz-box-shadow: transparent 0 0 0;
+		box-shadow: transparent 0 0 0;
+	}
+	
 	#frame .stack .file .visual img{
 		display: block;
 		width: 128px;
@@ -368,6 +407,11 @@ body{
 	
 	#frame .stack .folder .visual{
 		background: url('img/icons/48x48/folder.png') no-repeat center center;
+	}
+	
+	
+	#frame .stack .doc .visual{
+		background: url('img/icons/48x48/document.png') no-repeat center center;	
 	}
 	
 	#frame .stack .folder{
@@ -470,7 +514,7 @@ body{
 
 #frame .queue > li{
 	background: url('img/bg.mesh.png');
-	font-size: 12px;
+	font-size: 10px;
 	color: #E6E6E6;
 	text-decoration: none;
 	display: block;
@@ -478,6 +522,20 @@ body{
 	border-bottom: 1px solid #222;
 	overflow: hidden;
 	line-height: 32px;
+	white-space: nowrap;
+}
+
+.explain{
+	position: absolute;
+	font-size: 9px;
+	left: 35px;
+	margin-top: 12px;
+}
+
+.ie7 .explain, 
+.ie8 .explain{
+	float: right;
+	margin-top: 0;
 }
 
 /* uploader */

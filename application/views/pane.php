@@ -20,7 +20,7 @@
 			<button>Upload</button>
 			<div>Upload file(s)</div>
 		<?=form_close()?>
-		<a href="#" class="button negative queue-clear">Clear History</a>
+		<a href="#" class="button queue-clear">Clear History</a>
 		</div>
 	</div>
 	<?php endif; ?>
@@ -32,7 +32,7 @@
 		<?=form_open('download/zip', array('target'=>'_blank'))?>
 		<div class="control">
 			<a href="#" class="button download-zip">Download .zip</a>
-			<a href="#" class="button negative queue-clear">Clear Queue</a>
+			<a href="#" class="button queue-clear">Clear Queue</a>
 		</div>
 		<?=form_close()?>
 

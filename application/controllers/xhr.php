@@ -15,13 +15,12 @@ class Xhr extends CI_Controller {
 
 		$this->data = $this->input->post('data');
 		$this->path = $this->input->post('path');
-		
-		session_start();
 	}
 	
 	function create(){
 		
 		// require admin
+		session_start();
 		if(!isset($_SESSION['user']['admin']) || !$_SESSION['user']['admin']){
 			
 			$result = array(
@@ -50,6 +49,7 @@ class Xhr extends CI_Controller {
 	function delete(){
 		
 		// require admin
+		session_start();
 		if(!isset($_SESSION['user']['admin']) || !$_SESSION['user']['admin']){
 			
 			$result = array(
@@ -77,6 +77,7 @@ class Xhr extends CI_Controller {
 	function update(){
 		
 		// require admin
+		session_start();
 		if(!isset($_SESSION['user']['admin']) || !$_SESSION['user']['admin']){
 			
 			$result = array(

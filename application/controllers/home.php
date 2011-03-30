@@ -30,7 +30,7 @@ class Home extends CI_Controller {
 		$data['dir_content'] = $this->storage->getDirectory();
 		
 		#echo '<pre>';
-		#print_r($tree['dir_content']);
+		#print_r($data['dir_content']);
 		#die;
 		$data['tree'] = $this->load->view('tree', $data, true);
 		
