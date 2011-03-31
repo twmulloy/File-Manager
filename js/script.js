@@ -1047,7 +1047,7 @@ if(is_admin){
 	});
 	
 	// download a single file/directory
-	$('.download', '.controls').live('click', function(){
+	$('.download').live('click', function(){
 		var item = $(this).closest('li[data-hash][data-name]'),
 			name = item.data('name'),
 			hash = item.data('hash'),
@@ -1061,7 +1061,9 @@ if(is_admin){
 		var form = $('<form/>').attr({
 			'action':appPath+'download',
 			'method':'post',
-			'target':'_blank'
+			'target':'_blank',
+			'id':'form-'+name,
+			'name':'form-name-'+name
 		})
 		.append(
 			$('<input/>').attr({
@@ -1083,10 +1085,10 @@ if(is_admin){
 				'name':'data[hash]',
 				'value':hash
 			})
-		);
+		).appendTo('body');
 		
 		form.submit();
-
+		form.remove();
 		return false;
 	});
 	

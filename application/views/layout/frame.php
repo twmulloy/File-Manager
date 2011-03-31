@@ -13,6 +13,7 @@
 				<span class="loading">Loading...</span>
 				
 				<a href="#" id="send-email-button" class="button" title="Send request for marketing file(s)"><span class="icon mail"></span>Send Request</a>
+				<a href="/" class="button" title="Exit Marketing Files system"><span class="icon home"></span>Exit Marketing Files</a>
 				
 				<?=form_open('search', array('id'=>'searchbox'))?>
 						<?=form_input(array('id'=>'search-input', 'name'=>'search', 'placeholder'=>'Search'))?>

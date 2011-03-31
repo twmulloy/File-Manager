@@ -131,7 +131,6 @@ form ul li textarea{
 #e .loading{
 	margin-top: 30px;
 }
-
 .controls li{
 	float: left;
 }
@@ -508,10 +507,7 @@ form ul li textarea{
 }
 
 .uploading .file_upload_progress{
-	right: 0;
-	margin-right: 8px;
-	margin-top: 8px;
-	position: absolute;
+
 }
 
 #pane-download.dropactive{
