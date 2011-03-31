@@ -25,8 +25,17 @@ function setPath(path){
 	$('input[name="path"]').val(clean);
 	
 	if(clean){
-		clean = clean.replace(/\//gi, '<span class="slash">/</span>');
+		//clean = clean.replace(/\//gi, '<span class="slash">/</span>');
 	}
+	
+	/*
+	var segments = clean.split('/'),
+		anchored = '';
+		
+	$.each(segments, function(x){
+		console.log(this);
+	});
+	*/
 	
 	// clear search input field
 	$('#search-input').val('');
@@ -890,6 +899,7 @@ if(is_admin){
 		downloadTable: $('#files'),
 		buildUploadRow: function (files, index) {
 			return $('<li/>')
+				.addClass('uploading')
 				.html(files[index].name)
 				.append(
 					$('<div/>')
@@ -901,13 +911,6 @@ if(is_admin){
 				.append(
 					$('<div/>')
 						.addClass('file_upload_cancel')
-						.append(
-							$('<a/>')
-								.attr({
-									'class':'button pill'
-								})
-								.html('Cancel')
-						)
 				);
 			},
 			buildDownloadRow: function(file){

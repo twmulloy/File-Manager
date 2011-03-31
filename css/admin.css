@@ -362,6 +362,7 @@ form ul li textarea{
 		color: #999;
 		width: 138px;
 		cursor: pointer;
+		height: 200px;
 
 	}
 	
@@ -504,6 +505,13 @@ form ul li textarea{
 
 #pane-upload{
 	margin-left: 0px;
+}
+
+.uploading .file_upload_progress{
+	right: 0;
+	margin-right: 8px;
+	margin-top: 8px;
+	position: absolute;
 }
 
 #pane-download.dropactive{
