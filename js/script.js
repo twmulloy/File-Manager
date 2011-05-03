@@ -191,12 +191,44 @@ function bindStack(){
 	return false;
 }
 
+
+function setInline(that){
+	// old name, new name
+	var item = $(that).closest('li[data-name][data-hash]'),
+		hash = item.data('hash'),
+		from = item.data('name'),
+		to = $(that).val();
+		
+	// close any open dialogs
+	$('#rename-folder').dialog('close');
+		
+	// name didn't change just reset
+	if(from == to){
+		var parent = $(that).closest('li');
+		$(that).remove();
+		parent.empty().append($('<a/>').attr({'href':'#', 'class':'name', 'title':from}).html(from));
+		return false;
+	}
+
+	// pass data and open
+	$('#rename-folder').data({
+			'hash':hash,
+			'from':from,
+			'to':to,
+			'item':item
+		})
+		.dialog('open');
+
+	return false;
+}
+
 var globals = {
 	originalIndex: 0,
 	paneWidth: 0,
 	curDir: '', // current directory
 	trail: [] // root of storage directory
 };
+
 
 $(function(){
 	
@@ -735,15 +767,18 @@ if(is_admin){
 if(is_admin){
 	// inline folder rename
 	$('a.rename').live('click', function(){
+
+
 		var parent = $(this).closest('li[data-name][data-type][data-hash]');
 		if(!parent.hasClass('folder')){ return false; }
 		
 		// find folder name, turn to input
 		var li = parent.find('.details .name').closest('li'),
 			original = li.children().remove(),
-			input = 	$('<input/>')
+			id = 'folder-'+parent.index(),
+			input = $('<input/>')
 					.attr({
-						'id':'folder-'+parent.data('name'),
+						'id':id,
 						'class':'inline-edit',
 						'type':'text'
 					})
@@ -754,39 +789,25 @@ if(is_admin){
 				input
 			);
 			
-		$('#folder-'+parent.data('name')).focus().select();
+		$('#'+id).focus().select();
 		
 		return false;
 	});
 	
-	$('.inline-edit').live('blur', function(){
-		// old name, new name
-		var item = $(this).closest('li[data-name][data-hash]'),
-			hash = item.data('hash'),
-			from = item.data('name'),
-			to = $(this).val();
+	$('.inline-edit')
+		.live('keypress', function(event){
+			// user hits a certain key, eg ENTER
+			if(event.which === 13){ 
+				setInline(this);
+				return false;
+			}
 			
-		// close any open dialogs
-		$('#rename-folder').dialog('close');
-			
-		// name didn't change just reset
-		if(from == to){
-			var parent = $(this).closest('li');
-			$(this).remove();
-			parent.empty().append($('<a/>').attr({'href':'#', 'class':'name', 'title':from}).html(from));
+			return true;
+		})
+		.live('blur', function(){
+			setInline(this);
 			return false;
-		}
-
-		// pass data and open
-		$('#rename-folder').data({
-				'hash':hash,
-				'from':from,
-				'to':to,
-				'item':item
-			})
-			.dialog('open');
-		return false;
-	});
+		});
 	
 	$('#rename-folder').dialog({
 			autoOpen: false,
