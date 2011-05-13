@@ -30,7 +30,7 @@ class Upload extends CI_Controller {
 		
 		$path = $this->input->post('path');
 		$config['upload_path'] 		= $path ? $this->storage->getPath($path) : $this->config->item('storage_directory');
-		$config['allowed_types']	= 'gif|jpg|jpeg|png|tiff|psd|pdf|txt|xls|docx';
+		$config['allowed_types']	= 'gif|jpg|jpeg|png|tiff|psd|pdf|txt|xls|docx|ai|eps|xlsx';
 		$config['overwrite'] 			= true;
 		$config['remove_spaces']	= true;
 		$this->load->library('upload', $config);
