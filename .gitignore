@@ -1,5 +1,1 @@
-*~
-*.lock
-*.DS_Store
-*.tmproj
-
+.DS_Store
